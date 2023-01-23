@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import { Home } from "./pages/home";
 import { Perfil } from "./pages/perfil";
 import { CrearEvento } from "./pages/crearevento";
@@ -30,6 +31,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Login />} path="/login" />
+                        <Route element={<Register />} path="/register" />
                         <Route element={<Home />} path="/" />
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<CrearEvento />} path="/crearevento" />
@@ -47,3 +49,4 @@ const Layout = () => {
 };
 
 export default injectContext(Layout);
+

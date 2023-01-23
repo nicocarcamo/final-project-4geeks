@@ -3,11 +3,11 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 import 'semantic-ui-css/semantic.min.css'
 
 
-const [form, setForm] = useState ({
-    cont onChange = (E,{name, value}) => {
-        setForm({...form, [name]:value})
-    }
-})
+// const [form, setForm] = useState ({
+//     cont onChange = (E,{name, value}) => {
+//         setForm({...form, [name]:value})
+//     }
+// })
 
 export const Register = () => (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
