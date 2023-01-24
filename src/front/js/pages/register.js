@@ -1,58 +1,94 @@
-import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import React, { useState } from "react";
+import axios from "axios";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+} from "semantic-ui-react";
 
 
-// const [form, setForm] = useState ({
-//     cont onChange = (E,{name, value}) => {
-//         setForm({...form, [name]:value})
-//     }
-// })
+export const Register = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    is_active: true
+  });
+  const [message, setMessage] = useState(null);
 
-export const Register = () => (
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo.png' /> Log-in to your account
-      </Header>
-      <Form size='large'>
-    <Segment>
-    <Form>
-    <Form.Field>
-      <Form.Input 
-        name="username" 
-        placeholder="Username" 
-        label="Username"/>
-    </Form.Field>
-    <Form.Field>
-      <Form.Input 
-        name="firstname" 
-        placeholder="First Name" 
-        label="First Name"/>
-    </Form.Field>
-    <Form.Field>
-      <Form.Input 
-        name="lastname" 
-        placeholder="Last Name" 
-        label="Last Name"/>
-    </Form.Field>
-    <Form.Field>
-      <Form.Input 
-        name="mail" 
-        placeholder="Email"
-        label="Email"/>
-    </Form.Field>
-    <Form.Field>
-      <Form.Input 
-        name="password" 
-        placeholder="Password"
-        label="Password"/>
-    </Form.Field>
-    <Button type='submit'>Submit</Button>
-  </Form>
-  </Segment>
-</Form>
-    </Grid.Column>
-  </Grid>
-    )
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${process.env.BACKEND_URL}/api/register`, formData);
+      setMessage(res.data.message);
+    } catch (err) {
+        setMessage(err.response && err.response.data.message);
+    }
+  };
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as="h2" color="teal" textAlign="center">
+          <Image src="/rigo-baby.jpg" /> Create New Account
+        </Header>
+        <Segment>
+          <Form size="large" onSubmit={handleSubmit}>
+            <Form.Field>
+              <Form.Input
+                name="username"
+                placeholder="Username"
+                label="Username"
+                onChange={handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input
+                name="firstname"
+                placeholder="First Name"
+                label="First Name"
+                onChange={handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input
+                name="lastname"
+                placeholder="Last Name"
+                label="Last Name"
+                onChange={handleChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Form.Input
+                name="email"
+                placeholder="Email"
+                label="Email"
+                onChange={handleChange}
+              />
+            </Form.Field>
+
+            <Form.Field>
+              <Form.Input
+                name="password"
+                placeholder="Password"
+                label="Password"
+                onChange={handleChange}
+              />
+            </Form.Field>
+            <Button color='teal' fluid size='large' type="submit">Submit</Button>
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
+  );
+};

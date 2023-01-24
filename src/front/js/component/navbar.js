@@ -10,37 +10,37 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					<Link to="/login">
-						<button className="btn btn-primary">Login</button>
+						<button className="btn btn-secondary">Login</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/register">
-						<button className="btn btn-primary">Register</button>
+						<button className="btn btn-secondary">Register</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/perfil">
-						<button className="btn btn-primary">Perfil</button>
+						<button className="btn btn-secondary">Perfil</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/crearevento">
-						<button className="btn btn-primary">Crear Evento</button>
+						<button className="btn btn-secondary">Crear Evento</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/unirseevento">
-						<button className="btn btn-primary">Unirse A Evento</button>
+						<button className="btn btn-secondary">Unirse Evento</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/inbox">
-						<button className="btn btn-primary">Inbox</button>
+						<button className="btn btn-secondary">Inbox</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/">
-						<button className="btn btn-primary">Home</button>
+						<button className="btn btn-secondary">Home</button>
 					</Link>
 				</div>
 			</div>
