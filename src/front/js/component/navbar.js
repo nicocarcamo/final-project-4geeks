@@ -6,7 +6,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+					<span className="navbar-brand mb-0 h1">MeetMeUp</span>
 				</Link>
 				<div className="ml-auto">
 					<Link to="/login">
@@ -14,8 +14,8 @@ export const Navbar = () => {
 					</Link>
 				</div>
 				<div className="ml-auto">
-					<Link to="/">
-						<button className="btn btn-primary">Home</button>
+					<Link to="/register">
+						<button className="btn btn-primary">Register</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
@@ -25,12 +25,12 @@ export const Navbar = () => {
 				</div>
 				<div className="ml-auto">
 					<Link to="/crearevento">
-						<button className="btn btn-primary">CrearEvento</button>
+						<button className="btn btn-primary">Crear Evento</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
 					<Link to="/unirseevento">
-						<button className="btn btn-primary">UnirseEvento</button>
+						<button className="btn btn-primary">Unirse A Evento</button>
 					</Link>
 				</div>
 				<div className="ml-auto">
@@ -39,8 +39,8 @@ export const Navbar = () => {
 					</Link>
 				</div>
 				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
+					<Link to="/">
+						<button className="btn btn-primary">Home</button>
 					</Link>
 				</div>
 			</div>
