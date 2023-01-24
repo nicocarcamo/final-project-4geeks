@@ -9,7 +9,7 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
+
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ export const Register = () => {
     <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-          <Image src="/rigo-baby.jpg" /> Register to your account
+          <Image src="/rigo-baby.jpg" /> Create New Account
         </Header>
         <Segment>
           <Form size="large" onSubmit={handleSubmit}>
