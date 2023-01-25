@@ -8,7 +8,7 @@ export const CrearEvento = () => {
 	return (
 		<div className="text-center mt-5">
 			<h1>Crea Tu Evento</h1>
-				<div className="w-75 m-auto">
+				<div className="w-50 m-auto">
 					<form className="row g-3">
 						<div className="col-md-6">
 							<label htmlFor="inputEmail4" className="form-label">
