@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Button, Container, Header, Icon } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Home = () => {
@@ -30,10 +31,13 @@ export const Home = () => {
 				// 	marginTop: mobile ? '0.5em' : '1.5em',
 				//   }}
 				/>
+				<Link to="/register" className="text-light">
 				<Button primary size='huge'>
 					Comienza
 					<i className="fa-solid fa-arrow-right ms-2"></i>
 				</Button>
+				</Link>
+
 			</Container>
 			<div className="alert alert-primary text-center mt-5">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
