@@ -1,64 +1,103 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+} from "semantic-ui-react";
 
 export const CrearEvento = () => {
 	const { store, actions } = useContext(Context);
 
-	return (
-		<div className="text-center mt-5">
-			<h1>Crea Tu Evento</h1>
-				<div className="w-50 m-auto">
-					<form className="row g-3">
-						<div className="col-md-6">
-							<label htmlFor="inputEmail4" className="form-label">
-								Nombre Evento
-							</label>
-							<input type="text" className="form-control" id="inputEmail4" />
-						</div>
-						<div className="col-md-6">
-							<label htmlFor="inputPassword4" className="form-label">
-								Fecha
-							</label>
-							<input type="password" className="form-control" id="inputPassword4" />
-						</div>
-						<div className="col-12">
-							<label htmlFor="inputAddress" className="form-label">
-								Lugar
-							</label>
-							<input
-								type="text"
-								className="form-control"
-								id="inputAddress"
-								placeholder="1234 Main St"
-							/>
-						</div>
-						<div className="col-md-6">
-							<label htmlFor="inputCity" className="form-label">
-								Hora
-							</label>
-							<input type="text" className="form-control" id="inputCity" />
-						</div>
-						<div className="col-md-4">
-							<label htmlFor="inputState" className="form-label">
-								State
-							</label>
-							<input type="text" className="form-control" id="inputCity" />
-						</div>
-						<div className="col-md-2">
-							<label htmlFor="inputZip" className="form-label">
-								Zip
-							</label>
-							<input type="text" className="form-control" id="inputZip" />
-						</div>
-						<div className="col-12">
-							<button type="submit" className="btn btn-primary">
-								Crear Evento
-							</button>
-						</div>
-					</form>
-				</div>
+	const [formData, setFormData] = useState({
+	  nombreevento: "",
+	  descripcion: "",
+	  integrantes: "",
+	  publicooprivado: "",
+	  valor: "",
+	  ubicacion: "",
+	  is_active: true
+	});
+	const [message, setMessage] = useState(null);
+  
+	const handleSubmit = async (e) => {
+	  e.preventDefault();
+	  try {
+		const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
+		  method: "POST",
+		  body: JSON.stringify(formData),
+		  headers: {
+			"Content-Type": "application/json"
+		  }
+		});
+		const json = await res.json();
+		setMessage(json.message);
+	  } catch (err) {
+		  setMessage(err.response && err.response.data.message);
+	  }
+	};
+  
+	const handleChange = (e) => {
+	  setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+  
 
-		</div>
+	return (
+		<Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+		<Grid.Column style={{ maxWidth: 450 }}>
+		  <Header as="h2" color="teal" textAlign="center">
+			<Image src="/rigo-baby.jpg" /> Create Nuevo Evento
+		  </Header>
+		  <Segment>
+			<Form size="large" onSubmit={handleSubmit}>
+			  <Form.Field>
+				<Form.Input
+				  name="nombreevento"
+				  placeholder="Nombre del Evento"
+				  label="Nombre del Evento"
+				  onChange={handleChange}
+				/>
+			  </Form.Field>
+			  <Form.Field>
+				<Form.Input
+					name="descripcion"
+					placeholder="Descripcion"
+					label="Descripcion"
+				  onChange={handleChange}
+				/>
+			  </Form.Field>
+			  <Form.Field>
+				<Form.Input
+				  name="integrantes"
+				  placeholder="Cantidad de Integrantes"
+				  label="Cantidad de Integrantes"
+				  onChange={handleChange}
+				/>
+			  </Form.Field>
+			  <Form.Field>
+				<Form.Input
+				  name="publicooprivado"
+				  placeholder="Público o Privado"
+				  label="Público o Privado"
+				  onChange={handleChange}
+				/>
+			  </Form.Field>
+			  <Form.Field>
+				<Form.Input
+				  name="ubicacion"
+				  placeholder="Ubicacion"
+				  label="Ubicacion"
+				  onChange={handleChange}
+				/>
+			  </Form.Field>
+			  <Button color='teal' fluid size='large' type="submit">Submit</Button>
+			</Form>
+		  </Segment>
+		</Grid.Column>
+	  </Grid>
 	);
 };
