@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import { Button, Container, Header, Icon } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container, Button } from 'semantic-ui-react'

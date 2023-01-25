@@ -3,45 +3,43 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
 			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">MeetMeUp</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/login">
-						<button className="btn btn-secondary">Login</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
-					<Link to="/register">
-						<button className="btn btn-secondary">Register</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
-					<Link to="/perfil">
-						<button className="btn btn-secondary">Perfil</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
-					<Link to="/crearevento">
-						<button className="btn btn-secondary">Crear Evento</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
-					<Link to="/unirseevento">
-						<button className="btn btn-secondary">Unirse Evento</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
-					<Link to="/inbox">
-						<button className="btn btn-secondary">Inbox</button>
-					</Link>
-				</div>
-				<div className="ml-auto">
+				<div className="navbar-nav">
 					<Link to="/">
-						<button className="btn btn-secondary">Home</button>
+						<span className="navbar-brand mb-0 h1">MeetMeUp</span>
 					</Link>
+
+					<div className="mx-2">
+						<Link to="/login" className="text-light">
+							Login
+						</Link>
+					</div>
+					<div className="mx-2">
+						<Link to="/register" className="text-light">
+							Register
+						</Link>
+					</div>
+					<div className="mx-2">
+						<Link to="/perfil" className="text-light">
+							Perfil
+						</Link>
+					</div>
+					<div className="mx-2">
+						<Link to="/crearevento" className="text-light">
+							Crear Evento
+						</Link>
+					</div>
+					<div className="mx-2">
+						<Link to="/unirseevento" className="text-light">
+							Unirse Evento
+						</Link>
+					</div>
+					<div className="mx-2">
+						<Link to="/inbox" className="text-light">
+							Inbox
+						</Link>
+					</div>
 				</div>
 			</div>
 		</nav>
