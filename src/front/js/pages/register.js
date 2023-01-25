@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   Button,
   Form,
@@ -9,7 +8,6 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +23,15 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.BACKEND_URL}/api/register`, formData);
-      setMessage(res.data.message);
+      const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const json = await res.json();
+      setMessage(json.message);
     } catch (err) {
         setMessage(err.response && err.response.data.message);
     }
