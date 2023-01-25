@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify, Blueprint
-from api.models import app, db, User
+from api.models import app, db, User, CrearEvento
 from werkzeug.security import check_password_hash
 
 api = Blueprint('api', __name__)
@@ -37,6 +37,21 @@ def login():
         return jsonify({'message': 'Invalid email or password'}), 401
 
     return jsonify({'message': 'Logged in successfully'}), 201
+
+@api.route('/crearevento', methods=['POST'])
+def crearevento():
+    print(request.get_json())
+    nombreevento = request.json['nombreevento']
+    descripcion = request.json['descripcion']
+    integrantes = request.json['integrantes']
+    publicooprivado = request.json['publicooprivado']
+    valor = request.json['valor']
+    ubicacion = request.json['ubicacion']
+    is_active = request.json['is_active']
+    crearevento = CrearEvento(nombreevento,descripcion,publicooprivado, integrantes, valor, ubicacion, is_active)
+    db.session.add(crearevento)
+    db.session.commit()
+    return jsonify({'message': 'Event created successfully'}), 201
 
 if __name__ == 'api':
     db.init_app(app)

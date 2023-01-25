@@ -21,6 +21,11 @@ export const Navbar = () => {
 						</Link>
 					</div>
 					<div className="mx-2">
+						<Link to="/" className="text-light">
+							Home
+						</Link>
+					</div>
+					<div className="mx-2">
 						<Link to="/perfil" className="text-light">
 							Perfil
 						</Link>

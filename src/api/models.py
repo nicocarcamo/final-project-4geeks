@@ -100,3 +100,22 @@ class Message(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+class CrearEvento(db.Model):
+    __tablename__ = 'crearevento'
+    id = db.Column(db.Integer, primary_key=True)
+    nombreevento = db.Column(db.String(120), unique=True, nullable=False)
+    descripcion = db.Column(db.String(120), nullable=False)
+    integrantes = db.Column(db.String(120), nullable=False)
+    publicooprivado = db.Column(db.String(120), unique=False)
+    valor = db.Column(db.String(120), nullable=False)
+    ubicacion = db.Column(db.String(120), nullable=False)
+    is_active = db.Column(db.Boolean, default=True)
+
+    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, is_active):
+        self.nombreevento = nombreevento
+        self.descripcion = descripcion
+        self.integrantes = integrantes
+        self.publicooprivado = publicooprivado
+        self.valor = valor
+        self.ubicacion = ubicacion
+        self.is_active = is_active
