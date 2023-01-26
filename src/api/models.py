@@ -22,7 +22,7 @@ class User(db.Model):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
-        self.password = generate_password_hash(password)
+        self.password = password
         self.is_active = is_active
 
 
