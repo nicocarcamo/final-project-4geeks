@@ -15,99 +15,43 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-# Register y login funcionando sin AUTH
-
-# @api.route('/register', methods=['POST'])
-# def register():
-#     print(request.get_json())
-#     username = request.json['username']
-#     firstname = request.json['firstname']
-#     lastname = request.json['lastname']
-#     email = request.json['email']
-#     password = request.json['password']
-#     is_active = request.json['is_active']
-#     user = User(username,firstname,lastname, email, password, is_active)
-#     db.session.add(user)
-#     db.session.commit()
-#     return jsonify({'message': 'User created successfully :)'}), 201
-
-# @api.route('/login', methods=['POST'])
-# def login():
-#     data = request.get_json()
-#     email = data.get('email')
-#     password = data.get('password')
-
-#     user = User.query.filter_by(email=email).first()
-#     if not user or not check_password_hash(user.password, password):
-#         return jsonify({'message': 'Invalid email or password :('}), 401
-
-#     return jsonify({'message': 'Logged in successfully :)'}), 201
 
 
+@api.route('/login', methods=['POST'])
+def login():
+    email = request.json.get('email')
+    password = request.json.get('password')
 
+    user = User.query.filter_by(email=email).first()
 
+    if not user: return jsonify({ "status": "fail", "message": "username incorrect" }), 401
+    if not check_password_hash(user.password, password): return jsonify({ "status": "fail", "message": "password incorrect" }), 401
 
-# Register y login con AUTH, pero funcionando mal. Se puede hacer register pero al parecer hay un problema
-# con el hasheo del pass y no logro hacer la autenticación.
+    access_token = create_access_token(identity=user.id)
+
+    data = {
+        "access_token": access_token,
+    }
+
+    return jsonify({'message': 'Logged in successfully :)'}, data), 200
+
 
 @api.route('/register', methods=['POST'])
 def register():
     print(request.get_json())
-    username = request.json['username']
-    firstname = request.json['firstname']
-    lastname = request.json['lastname']
-    email = request.json['email']
-    password = request.json['password']
-    is_active = request.json['is_active']
+    username = request.json.get('username')
+    firstname = request.json.get('firstname')
+    lastname = request.json.get('lastname')
+    email = request.json.get('email')
+    password = generate_password_hash(request.json.get('password'))
+    is_active = request.json.get('is_active')
 
-    if not email: return jsonify({"message": "Email is required"}), 400
-    if not password: return jsonify({"message": "Password is required"}), 400
-
-    password = generate_password_hash(request.json['password'])
     user = User(username,firstname,lastname, email, password, is_active)
 
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': 'User created successfully :)'}), 201
 
-
-
-@api.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    email = data.get('email')
-    password = data.get('password')
-
-    user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password, password):
-        return jsonify({'message': 'Invalid email or password :(('}), 401 
-
-    access_token = create_access_token(identity=user.email)
-    return jsonify({'message': 'Logged in successfully', 'access_token': access_token}), 201
-
-# @app.route('/api/login', methods=['POST'])
-# def login():
-#     email = request.json.get('email')
-#     password = request.json.get('password')
-    
-#     if not email: return jsonify({"message": "Email is required"}), 400
-#     if not password: return jsonify({"message": "Password is required"}), 400
-
-#     foundUser = User.query.filter_by(email=email).first()
-    
-#     if not foundUser: return jsonify({"message": "Email/Password are incorrects"}), 401
-#     if not check_password_hash(foundUser.password, password): return jsonify({"message": "Email/Password are incorrects"}), 401
-
-
-#     expires = datetime.timedelta(days=1)
-#     access_token = create_access_token(identity=foundUser.id, expires_delta=expires)
-
-#     data = {
-#         "access_token": access_token,
-#         "user": foundUser.serialize()
-#     }
-
-#     return jsonify(data), 200
 
 
 @api.route('/crearevento', methods=['POST'])
@@ -128,14 +72,15 @@ def crearevento():
 
 
 @api.route('/perfil', methods=['GET'])
-@jwt_required
+@jwt_required()
 def get_profile():
-    current_user = get_jwt_identity()
-    user = User.query.filter_by(email=current_user).first()
-    return jsonify({'username':user.username, 'email': user.email}), 200
+    id = get_jwt_identity()
+    user = User.query.get(id)
+    return jsonify(user.serialize()), 200
 
 
 if __name__ == 'api':
     db.init_app(app)
     db.create_all()
     app.register_blue
+
