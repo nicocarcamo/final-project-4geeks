@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import app, db, User, CrearEvento
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from werkzeug.security import check_password_hash, generate_password_hash
+import datetime
 
 api = Blueprint('api', __name__)
 
@@ -14,9 +15,6 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-
-
-
 @api.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email')
@@ -24,16 +22,21 @@ def login():
 
     user = User.query.filter_by(email=email).first()
 
+    # cambiar mensaje de error por "username/password incorrect" en ambos casos
     if not user: return jsonify({ "status": "fail", "message": "username incorrect" }), 401
     if not check_password_hash(user.password, password): return jsonify({ "status": "fail", "message": "password incorrect" }), 401
 
-    access_token = create_access_token(identity=user.id)
+    # modificar el expire time del token
+    expires = datetime.timedelta(minutes=3)
+    access_token = create_access_token(identity=user.id, expires_delta=expires)
 
     data = {
-        "access_token": access_token,
+        "status": "success",
+        "message": "Log In Successful!",
+        "access_token": access_token
     }
 
-    return jsonify({'message': 'Logged in successfully :)'}, data), 200
+    return jsonify(data), 200
 
 
 @api.route('/register', methods=['POST'])
