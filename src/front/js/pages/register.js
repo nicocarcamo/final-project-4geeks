@@ -56,7 +56,8 @@ export const Register = () => {
         }
       });
       const json = await res.json();
-      setMessage(json.message);
+      setMessage("User created successfully, please log in!");
+      console.log("User created successfully!")
     } catch (err) {
       setMessage(err.response && err.response.data.message);
     }
@@ -133,6 +134,7 @@ export const Register = () => {
             <Button color='teal' fluid size='large' type="submit" disabled={!isPasswordValid}>Submit</Button>
             {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
             {allFieldsRequiredMessage && <p style={{ color: "red" }}>{allFieldsRequiredMessage}</p>}
+            {message && <p style={{ color: "green" }}>{message}</p>}
           </Form>
         </Segment>
       </Grid.Column>
