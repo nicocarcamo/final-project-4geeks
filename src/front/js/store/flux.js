@@ -1,54 +1,57 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+	  store: {
+		eventos: [],
+		crearEvento: async (evento) => {
+		  try {
+			const resp = await fetch(
+			  process.env.BACKEND_URL + "/api/crearevento",
+			  {
+				method: "POST",
+				body: JSON.stringify(evento),
+				headers: {
+				  "Content-Type": "application/json",
 				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			  }
+			);
+  
+			const data = await resp.json();
+			setStore((store) => {
+			  store.eventos.push(data);
+  
+			  return store;
+			});
+		  } catch (error) {
+			console.log("Error creating event", error);
+		  }
 		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
+		unirseEvento: async (eventoId) => {
+		  try {
+			const resp = await fetch(
+			  process.env.BACKEND_URL + `/api/unirseevento/${eventoId}`,
+			  {
+				method: "POST",
+				headers: {
+				  "Content-Type": "application/json",
+				},
+			  }
+			);
+			const data = await resp.json();
+			setStore((store) => {
+			  store.eventos = store.eventos.map((evento) => {
+				if (evento.id === eventoId) {
+				  evento.integrantes = data.integrantes;
 				}
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
+				return evento;
+			  });
+			  return store;
+			});
+		  } catch (error) {
+			console.log("Error joining event", error);
+		  }
+		},
+	  },
 	};
-};
-
-export default getState;
+  };
+  
+  export default getState;
