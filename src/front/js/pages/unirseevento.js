@@ -1,45 +1,87 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import React, { useState, useEffect } from 'react';
+import { Table, Button, Form } from 'semantic-ui-react';
+
+export function UnirseEvento() {
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        fetch(
+            process.env.BACKEND_URL + "/api/crearevento", {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(data => setEvents(data))
+            .catch(err => console.log(err));
+    }, []);
+    
+    const handleSubmit = e => {
+        e.preventDefault();
+        fetch(process.env.BACKEND_URL + "/api/crearevento", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nombreevento: nombreevento,
+                descripcion: descripcion,
+                integrantes: integrantes,
+                publicooprivado: publicooprivado,
+                valor: valor,
+                ubicacion: ubicacion,
+                is_active: is_active
+            }),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                // updatearla lista
+                fetch(process.env.BACKEND_URL + "/api/crearevento", {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                    .then(res => res.json())
+                    .then(data => setEvents(data))
+                    .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+    };
+    
+    
+    return (
+        <div>
+            <h1>Unirse a evento</h1>
+            <Table celled>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Nombre del evento</Table.HeaderCell>
+                        <Table.HeaderCell>Descripcion</Table.HeaderCell>
+                        <Table.HeaderCell>Integrantes</Table.HeaderCell>
+                        <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
+                        <Table.HeaderCell>Valor</Table.HeaderCell>
+                        <Table.HeaderCell>Ubicacion</Table.HeaderCell>
+                        <Table.HeaderCell>Activo</Table.HeaderCell>
+                        <Table.HeaderCell>Unirse</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+    
+                <Table.Body>
+                    {events.map(event => (
+                        <Table.Row key={event.id}>
+                            <Table.Cell>{event.nombreevento}</Table.Cell>
+                            <Table.Cell>{event.descripcion}</Table.Cell>
+                            <Table.Cell>{event.integrantes}</Table.Cell>
+                            <Table.Cell>{event.publicooprivado}</Table.Cell>
+                            <Table.Cell>{event.valor}</Table.Cell>
+                            <Table.Cell>{event.ubicacion}</Table.Cell>
+                            <Table.Cell>{event.activo}</Table.Cell>
+                            <Table.Cell>
+                                <Button color='teal' fluid size='large' type="submit" onClick={handleSubmit}>Unirse</Button>
+                            </Table.Cell>
+                        </Table.Row>))}
+                </Table.Body>
+
+            </Table>
+        </div>
+    )}
 
 
-export const UnirseEvento = () => {
-	const { store, actions } = useContext(Context);
-
-	return (
-		<div className="text-center mt-5">
-			<h1>Únete a un evento</h1>
-			<div className="list-group w-50 mx-auto">
-				<a
-					href="#"
-					className="list-group-item list-group-item-action active"
-					aria-current="true"
-				>
-					<div className="d-flex w-100 justify-content-between">
-						<h5 className="mb-1">Partida de cartas magic</h5>
-						<small>Creado hace 3 días</small>
-					</div>
-					<p className="mb-1">Formatos modern, commander y legacy</p>
-					<small>Av. Salvador 432, 24/1/2023, 22:00Hrs</small>
-				</a>
-				<a href="#" className="list-group-item list-group-item-action">
-					<div className="d-flex w-100 justify-content-between">
-						<h5 className="mb-1">Salida en bici</h5>
-						<small className="text-muted">Creado hace 2 días</small>
-					</div>
-					<p className="mb-1">Vamos en bici hasta Pirque y volvemos, ritmo tranquilo.</p>
-					<small className="text-muted">Departamental con Vespucio, 28/1/2023, 8:30Hrs</small>
-				</a>
-				<a href="#" className="list-group-item list-group-item-action">
-					<div className="d-flex w-100 justify-content-between">
-						<h5 className="mb-1">Torneo de Catán</h5>
-						<small className="text-muted">Creado hace 3 horas</small>
-					</div>
-					<p className="mb-1">Costo de inscripción $5.000, 3 partidas garantizadas</p>
-					<small className="text-muted">Cafe de juegos de mesa "El Dado", 27/1/2023, 18:00Hrs</small>
-				</a>
-			</div>
-
-
-		</div>
-	);
-};
+    
