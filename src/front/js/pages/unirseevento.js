@@ -83,5 +83,3 @@ export function UnirseEvento() {
         </div>
     )}
 
-
-    
