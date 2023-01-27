@@ -12,7 +12,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				process.env.BACKEND_URL + "/api/crearevento",
 				{
 					method: "GET",
-					body: JSON.stringify(evento),
 					headers: {
 					"Content-Type": "application/json",
 					},

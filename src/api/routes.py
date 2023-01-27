@@ -38,9 +38,8 @@ def login():
 
     return jsonify({'message': 'Logged in successfully'}), 201
 
-@api.route('/crearevento', methods=['POST', 'GET'])
-def crearevento():
-    print(request.get_json())
+@api.route('/crearevento', methods=['POST'])
+def create_event():
     nombreevento = request.json['nombreevento']
     descripcion = request.json['descripcion']
     integrantes = request.json['integrantes']
@@ -52,6 +51,11 @@ def crearevento():
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
+
+@api.route('/crearevento', methods=['GET'])
+def get_all_events():
+    events = CrearEvento.query.all()
+    return jsonify([event.serialize() for event in events]), 200
 
 if __name__ == 'api':
     db.init_app(app)

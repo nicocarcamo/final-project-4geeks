@@ -3,22 +3,33 @@ import { Table, Button } from 'semantic-ui-react';
 import { Context } from '../store/appContext';
 
 export const UnirseEvento = () => {
-  const { store, actions } = useContext(Context);
   const [eventos, setEventos] = useState([]);
-
-    useEffect(() => {
-        async function fetchData() {
-          const resp = await fetch(process.env.BACKEND_URL + "/api/crearevento", {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-            const data = await resp.json();
-            setEventos(data);
+  const getEvento = async () => {
+    try {
+        const resp = await fetch(
+        process.env.BACKEND_URL + "/api/crearevento",
+        {
+            method: "GET",
+            headers: {
+            "Content-Type": "application/json",
+            },
         }
-        fetchData();
-    }, []);
+        );
+
+        const data = await resp.json();
+        setStore((store) => {
+        store.eventos.push(data);
+
+        return store;
+        });
+    } catch (error) {
+        console.log("Error, no se puede crear evento", error);
+    }
+}
+
+useEffect(() => {
+    getEvento();
+}, [])
 
     return (
         <Table>
