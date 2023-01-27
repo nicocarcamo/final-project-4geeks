@@ -113,7 +113,7 @@ export const Inbox = () => {
       <header>
         <SignOut />
       </header>
-		{/* 4geeks4life */}
+		{/* project.meetmeup@gmail.com - 4geeks4life */}
       <section>{user ? <Chat /> : <SignIn />}</section>
       {/* <section><Chat /></section> */}
     </div>
