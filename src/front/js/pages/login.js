@@ -29,7 +29,7 @@ export const Login = () => {
         setMessage(json.message);
       }
     } catch (err) {
-        setMessage(err.response && err.response.data.message);
+      setMessage(err.response && err.response.data.message);
     }
   };
 
@@ -70,10 +70,10 @@ export const Login = () => {
         </Form>
         {message && <Message>{message}</Message>}
         {!isLoggedIn && (
-        <Message>
-          New to us? <a href='/register'>Sign Up</a>
-      </Message>)}
-    </Grid.Column>
-  </Grid>
+          <Message>
+            New to us? <a href='/register'>Sign Up</a>
+          </Message>)}
+      </Grid.Column>
+    </Grid>
   )
-        }
+}
