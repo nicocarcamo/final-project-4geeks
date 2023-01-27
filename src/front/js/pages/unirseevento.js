@@ -16,8 +16,8 @@ export const UnirseEvento = () => {
         <Table>
             <Table.Header>
                 <Table.Row>
-                    <Table.HeaderCell>Event Name</Table.HeaderCell>
-                    <Table.HeaderCell>Description</Table.HeaderCell>
+                    <Table.HeaderCell>Nombre</Table.HeaderCell>
+                    <Table.HeaderCell>Descripcion</Table.HeaderCell>
                     <Table.HeaderCell>Integrantes</Table.HeaderCell>
                     <Table.HeaderCell>Valor</Table.HeaderCell>
                     <Table.HeaderCell>Ubicacion</Table.HeaderCell>

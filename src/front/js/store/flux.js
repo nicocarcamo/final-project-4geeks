@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return store;
 				});
 			} catch (error) {
-				console.log("Error creating event", error);
+				console.log("Error, no se puede crear evento", error);
 			}
 	}
 	}}
