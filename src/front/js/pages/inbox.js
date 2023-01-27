@@ -69,7 +69,8 @@ function Chat() {
       photoURL,
     });
     setFormValue("");
-    jumpBottom.current.scrollIntoView({behavior: 'smooth'})
+    // falta mejorar 
+    // jumpBottom.current.scrollIntoView({behavior: 'smooth'})
   };
 
   return (
