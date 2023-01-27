@@ -71,6 +71,15 @@ def crearevento():
     return jsonify({'message': 'Event created successfully'}), 201
 
 
+@app.route('/invitacion', methods=['POST'])
+def invite_friend():
+    id_evento = request.json['id_evento']
+    friend_username = request.json['friend_username']
+    new_invitation = Invitaciones(id_evento=id_evento, invitado=friend_username, estado='pendiente')
+    new_invitation.save()
+    return jsonify({'mensaje': 'Invitacion enviada correctamente'}), 200
+
+
 @api.route('/perfil', methods=['GET'])
 @jwt_required()
 def get_profile():

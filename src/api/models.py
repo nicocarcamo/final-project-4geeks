@@ -100,6 +100,31 @@ class Message(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+
+# INVITAR AL EVENTO
+class Invitaciones(db.Model):
+    __tablename__ = 'invitaciones'
+    id = db.Column(db.Integer, primary_key=True)
+    id_evento = db.Column(db.Integer, db.ForeignKey("events.id"), nullable=False)
+    invitado = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+    estado = db.Column(db.String(120), nullable=False)
+
+    def __init__(self, id_evento, invitado, estado):
+        self.id_evento = id_evento
+        self.invitado = invitado
+        self.estado = estado
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
@@ -119,3 +144,5 @@ class CrearEvento(db.Model):
         self.valor = valor
         self.ubicacion = ubicacion
         self.is_active = is_active
+
+
