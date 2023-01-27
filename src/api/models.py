@@ -119,3 +119,10 @@ class CrearEvento(db.Model):
         self.valor = valor
         self.ubicacion = ubicacion
         self.is_active = is_active
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "nombreevento": self.nombreevento,
+            "descripcion": self.descripcion
+        }
