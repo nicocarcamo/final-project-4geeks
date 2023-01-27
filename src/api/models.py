@@ -16,6 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
+    user = db.relationship("UnirseEvento", back_populates="user")
 
     def __init__(self, username, firstname, lastname, email, password, is_active):
         self.username = username
@@ -25,7 +26,6 @@ class User(db.Model):
         self.password = generate_password_hash(password)
         self.is_active = is_active
 
-
     def serialize(self):
         return {
             "id": self.id,
@@ -34,61 +34,6 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
     
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-    
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-
-class Event(db.Model):
-    __tablename__ = "events"
-    id = db.Column(db.Integer, primary_key=True)
-    nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
-    lugar = db.Column(db.String(120), nullable=False)
-    fecha = db.Column(db.String(120), nullable=False)
-    hora = db.Column(db.String(120), nullable=False)
-    asistentes = db.Column(db.String)
-    creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "nombre_evento": self.nombre_evento,
-            "lugar": self.lugar,
-            "fecha": self.fecha,
-            "hora": self.hora,
-            "creador_evento": self.creador_evento
-        }
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-    
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-class Message(db.Model):
-    __tablename__ = "messages"
-    id = db.Column(db.Integer, primary_key=True)
-    message_text = db.Column(db.String(500), nullable=False)
-    message_creator = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "message_creator": self.message_creator
-        }
-
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -110,6 +55,7 @@ class CrearEvento(db.Model):
     valor = db.Column(db.String(120), nullable=False)
     ubicacion = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
+    event = db.relationship("UnirseEvento", back_populates="event")
 
     def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, is_active):
         self.nombreevento = nombreevento
@@ -119,3 +65,96 @@ class CrearEvento(db.Model):
         self.valor = valor
         self.ubicacion = ubicacion
         self.is_active = is_active
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "nombreevento": self.nombreevento,
+            "descripcion": self.descripcion,
+            "integrantes": self.integrantes,
+            "publicooprivado": self.publicooprivado,
+            "valor": self.valor,
+            "ubicacion": self.ubicacion,
+            "is_active": self.is_active
+        }
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+class UnirseEvento(db.Model):
+    __tablename__ = 'unirseevento'
+    event_id = db.Column(db.Integer, db.ForeignKey('crearevento.id'), primary_key=True)    
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    is_active = db.Column(db.Boolean, default=True)
+    event = db.relationship("CrearEvento", back_populates="event")
+    user = db.relationship("User", back_populates="user")
+
+    def __init__(self,event, user):
+        self.event = event
+        self.user = user
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+# class Event(db.Model):
+#     __tablename__ = "events"
+#     id = db.Column(db.Integer, primary_key=True)
+#     nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
+#     lugar = db.Column(db.String(120), nullable=False)
+#     fecha = db.Column(db.String(120), nullable=False)
+#     hora = db.Column(db.String(120), nullable=False)
+#     asistentes = db.Column(db.String)
+#     creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "nombre_evento": self.nombre_evento,
+#             "lugar": self.lugar,
+#             "fecha": self.fecha,
+#             "hora": self.hora,
+#             "creador_evento": self.creador_evento
+#         }
+
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
+
+#     def update(self):
+#         db.session.commit()
+    
+#     def delete(self):
+#         db.session.delete(self)
+#         db.session.commit()
+
+# class Message(db.Model):
+#     __tablename__ = "messages"
+#     id = db.Column(db.Integer, primary_key=True)
+#     message_text = db.Column(db.String(500), nullable=False)
+#     message_creator = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "message_creator": self.message_creator
+#         }
+
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
+
+#     def update(self):
+#         db.session.commit()
+    
+#     def delete(self):
+#         db.session.delete(self)
+#         db.session.commit()

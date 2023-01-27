@@ -14,14 +14,14 @@ def handle_hello():
 
 @api.route('/register', methods=['POST'])
 def register():
-    print(request.get_json())
-    username = request.json['username']
-    firstname = request.json['firstname']
-    lastname = request.json['lastname']
-    email = request.json['email']
-    password = request.json['password']
-    is_active = request.json['is_active']
-    user = User(username,firstname,lastname, email, password, is_active)
+    data = request.get_json()
+    username = data.get('username')
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    email = data.get('email')
+    password = data.get('password')
+    is_active = data.get('is_active')
+    user = User(username=username,firstname=firstname,lastname=lastname, email=email, password=password, is_active=is_active)
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
@@ -39,8 +39,7 @@ def login():
     return jsonify({'message': 'Logged in successfully'}), 201
 
 @api.route('/crearevento', methods=['POST'])
-def crearevento():
-    print(request.get_json())
+def create_event():
     nombreevento = request.json['nombreevento']
     descripcion = request.json['descripcion']
     integrantes = request.json['integrantes']
@@ -53,8 +52,12 @@ def crearevento():
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
 
+@api.route('/crearevento', methods=['GET'])
+def get_all_events():
+    events = CrearEvento.query.all()
+    return jsonify([event.serialize() for event in events]), 200
+
 if __name__ == 'api':
     db.init_app(app)
     db.create_all()
-    app.register_blue
-
+    app.register_blueprint(api)
