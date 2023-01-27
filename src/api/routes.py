@@ -50,7 +50,7 @@ def register():
     is_active = request.json.get('is_active')
 
     user = User(username,firstname,lastname, email, password, is_active)
-
+    
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': 'User created successfully :)'}), 201
@@ -63,8 +63,7 @@ def get_all_users():
 
 
 @api.route('/crearevento', methods=['POST'])
-def crearevento():
-    print(request.get_json())
+def create_event():
     nombreevento = request.json['nombreevento']
     descripcion = request.json['descripcion']
     integrantes = request.json['integrantes']
@@ -91,9 +90,7 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
-
 if __name__ == 'api':
     db.init_app(app)
     db.create_all()
-    app.register_blue
-
+    app.register_blueprint(api)

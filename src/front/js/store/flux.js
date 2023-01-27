@@ -1,5 +1,6 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
+
 		store: {
 			message: null,
 			eventos: []
@@ -44,6 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		}
 	};
+
 };
 
-export default getState;
+  export default getState;
