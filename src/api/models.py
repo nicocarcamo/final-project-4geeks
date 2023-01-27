@@ -23,7 +23,7 @@ class User(db.Model):
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
-        self.password = password
+        self.password = generate_password_hash(password)
         self.is_active = is_active
 
     def serialize(self):

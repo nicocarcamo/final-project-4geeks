@@ -1,12 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify, Blueprint
 from api.models import app, db, User, CrearEvento
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
-from werkzeug.security import check_password_hash, generate_password_hash
-import datetime
+from werkzeug.security import check_password_hash
 
 api = Blueprint('api', __name__)
-
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -15,47 +12,31 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
-@api.route('/login', methods=['POST'])
-def login():
-    email = request.json.get('email')
-    password = request.json.get('password')
-
-    user = User.query.filter_by(email=email).first()
-
-    # cambiar mensaje de error por "username/password incorrect" en ambos casos
-    if not user: return jsonify({ "status": "fail", "message": "username incorrect" }), 401
-    if not check_password_hash(user.password, password): return jsonify({ "status": "fail", "message": "password incorrect" }), 401
-
-    # modificar el expire time del token
-    expires = datetime.timedelta(minutes=3)
-    access_token = create_access_token(identity=user.id, expires_delta=expires)
-
-    data = {
-        "status": "success",
-        "message": "Log In Successful!",
-        "access_token": access_token
-    }
-
-    return jsonify(data), 200
-
-
 @api.route('/register', methods=['POST'])
 def register():
-    print(request.get_json())
-    username = request.json.get('username')
-    firstname = request.json.get('firstname')
-    lastname = request.json.get('lastname')
-    email = request.json.get('email')
-    password = generate_password_hash(request.json.get('password'))
-    is_active = request.json.get('is_active')
-
-    user = User(username,firstname,lastname, email, password, is_active)
-    
+    data = request.get_json()
+    username = data.get('username')
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    email = data.get('email')
+    password = data.get('password')
+    is_active = data.get('is_active')
+    user = User(username=username,firstname=firstname,lastname=lastname, email=email, password=password, is_active=is_active)
     db.session.add(user)
     db.session.commit()
-    return jsonify({'message': 'User created successfully :)'}), 201
+    return jsonify({'message': 'User created successfully'}), 201
 
+@api.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
 
+    user = User.query.filter_by(email=email).first()
+    if not user or not check_password_hash(user.password, password):
+        return jsonify({'message': 'Invalid email or password'}), 401
+
+    return jsonify({'message': 'Logged in successfully'}), 201
 
 @api.route('/crearevento', methods=['POST'])
 def create_event():
@@ -66,8 +47,7 @@ def create_event():
     valor = request.json['valor']
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
-    crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
+    crearevento = CrearEvento(nombreevento,descripcion,publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
@@ -76,13 +56,6 @@ def create_event():
 def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
-
-@api.route('/perfil', methods=['GET'])
-@jwt_required()
-def get_profile():
-    id = get_jwt_identity()
-    user = User.query.get(id)
-    return jsonify(user.serialize()), 200
 
 if __name__ == 'api':
     db.init_app(app)
