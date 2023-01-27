@@ -4,10 +4,18 @@ import { Context } from '../store/appContext';
 
 export const UnirseEvento = () => {
   const { store, actions } = useContext(Context);
+  const [eventos, setEventos] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
-          await actions.getEvento();
+          const resp = await fetch(process.env.BACKEND_URL + "/api/crearevento", {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            const data = await resp.json();
+            setEventos(data);
         }
         fetchData();
     }, []);
@@ -25,7 +33,7 @@ export const UnirseEvento = () => {
                 </Table.Row>
             </Table.Header>
             <Table.Body>
-                {store.eventos.map((crearevento) => (
+                {eventos.map((crearevento) => (
                     <Table.Row key={crearevento.id}>
                         <Table.Cell>{crearevento.nombreevento}</Table.Cell>
                         <Table.Cell>{crearevento.descripcion}</Table.Cell>

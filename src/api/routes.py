@@ -38,7 +38,7 @@ def login():
 
     return jsonify({'message': 'Logged in successfully'}), 201
 
-@api.route('/crearevento', methods=['POST'])
+@api.route('/crearevento', methods=['POST', 'GET'])
 def crearevento():
     print(request.get_json())
     nombreevento = request.json['nombreevento']
