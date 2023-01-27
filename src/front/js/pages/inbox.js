@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+import React, { useContext, useRef, useState } from "react";
+// import { Context } from "../store/appContext";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -32,7 +32,7 @@ function SignIn() {
   };
   return (
     <div>
-      <button className="sign-in" onClick={signGoogle}>Sign in with Google</button>
+      <button className="sign" onClick={signGoogle}>Sign in with Google</button>
     </div>
   );
 }
@@ -40,7 +40,7 @@ function SignIn() {
 function SignOut() {
   return (
     auth.currentUser && (
-      <button className="sign-out" onClick={() => auth.signOut()}>
+      <button className="sign" onClick={() => auth.signOut()}>
         {" "}
         Sign Out{" "}
       </button>
@@ -50,10 +50,13 @@ function SignOut() {
 
 function Chat() {
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limit(25);
 
-  const [messages] = useCollectionData(query, { idField: "id" });
+  const consulta = messagesRef.orderBy("createdAt");  //.limit(number)
+
+  const [messages] = useCollectionData(consulta, { idField: "id" });
   const [formValue, setFormValue] = useState("");
+
+  const jumpBottom = useRef()
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -66,6 +69,7 @@ function Chat() {
       photoURL,
     });
     setFormValue("");
+    jumpBottom.current.scrollIntoView({behavior: 'smooth'})
   };
 
   return (
@@ -73,6 +77,8 @@ function Chat() {
       <main>
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+
+          <div ref={jumpBottom}></div>
       </main>
 
       <form onSubmit={sendMessage}>
