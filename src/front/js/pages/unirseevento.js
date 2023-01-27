@@ -3,13 +3,6 @@ import { Table, Button, Form } from 'semantic-ui-react';
 
 export function UnirseEvento() {
     const [events, setEvents] = useState([]);
-    const [nombreevento, setNombreEvento] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [integrantes, setIntegrantes] = useState('');
-    const [publicooprivado, setPublicoOPrivado] = useState('');
-    const [valor, setValor] = useState('');
-    const [ubicacion, setUbicacion] = useState('');
-    const [is_active, setIsActive] = useState('');
 
     useEffect(() => {
         fetch(
@@ -24,8 +17,7 @@ export function UnirseEvento() {
     
     const handleSubmit = e => {
         e.preventDefault();
-        fetch(
-            process.env.BACKEND_URL + "/api/crearevento", {
+        fetch(process.env.BACKEND_URL + "/api/crearevento", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -39,9 +31,20 @@ export function UnirseEvento() {
             }),
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data)
+                // updatearla lista
+                fetch(process.env.BACKEND_URL + "/api/crearevento", {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                    .then(res => res.json())
+                    .then(data => setEvents(data))
+                    .catch(err => console.log(err));
+            })
             .catch(err => console.log(err));
     };
+    
     
     return (
         <div>
@@ -56,6 +59,7 @@ export function UnirseEvento() {
                         <Table.HeaderCell>Valor</Table.HeaderCell>
                         <Table.HeaderCell>Ubicacion</Table.HeaderCell>
                         <Table.HeaderCell>Activo</Table.HeaderCell>
+                        <Table.HeaderCell>Unirse</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
     
@@ -69,8 +73,12 @@ export function UnirseEvento() {
                             <Table.Cell>{event.valor}</Table.Cell>
                             <Table.Cell>{event.ubicacion}</Table.Cell>
                             <Table.Cell>{event.activo}</Table.Cell>
+                            <Table.Cell>
+                                <Button color='teal' fluid size='large' type="submit" onClick={handleSubmit}>Unirse</Button>
+                            </Table.Cell>
                         </Table.Row>))}
                 </Table.Body>
+
             </Table>
         </div>
     )}
