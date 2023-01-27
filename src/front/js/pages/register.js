@@ -19,6 +19,7 @@ export const Register = () => {
     is_active: true
   });
   const [message, setMessage] = useState(null);
+  const [createError, setCreateError] = useState(null)
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [passwordError, setPasswordError] = useState(null);
   const [errors, setErrors] = useState({});
@@ -56,9 +57,10 @@ export const Register = () => {
         }
       });
       const json = await res.json();
-      setMessage(json.message);
+      setMessage("User created successfully, please log in!");
+      console.log("User created successfully!")
     } catch (err) {
-      setMessage(err.response && err.response.data.message);
+      setCreateError("Username/email already exists");
     }
   };
 
@@ -133,6 +135,8 @@ export const Register = () => {
             <Button color='teal' fluid size='large' type="submit" disabled={!isPasswordValid}>Submit</Button>
             {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
             {allFieldsRequiredMessage && <p style={{ color: "red" }}>{allFieldsRequiredMessage}</p>}
+            {message && <p style={{ color: "green" }}>{message}</p>}
+            {createError && <p style={{ color: "red" }}>{createError}</p>}            
           </Form>
         </Segment>
       </Grid.Column>
