@@ -1,47 +1,43 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import { Card, Button, Grid, Image, Header, Segment } from "semantic-ui-react";
+import React, { useState, useEffect, useContext } from 'react';
+import { Table, Button } from 'semantic-ui-react';
+import { Context } from '../store/appContext';
 
 export const UnirseEvento = () => {
   const { store, actions } = useContext(Context);
 
-  return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
-          <Image src="/rigo-baby.jpg" /> Eventos disponibles
-        </Header>
-        <Segment>
-          <Card.Group>
-            {store.eventos && Array.isArray(store.eventos) ? (
-              store.eventos.map((evento, index) => {
-                return (
-                  <Card key={index}>
-                    <Card.Content>
-                      <Card.Header>{evento.nombreevento}</Card.Header>
-                      <Card.Meta>{evento.ubicacion}</Card.Meta>
-                      <Card.Description>
-                        {evento.descripcion} - {evento.integrantes} integrantes
-                        - {evento.publicooprivado}
-                      </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                      <Button
-                        color="teal"
-                        onClick={() => actions.unirseEvento(evento.id)}
-                      >
-                        Unirse al evento
-                      </Button>
-                    </Card.Content>
-                  </Card>
-                );
-              })
-            ) : (
-              <p>No hay eventos disponibles</p>
-            )}
-          </Card.Group>
-        </Segment>
-      </Grid.Column>
-    </Grid>
-  );
-};
+    useEffect(() => {
+        async function fetchData() {
+          await actions.getEvento();
+        }
+        fetchData();
+    }, []);
+
+    return (
+        <Table>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Event Name</Table.HeaderCell>
+                    <Table.HeaderCell>Description</Table.HeaderCell>
+                    <Table.HeaderCell>Integrantes</Table.HeaderCell>
+                    <Table.HeaderCell>Valor</Table.HeaderCell>
+                    <Table.HeaderCell>Ubicacion</Table.HeaderCell>
+                    <Table.HeaderCell>Action</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {store.eventos.map((crearevento) => (
+                    <Table.Row key={crearevento.id}>
+                        <Table.Cell>{crearevento.nombreevento}</Table.Cell>
+                        <Table.Cell>{crearevento.descripcion}</Table.Cell>
+                        <Table.Cell>{crearevento.integrantes}</Table.Cell>
+                        <Table.Cell>{crearevento.valor}</Table.Cell>
+                        <Table.Cell>{crearevento.ubicacion}</Table.Cell>
+                        {/* <Table.Cell>
+                            <Button onClick={() => actions.joinEvent(crearevento.id)}>Join</Button>
+                        </Table.Cell> */}
+                    </Table.Row>
+                ))}
+            </Table.Body>
+        </Table>
+    );
+}
