@@ -22,7 +22,7 @@
     height: 10vh;
     min-height: 50px;
     color: white;
-    position: fixed;
+    position: relative;
     width: 100%;
     max-width: 728px;
     top: 0;
@@ -32,6 +32,8 @@
     z-index: 99;
     padding: 10px;
     box-sizing: border-box;
+    border: 2px solid #fff;
+    border-radius: 10px;
   }
   
   .chat section {
@@ -40,7 +42,8 @@
     justify-content: center;
     min-height: 100vh;
     background-color: rgb(61, 59, 69);
-    
+    border-radius: 0px 0px 15px 15px;
+    border: 2px solid #fff;
   }
   
   .chat main {
@@ -57,7 +60,7 @@
     height: 10vh;
     position: fixed;
     bottom: 0;
-    background-color: rgb(24, 23, 23);
+    /* background-color: rgb(24, 23, 23); */
     width: 100%;
     max-width: 728px;
     display: flex;
@@ -68,6 +71,7 @@
   .chat form button {
     width: 20%;
     background-color: rgb(65, 65, 93);
+    border: 2px solid;
   }
   
   
@@ -75,11 +79,15 @@
     line-height: 1.5;
     width: 100%;
     font-size: 1.5rem;
-    background: rgba(119, 124, 167, 0.501);
+    /* background: rgba(119, 124, 167, 0.501); */
+    background-color: rgba(0, 0, 0);
     color: white;
     outline: none;
     border: none;
     padding: 0 10px;
+    padding-left: 40px;
+    border: 2px solid;
+    border-radius: 5px;
 
   }
   
@@ -105,6 +113,7 @@
   .sign {
     max-width: 400px;
     margin: 0 auto;
+    border: 2px solid #fff !important;
   }
 
   /* ul, li {

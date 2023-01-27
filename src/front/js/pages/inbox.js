@@ -32,7 +32,7 @@ function SignIn() {
   };
   return (
     <div>
-      <button className="sign" onClick={signGoogle}>Sign in with Google</button>
+      <button className="sign btn btn-secondary" onClick={signGoogle}>Sign in with Google</button>
     </div>
   );
 }
@@ -40,7 +40,7 @@ function SignIn() {
 function SignOut() {
   return (
     auth.currentUser && (
-      <button className="sign" onClick={() => auth.signOut()}>
+      <button className="sign btn btn-secondary" onClick={() => auth.signOut()}>
         {" "}
         Sign Out{" "}
       </button>
@@ -83,11 +83,11 @@ function Chat() {
       </main>
 
       <form onSubmit={sendMessage}>
-        <input className="inputChat"
+        <input className="inputChat" placeholder="Mensaje..."
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit"> Send </button>
+        <button className="btn btn-secondary" type="submit"> Send </button>
       </form>
     </div>
   );
