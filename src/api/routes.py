@@ -1,12 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, request, jsonify, Blueprint
 from api.models import app, db, User, CrearEvento
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
-from werkzeug.security import check_password_hash, generate_password_hash
-import datetime
+from werkzeug.security import check_password_hash
 
 api = Blueprint('api', __name__)
-
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -14,6 +11,7 @@ def handle_hello():
         "message": "Backend y frontend conectados :)"
     }
     return jsonify(response_body), 200
+
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -41,26 +39,23 @@ def login():
 
 @api.route('/register', methods=['POST'])
 def register():
-    print(request.get_json())
-    username = request.json.get('username')
-    firstname = request.json.get('firstname')
-    lastname = request.json.get('lastname')
-    email = request.json.get('email')
-    password = generate_password_hash(request.json.get('password'))
-    is_active = request.json.get('is_active')
-
-    user = User(username,firstname,lastname, email, password, is_active)
-    
+    data = request.get_json()
+    username = data.get('username')
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    email = data.get('email')
+    password = data.get('password')
+    is_active = data.get('is_active')
+    user = User(username=username,firstname=firstname,lastname=lastname, email=email, password=password, is_active=is_active)
     db.session.add(user)
     db.session.commit()
-    return jsonify({'message': 'User created successfully :)'}), 201
+    return jsonify({'message': 'User created successfully'}), 201
 
 @api.route('/register', methods=['GET'])
 def get_all_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
-
-
+    return jsonify({'message': 'Logged in successfully'}), 201
 
 @api.route('/crearevento', methods=['POST'])
 def create_event():
@@ -71,8 +66,7 @@ def create_event():
     valor = request.json['valor']
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
-    crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
+    crearevento = CrearEvento(nombreevento,descripcion,publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
