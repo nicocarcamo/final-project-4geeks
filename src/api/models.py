@@ -77,28 +77,28 @@ class Event(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-class Message(db.Model):
-    __tablename__ = "messages"
-    id = db.Column(db.Integer, primary_key=True)
-    message_text = db.Column(db.String(500), nullable=False)
-    message_creator = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+# class Message(db.Model):
+#     __tablename__ = "messages"
+#     id = db.Column(db.Integer, primary_key=True)
+#     message_text = db.Column(db.String(500), nullable=False)
+#     message_creator = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "message_creator": self.message_creator
-        }
+#     def serialize(self):
+#         return {
+#             "id": self.id,
+#             "message_creator": self.message_creator
+#         }
 
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
+#     def save(self):
+#         db.session.add(self)
+#         db.session.commit()
 
-    def update(self):
-        db.session.commit()
+#     def update(self):
+#         db.session.commit()
     
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
+#     def delete(self):
+#         db.session.delete(self)
+#         db.session.commit()
 
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
@@ -124,5 +124,22 @@ class CrearEvento(db.Model):
         return {
             "id": self.id,
             "nombreevento": self.nombreevento,
-            "descripcion": self.descripcion
+            "descripcion": self.descripcion,
+            "integrantes": self.integrantes,
+            "publicooprivado": self.publicooprivado,
+            "valor": self.valor,
+            "ubicacion": self.ubicacion,
+            "is_active": self.is_active
         }
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
