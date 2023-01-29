@@ -9,20 +9,14 @@ export const Navbar = () => {
 					<Link to="/">
 						<span className="navbar-brand mb-0 h1">MeetMeUp</span>
 					</Link>
-
-					<div className="mx-2">
-						<Link to="/login" className="text-light">
-							Login
-						</Link>
-					</div>
 					<div className="mx-2">
 						<Link to="/register" className="text-light">
 							Register
 						</Link>
 					</div>
 					<div className="mx-2">
-						<Link to="/" className="text-light">
-							Home
+						<Link to="/login" className="text-light">
+							Login
 						</Link>
 					</div>
 					<div className="mx-2">
