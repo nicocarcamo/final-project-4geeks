@@ -4,10 +4,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		store: {
 			message: null,
+			eventCreatedMessage: null,
 			events: []
 		},
-		actions: {
 
+		actions: {
 			getMessage: async () => {
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
@@ -30,12 +31,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("Error loading events from backend", error)
 				}
+			},
+			createEvent: async (formData) => {
+				try {
+					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
+						method: "POST",
+						body: JSON.stringify(formData),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+					const json = await res.json();
+					setStore({ event: json, eventCreatedMessage: "Event created successfully!" });
+				} catch (err) {
+					setStore({ message: err.response && err.response.data.message });
+				}
 			}
-
 		}
 	};
-
 };
 
-  export default getState;
+export default getState;
 
