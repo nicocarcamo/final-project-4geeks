@@ -26,19 +26,19 @@ export function UnirseEvento() {
                 is_active: is_active
             }),
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                // updatearla lista
-                fetch(process.env.BACKEND_URL + "/api/crearevento", {
-                    method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                })
-                    .then(res => res.json())
-                    .then(data => setEvents(data))
-                    .catch(err => console.log(err));
-            })
-            .catch(err => console.log(err));
+            // .then(res => res.json())
+            // .then(data => {
+            //     console.log(data)
+            //     // updatearla lista
+            //     fetch(process.env.BACKEND_URL + "/api/crearevento", {
+            //         method: 'GET',
+            //         headers: { 'Content-Type': 'application/json' },
+            //     })
+            //         .then(res => res.json())
+            //         .then(data => setEvents(data))
+            //         .catch(err => console.log(err));
+            // })
+            // .catch(err => console.log(err));
     };
 
 
