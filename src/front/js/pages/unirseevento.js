@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'semantic-ui-react';
+import { Context } from "../store/appContext";
 
 export function UnirseEvento() {
+
+    const { store, actions } = useContext(Context);
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        fetch(
-            process.env.BACKEND_URL + "/api/crearevento", {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(res => res.json())
-            .then(data => setEvents(data))
-            .catch(err => console.log(err));
+        actions.getEvents().then(data => setEvents(data));
     }, []);
     
     const handleSubmit = e => {
@@ -44,8 +40,8 @@ export function UnirseEvento() {
             })
             .catch(err => console.log(err));
     };
-    
-    
+
+
     return (
         <div>
             <h1>Unirse a evento</h1>
@@ -62,7 +58,7 @@ export function UnirseEvento() {
                         <Table.HeaderCell>Unirse</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
-    
+
                 <Table.Body>
                     {events.map(event => (
                         <Table.Row key={event.id}>
@@ -81,5 +77,6 @@ export function UnirseEvento() {
 
             </Table>
         </div>
-    )}
+    )
+}
 

@@ -35,7 +35,7 @@ export const CrearEvento = () => {
 		  }
 		});
 		const json = await res.json();
-		setMessage(json.message);
+		setMessage(json.message, "created successfully!");
 	  } catch (err) {
 		  setMessage(err.response && err.response.data.message);
 	  }
@@ -95,6 +95,7 @@ export const CrearEvento = () => {
 				/>
 			  </Form.Field>
 			  <Button color='teal' fluid size='large' type="submit">Submit</Button>
+			  {message && <p style={{ color: "green" }}>{message}</p>}
 			</Form>
 		  </Segment>
 		</Grid.Column>
