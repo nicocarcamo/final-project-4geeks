@@ -5,7 +5,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			message: null,
 			eventCreatedMessage: null,
-			events: []
+			events: [],
+			loginMessage: null,
+			isLoggedIn: false,
 		},
 
 		actions: {
@@ -46,6 +48,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (err) {
 					setStore({ message: err.response && err.response.data.message });
 				}
+			},
+			login: async (formData) => {
+				try {
+					const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+					  method: "POST",
+					  body: JSON.stringify(formData),
+					  headers: {
+						"Content-Type": "application/json"
+					  }
+					});
+					const json = await res.json();
+					if (json.status === 'success') {
+					  setStore({ loginMessage: "Logged in successfully!" });
+					} else {
+					  setStore({ loginMessage: "Incorrect email/password" });
+					}
+				  } catch (err) {
+					setStore({ loginMessage: "Error logging in" });
+				  }
 			}
 		}
 	};
