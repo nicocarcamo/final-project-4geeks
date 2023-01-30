@@ -8,6 +8,7 @@ import { Home } from "./pages/home";
 import { Perfil } from "./pages/perfil";
 import { CrearEvento } from "./pages/crearevento";
 import { UnirseEvento } from "./pages/unirseevento";
+import { MiEvento } from "./pages/mievento";
 import { Inbox } from "./pages/inbox";
 import { ProtectedRoutes } from "./pages/protectedroutes";
 
@@ -39,7 +40,8 @@ const Layout = () => {
                             <Route element={<CrearEvento />} path="/crearevento" />
                             <Route element={<UnirseEvento />} path="/unirseevento" />   
                             <Route element={<Inbox />} path="/inbox" />
-                            <Route element={<Demo />} path="/register" />
+                            <Route element={<MiEvento />} path="/mievento" />
+                            <Route element={<Demo />} path="/demo" />
                             <Route element={<Single />} path="/single/:theid" />
                             <Route element={<h1>Not found!</h1>} />
                         {/* </Route> */}

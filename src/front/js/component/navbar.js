@@ -46,6 +46,11 @@ export const Navbar = () => {
               </Link>
             </div>
             <div className="mx-2">
+              <Link to="/mievento" className="text-light">
+                Mi Evento
+              </Link>
+            </div>
+            <div className="mx-2">
               <Link to="/inbox" className="text-light">
                 Inbox
               </Link>

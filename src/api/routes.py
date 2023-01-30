@@ -90,6 +90,15 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
+@app.route('/api/currentuser', methods=['GET'])
+@jwt_required
+def current_user():
+    current_user_email = get_jwt_identity()
+    user = User.query.get(id)
+    if user:
+        return jsonify({'email': user.email, 'name': user.name})
+    return jsonify({'error': 'User not found'}), 404
+
 if __name__ == 'api':
     db.init_app(app)
     db.create_all()
