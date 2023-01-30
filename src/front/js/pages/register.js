@@ -140,7 +140,7 @@ export const Register = () => {
           </Form>
         </Segment>
         <Message>
-            Already have a user? <a href='/'>Login</a>
+            Already have a user? <a href='/login'>Login</a>
           </Message>
       </Grid.Column>
     </Grid>

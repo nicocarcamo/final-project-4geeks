@@ -7,7 +7,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			eventCreatedMessage: null,
 			events: [],
 			loginMessage: null,
-			isLoggedIn: false,
+			registerMessage: null,
+			currentUser: null,
+			email: '',
+			username: '',
+			firstname: '',
+			lastname: '',
+			password: '',
+			perfil: null,
 		},
 
 		actions: {
@@ -49,44 +56,83 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ message: err.response && err.response.data.message });
 				}
 			},
-			login: async (formData) => {
+
+			login: async (formData, navigate) => {
+				const { currentUser } = getStore();
 				try {
-				  const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-					method: "POST",
-					body: JSON.stringify(formData),
-					headers: {
-					  "Content-Type": "application/json"
-					}
-				  });
-				  const json = await res.json();
-				  setStore({ loginMessage: json.message });
-				  return json;
-				} catch (err) {
-				  setStore({ loginMessage: "Error logging in" });
-				  return { status: 'error' };
-				}
-			  },
-			  
-			getCurrentUser: async () => {
-				const jwtToken = localStorage.getItem("jwtToken");
-				try {
-				  const res = await fetch(
-					`${process.env.BACKEND_URL}/api/currentuser`,
-					{
-						method: "GET",
+					const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+						method: "POST",
+						body: JSON.stringify(formData),
 						headers: {
-						  "Content-Type": "application/json",
-						  "Authorization": `Bearer ${jwtToken}`
-						},
-					  }
-					);
+							"Content-Type": "application/json"
+						}
+					});
 					const json = await res.json();
-					setStore({ events: data.filter((event) => event.createdBy === currentUser._id) });
-					return data;
-				  } catch (err) {
-					console.log("Error getting current user", err);
-				  }
-				},	
+					if (json) {
+						setStore({
+							currentUser: json,
+							email: '',
+							password: '',
+							error: null
+						})
+						sessionStorage.setItem('currentUser', JSON.stringify(json))
+						// console.log(json)
+						// console.log("logged in")
+						// console.log(currentUser)
+						navigate('/perfil')
+					} else {
+						setStore({
+							currentUser: null,
+							error: json
+						})
+						if (sessionStorage.getItem('currentUser')) sessionStorage.removeItem('currentUser')
+					}
+				}
+				catch (err) {
+					console.error(err)
+					setStore({ loginMessage: "Error logging in" });
+				}
+			},
+
+			// getCurrentUser: async () => {
+			// 	const jwtToken = localStorage.getItem("jwtToken");
+			// 	try {
+			// 		const res = await fetch(
+			// 			`${process.env.BACKEND_URL}/api/currentuser`,
+			// 			{
+			// 				method: "GET",
+			// 				headers: {
+			// 					"Content-Type": "application/json",
+			// 					"Authorization": `Bearer ${jwtToken}`
+			// 				},
+			// 			}
+			// 		);
+			// 		const json = await res.json();
+			// 		setStore({ events: data.filter((event) => event.createdBy === currentUser._id) });
+			// 		return data;
+			// 	} catch (err) {
+			// 		console.log("Error getting current user", err);
+			// 	}
+			// },
+			getProfile: () => {
+				const { currentUser } = getStore();
+
+				fetch(`${process.env.BACKEND_URL}/api/perfil`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${currentUser?.access_token}`
+					}
+
+				})
+					.then(response => response.json())
+					.then(data => {
+						setStore({
+							profile: data
+						})
+
+					})
+			},
 		}
 	};
 };

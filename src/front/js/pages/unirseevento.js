@@ -8,13 +8,17 @@ export function UnirseEvento() {
     const [events, setEvents] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
   
+    // useEffect(() => {
+    //   actions.getEvents()
+    //     .then(data => setEvents(data))
+    //     .catch(error => console.error(error));
+    //   actions.getCurrentUser()
+    //     .then(user => setCurrentUser(user))
+    //     .catch(error => console.error(error));
+    // }, []);
+
     useEffect(() => {
-      actions.getEvents()
-        .then(data => setEvents(data))
-        .catch(error => console.error(error));
-      actions.getCurrentUser()
-        .then(user => setCurrentUser(user))
-        .catch(error => console.error(error));
+        actions.getEvents().then(data => setEvents(data));
     }, []);
 
 

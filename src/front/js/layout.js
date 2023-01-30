@@ -32,10 +32,10 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Login />} path="/" />
+                        <Route element={<Login />} path="/login" />
                         <Route element={<Register />} path="/register" />
                         {/* <Route element={<ProtectedRoutes />}> */}
-                            <Route element={<Home />} path="/home" />
+                            <Route element={<Home />} path="/" />
                             <Route element={<Perfil />} path="/perfil" />
                             <Route element={<CrearEvento />} path="/crearevento" />
                             <Route element={<UnirseEvento />} path="/unirseevento" />   
