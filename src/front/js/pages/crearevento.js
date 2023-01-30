@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -12,7 +13,6 @@ import {
 
 export const CrearEvento = () => {
 	const { store, actions } = useContext(Context);
-
 	const [formData, setFormData] = useState({
 	  nombreevento: "",
 	  descripcion: "",
@@ -22,10 +22,12 @@ export const CrearEvento = () => {
 	  ubicacion: "",
 	  is_active: true
 	});
-  
+	const navigate = useNavigate()
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		actions.createEvent(formData);
+		navigate("/unirseevento")
 	};	
   
 	const handleChange = (e) => {
