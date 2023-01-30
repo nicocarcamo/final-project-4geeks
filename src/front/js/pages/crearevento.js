@@ -22,16 +22,30 @@ export const CrearEvento = () => {
 	  ubicacion: "",
 	  is_active: true
 	});
+	const [message, setMessage] = useState(null);
   
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		actions.createEvent(formData);
-	};	
+	const handleSubmit = async (e) => {
+	  e.preventDefault();
+	  try {
+		const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
+		  method: "POST",
+		  body: JSON.stringify(formData),
+		  headers: {
+			"Content-Type": "application/json"
+		  }
+		});
+		const json = await res.json();
+		setMessage(json.message);
+	  } catch (err) {
+		  setMessage(err.response && err.response.data.message);
+	  }
+	};
   
 	const handleChange = (e) => {
 	  setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
   
+
 	return (
 		<Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
 		<Grid.Column style={{ maxWidth: 450 }}>
@@ -81,7 +95,6 @@ export const CrearEvento = () => {
 				/>
 			  </Form.Field>
 			  <Button color='teal' fluid size='large' type="submit">Submit</Button>
-			  {store.eventCreatedMessage && <p style={{ color: "green" }}>{store.eventCreatedMessage}</p>}
 			</Form>
 		  </Segment>
 		</Grid.Column>
