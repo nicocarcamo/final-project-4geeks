@@ -9,6 +9,7 @@ import { Perfil } from "./pages/perfil";
 import { CrearEvento } from "./pages/crearevento";
 import { UnirseEvento } from "./pages/unirseevento";
 import { Inbox } from "./pages/inbox";
+import { ProtectedRoutes } from "./pages/protectedroutes";
 
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
@@ -30,16 +31,18 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Login />} path="/login" />
+                        <Route element={<Login />} path="/" />
                         <Route element={<Register />} path="/register" />
-                        <Route element={<Home />} path="/" />
-                        <Route element={<Perfil />} path="/perfil" />
-                        <Route element={<CrearEvento />} path="/crearevento" />
-                        <Route element={<UnirseEvento />} path="/unirseevento" />   
-                        <Route element={<Inbox />} path="/inbox" />
-                        <Route element={<Demo />} path="/register" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<ProtectedRoutes />}>
+                            <Route element={<Home />} path="/home" />
+                            <Route element={<Perfil />} path="/perfil" />
+                            <Route element={<CrearEvento />} path="/crearevento" />
+                            <Route element={<UnirseEvento />} path="/unirseevento" />   
+                            <Route element={<Inbox />} path="/inbox" />
+                            <Route element={<Demo />} path="/register" />
+                            <Route element={<Single />} path="/single/:theid" />
+                            <Route element={<h1>Not found!</h1>} />
+                        </Route>
                     </Routes>
                     <Footer />
                 </ScrollToTop>
