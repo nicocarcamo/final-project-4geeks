@@ -27,7 +27,7 @@ def login():
     if not check_password_hash(user.password, password): return jsonify({ "status": "fail", "message": "password incorrect" }), 401
 
     # modificar el expire time del token
-    expires = datetime.timedelta(minutes=3)
+    expires = datetime.timedelta(days=2)
     access_token = create_access_token(identity=user.id, expires_delta=expires)
 
     data = {
@@ -55,6 +55,11 @@ def register():
     db.session.commit()
     return jsonify({'message': 'User created successfully :)'}), 201
 
+@api.route('/register', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users]), 200
+
 
 
 @api.route('/crearevento', methods=['POST'])
@@ -76,14 +81,6 @@ def create_event():
 def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
-
-@app.route('/invitacion', methods=['POST'])
-def invite_friend():
-    id_evento = request.json['id_evento']
-    friend_username = request.json['friend_username']
-    new_invitation = Invitaciones(id_evento=id_evento, invitado=friend_username, estado='pendiente')
-    new_invitation.save()
-    return jsonify({'mensaje': 'Invitacion enviada correctamente'}), 200
 
 
 @api.route('/perfil', methods=['GET'])
