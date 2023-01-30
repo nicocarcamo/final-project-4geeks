@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import { Context } from "../store/appContext";
+
 
 export const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,29 +9,12 @@ export const Login = () => {
     password: ""
   });
 
-  const [message, setMessage] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { store, actions } = useContext(Context);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      const json = await res.json();
-      if (json.status === 'success') {
-        setIsLoggedIn(true);
-        setMessage(json.message);
-      } else {
-        setMessage(json.message);
-      }
-    } catch (err) {
-      setMessage(err.response && err.response.data.message);
-    }
+    actions.login(formData);
   };
 
   const handleChange = (e) => {
@@ -68,7 +52,7 @@ export const Login = () => {
             </Button>
           </Segment>
         </Form>
-        {message && <Message>{message}</Message>}
+        {store.loginMessage && <Message>{store.loginMessage}</Message>}
         {!isLoggedIn && (
           <Message>
             New to us? <a href='/register'>Sign Up</a>
