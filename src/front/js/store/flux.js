@@ -67,7 +67,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  } catch (err) {
 					setStore({ loginMessage: "Error logging in" });
 				  }
-			}
+			},
+			getCurrentUser: async () => {
+				const jwtToken = localStorage.getItem("jwtToken");
+				try {
+				  const res = await fetch(
+					`${process.env.BACKEND_URL}/api/currentuser`,
+					{
+						method: "GET",
+						headers: {
+						  "Content-Type": "application/json",
+						  "Authorization": `Bearer ${jwtToken}`
+						},
+					  }
+					);
+					const json = await res.json();
+					setStore({ events: data.filter((event) => event.createdBy === currentUser._id) });
+					return data;
+				  } catch (err) {
+					console.log("Error getting current user", err);
+				  }
+				},	
 		}
 	};
 };
