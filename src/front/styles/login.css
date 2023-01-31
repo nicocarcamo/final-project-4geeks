@@ -75,3 +75,6 @@ div .ui.message{
 .ui.message.msg a{
     color: rgb(11, 41, 67) !important;
 }
+.ui.message.msg a:hover{
+    color: aliceblue !important;
+}
