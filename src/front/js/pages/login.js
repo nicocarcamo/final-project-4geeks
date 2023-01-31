@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import { Context } from "../store/appContext";
 
 
+
 export const Login = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -12,10 +15,20 @@ export const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { store, actions } = useContext(Context);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const result = await actions.login(formData);
+  //   console.log(result);
+    // if (result.status === 'success') {
+    //   navigate("/home");
+    // }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    actions.login(formData);
+    actions.login(formData, navigate);
   };
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

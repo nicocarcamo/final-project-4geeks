@@ -139,6 +139,9 @@ export const Register = () => {
             {createError && <p style={{ color: "red" }}>{createError}</p>}            
           </Form>
         </Segment>
+        <Message>
+            Already have a user? <a href='/login'>Login</a>
+          </Message>
       </Grid.Column>
     </Grid>
   );

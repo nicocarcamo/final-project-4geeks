@@ -1,45 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export function UnirseEvento() {
-
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
     const [events, setEvents] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        actions.getEvents().then(data => setEvents(data));
+        if (!store.currentUser) navigate('/login');
+    }, [])
+
+    useEffect(() => {
+        actions.getEvents()
+        .then(data => setEvents(data))
+        .catch(error => console.error(error));
+      actions.getCurrentUser()
+        .then(user => setCurrentUser(user))
+        .catch(error => console.error(error));
     }, []);
-    
-    const handleSubmit = e => {
-        e.preventDefault();
-        fetch(process.env.BACKEND_URL + "/api/crearevento", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nombreevento: nombreevento,
-                descripcion: descripcion,
-                integrantes: integrantes,
-                publicooprivado: publicooprivado,
-                valor: valor,
-                ubicacion: ubicacion,
-                is_active: is_active
-            }),
-        })
-            // .then(res => res.json())
-            // .then(data => {
-            //     console.log(data)
-            //     // updatearla lista
-            //     fetch(process.env.BACKEND_URL + "/api/crearevento", {
-            //         method: 'GET',
-            //         headers: { 'Content-Type': 'application/json' },
-            //     })
-            //         .then(res => res.json())
-            //         .then(data => setEvents(data))
-            //         .catch(err => console.log(err));
-            // })
-            // .catch(err => console.log(err));
-    };
 
 
     return (
@@ -70,8 +52,11 @@ export function UnirseEvento() {
                             <Table.Cell>{event.ubicacion}</Table.Cell>
                             <Table.Cell>{event.activo}</Table.Cell>
                             <Table.Cell>
-                                <Button color='teal' fluid size='large' type="submit" onClick={handleSubmit}>Unirse</Button>
-                            </Table.Cell>
+                            <Button as={Link} to={`/evento/${event.id}`} color="blue">
+                    Ver detalles
+                  </Button>
+                           
+                  </Table.Cell>
                         </Table.Row>))}
                 </Table.Body>
 
