@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+// import "../../styles/home.css";
 import { Container, Button } from 'semantic-ui-react'
 import { Carrusel } from "./carruselhome";
 
