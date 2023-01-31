@@ -2,11 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Card, Button, Form } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useNavigate } from 'react-router-dom';
+
 
 export function MiEvento({ evento }) {
   const { store, actions } = useContext(Context);
   const [events, setEvents] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (!store.currentUser) navigate('/login');
+  }, [])
 
   useEffect(() => {
     actions.getEvents()
