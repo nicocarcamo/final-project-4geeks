@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
-			createEvent: async (formData) => {
+			createEvent: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
 						method: "POST",
@@ -51,9 +51,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const json = await res.json();
-					setStore({ event: json, eventCreatedMessage: "Event created successfully!" });
+					setMessage("Event created successfully!" );
+					navigate('/unirseevento')
 				} catch (err) {
-					setStore({ message: err.response && err.response.data.message });
+					setMessage("Error creating event.");
 				}
 			},
 
