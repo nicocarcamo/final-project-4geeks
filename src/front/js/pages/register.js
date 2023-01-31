@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -10,6 +11,8 @@ import {
 } from "semantic-ui-react";
 
 export const Register = () => {
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     username: "",
     firstname: "",
@@ -59,6 +62,7 @@ export const Register = () => {
       const json = await res.json();
       setMessage("User created successfully, please log in!");
       console.log("User created successfully!")
+      navigate('/login')
     } catch (err) {
       setCreateError("Username/email already exists");
     }
