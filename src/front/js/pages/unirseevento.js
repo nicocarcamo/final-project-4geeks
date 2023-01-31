@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export function UnirseEvento() {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
     const [events, setEvents] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
   
@@ -16,6 +18,10 @@ export function UnirseEvento() {
     //     .then(user => setCurrentUser(user))
     //     .catch(error => console.error(error));
     // }, []);
+
+    useEffect(() => {
+        if (!store.currentUser) navigate('/login');
+    }, [])
 
     useEffect(() => {
         actions.getEvents().then(data => setEvents(data));
