@@ -57,6 +57,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			register: async (formData, navigate, setMessage) => {
+				try {
+					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+					  method: "POST",
+					  body: JSON.stringify(formData),
+					  headers: {
+						"Content-Type": "application/json"
+					  }
+					});
+					const json = await res.json();
+					setMessage("User created successfully, please log in!");
+					console.log("User created successfully!")
+					navigate('/login')
+				  } catch (err) {
+					setMessage("Username/email already exists");
+				  }
+			},
+
 			login: async (formData, navigate) => {
 				const { currentUser } = getStore();
 				try {

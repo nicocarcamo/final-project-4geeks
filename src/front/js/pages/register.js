@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
@@ -7,10 +8,12 @@ import {
   Header,
   Image,
   Message,
+  ModalActions,
   Segment,
 } from "semantic-ui-react";
 
 export const Register = () => {
+  const { store, actions } = useContext(Context);
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -51,21 +54,7 @@ export const Register = () => {
        setAllFieldsRequiredMessage("All fields are required")
        return
     }
-    try {
-      const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      const json = await res.json();
-      setMessage("User created successfully, please log in!");
-      console.log("User created successfully!")
-      navigate('/login')
-    } catch (err) {
-      setCreateError("Username/email already exists");
-    }
+    actions.register(formData, navigate, setMessage)
   };
 
 
