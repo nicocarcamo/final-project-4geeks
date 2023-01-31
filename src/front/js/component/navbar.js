@@ -39,10 +39,10 @@ export const Navbar = () => {
         </Link>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
 
         <div
