@@ -47,6 +47,38 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+
+class Event(db.Model):
+    __tablename__ = "events"
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
+    lugar = db.Column(db.String(120), nullable=False)
+    fecha = db.Column(db.String(120), nullable=False)
+    hora = db.Column(db.String(120), nullable=False)
+    asistentes = db.Column(db.String)
+    creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "nombre_evento": self.nombre_evento,
+            "lugar": self.lugar,
+            "fecha": self.fecha,
+            "hora": self.hora,
+            "creador_evento": self.creador_evento
+        }
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
