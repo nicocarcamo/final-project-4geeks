@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import MapPicker from '../component/MapPicker';
 import {
   Button,
   Form,
@@ -92,6 +93,7 @@ export const CrearEvento = () => {
 			  {message && <Message>{message}</Message>}
 			</Form>
 		  </Segment>
+		  <MapPicker />
 		</Grid.Column>
 	  </Grid>
 	);

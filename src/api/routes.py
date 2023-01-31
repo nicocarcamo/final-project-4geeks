@@ -71,8 +71,13 @@ def create_event():
     valor = request.json['valor']
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
+
+    # el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
+    # lat = request.json['lat']
+    # lng= request.json['lng']
+
     crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
+        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active, lat, lng)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
