@@ -1,0 +1,73 @@
+
+body {
+    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+.blur {
+    position: absolute;
+    margin: -50px;
+    padding: -50px;
+    top: -20px;
+    left: -20px;
+    right: -40px;
+    bottom: -40px;
+    width: auto;
+    height: auto;
+    background-image: url(https://img.freepik.com/fotos-premium/pintura-paisaje-acuarela-globos-aerostaticos_49537-310.jpg?w=826);
+    filter: blur(10px);
+    background-size: cover;
+    z-index: 0;
+}
+
+.innerContent {
+    position: relative;
+    z-index: 1;
+}
+
+.header{
+    position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
+}
+.header img{
+    transform: scale(5);
+    padding: 5px;
+    justify-content: center;
+    background-color: rgba(126, 149, 150, 0.495) !important;
+    /* border: 1px dotted #000; */
+}
+.ui.message.msg{
+    position: static;
+    border: 3px solid #000;
+    margin-top: 60px !important;
+    margin-left: 250px !important;
+    color: aliceblue !important;
+    background-color: rgba(126, 149, 150, 0.495) !important;
+}
+.login{
+    padding-top: 30px !important;
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;   
+    
+}
+
+.ui.stacked.segment{
+    background-color: rgba(126, 149, 150, 0.495) !important;
+    border: 3px solid #000;
+}
+div .ui.message{
+    position: absolute;
+    top: -50px;
+    left: 100px;
+    background-color: rgba(220, 20, 60, 0.601);
+    border: 10px solid rgba(220, 20, 60, 0.601);
+    color: aliceblue;
+}
