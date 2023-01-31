@@ -5,9 +5,10 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  if (location.pathname === "/" || location.pathname === "/register") {
-    return null;
-  } else {
+  // chequear la lógica detras de esto: si estamos logueados y nos vamos a register o login, no tenemos como volver al resto del sitio
+  // if (location.pathname === "/" || location.pathname === "/register") {
+  //   return null;
+  // } else {
     return (
       <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div className="container">
@@ -16,18 +17,13 @@ export const Navbar = () => {
               <span className="navbar-brand mb-0 h1">MeetMeUp</span>
             </Link>
             <div className="mx-2">
-              <Link to="/" className="text-light">
+              <Link to="/login" className="text-light">
                 Login
               </Link>
             </div>
             <div className="mx-2">
               <Link to="/register" className="text-light">
                 Register
-              </Link>
-            </div>
-            <div className="mx-2">
-              <Link to="/home" className="text-light">
-                Home
               </Link>
             </div>
             <div className="mx-2">
@@ -60,4 +56,4 @@ export const Navbar = () => {
       </nav>
     );
   }
-};
+// };
