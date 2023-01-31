@@ -5,6 +5,7 @@ export const Navbar = () => {
 
   const location = useLocation();
 
+  // chequear la lógica detras de esto: si estamos logueados y nos vamos a register o login, no tenemos como volver al resto del sitio
   // if (location.pathname === "/" || location.pathname === "/register") {
   //   return null;
   // } else {

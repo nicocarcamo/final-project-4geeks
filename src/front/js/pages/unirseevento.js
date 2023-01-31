@@ -9,22 +9,18 @@ export function UnirseEvento() {
     const navigate = useNavigate()
     const [events, setEvents] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
-  
-    // useEffect(() => {
-    //   actions.getEvents()
-    //     .then(data => setEvents(data))
-    //     .catch(error => console.error(error));
-    //   actions.getCurrentUser()
-    //     .then(user => setCurrentUser(user))
-    //     .catch(error => console.error(error));
-    // }, []);
 
     useEffect(() => {
         if (!store.currentUser) navigate('/login');
     }, [])
 
     useEffect(() => {
-        actions.getEvents().then(data => setEvents(data));
+        actions.getEvents()
+        .then(data => setEvents(data))
+        .catch(error => console.error(error));
+      actions.getCurrentUser()
+        .then(user => setCurrentUser(user))
+        .catch(error => console.error(error));
     }, []);
 
 

@@ -19,15 +19,14 @@ export const Login = () => {
   //   e.preventDefault();
   //   const result = await actions.login(formData);
   //   console.log(result);
-  //   if (result.status === 'success') {
-  //     navigate("/home");
-  //   }
+    // if (result.status === 'success') {
+    //   navigate("/home");
+    // }
   // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     actions.login(formData, navigate);
-    console.log(store.currentUser)
   };
   
 

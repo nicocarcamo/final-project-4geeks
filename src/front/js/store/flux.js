@@ -68,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const json = await res.json();
-					if (json) {
+					if (json.status == 'success') {
 						setStore({
 							currentUser: json,
 							email: '',
@@ -76,9 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							error: null
 						})
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
-						// console.log(json)
-						// console.log("logged in")
-						// console.log(currentUser)
 						navigate('/perfil')
 					} else {
 						setStore({
@@ -94,26 +91,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// getCurrentUser: async () => {
-			// 	const jwtToken = localStorage.getItem("jwtToken");
-			// 	try {
-			// 		const res = await fetch(
-			// 			`${process.env.BACKEND_URL}/api/currentuser`,
-			// 			{
-			// 				method: "GET",
-			// 				headers: {
-			// 					"Content-Type": "application/json",
-			// 					"Authorization": `Bearer ${jwtToken}`
-			// 				},
-			// 			}
-			// 		);
-			// 		const json = await res.json();
-			// 		setStore({ events: data.filter((event) => event.createdBy === currentUser._id) });
-			// 		return data;
-			// 	} catch (err) {
-			// 		console.log("Error getting current user", err);
-			// 	}
-			// },
+			getCurrentUser: async () => {
+				const jwtToken = localStorage.getItem("jwtToken");
+				const { currentUser } = getStore();
+
+				try {
+					const res = await fetch(
+						`${process.env.BACKEND_URL}/api/currentuser`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": `Bearer ${currentUser?.access_token}`
+							},
+						}
+					);
+					const json = await res.json();
+					setStore({ events: data.filter((event) => event.createdBy === currentUser._id) });
+					return data;
+				} catch (err) {
+					console.log("Error getting current user", err);
+				}
+			},
 			getProfile: () => {
 				const { currentUser } = getStore();
 
