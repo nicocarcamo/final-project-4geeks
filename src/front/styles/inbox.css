@@ -61,6 +61,7 @@
     position: fixed;
     bottom: 0;
     background-color: rgb(24, 23, 23);
+    /* background-color: rgb(24, 23, 23); */
     width: 100%;
     max-width: 728px;
     display: flex;
@@ -80,6 +81,7 @@
     width: 100%;
     font-size: 1.5rem;
     background: rgba(119, 124, 167, 0.501);
+    /* background: rgba(119, 124, 167, 0.501); */
     background-color: rgba(0, 0, 0);
     color: white;
     outline: none;
@@ -120,7 +122,7 @@
     text-align: left;
     list-style: none;
   }
-  
+ 
   .parrafo {
     max-width: 500px;
     margin-bottom: 12px;
@@ -132,10 +134,12 @@
     text-align: center;
   }
   
+
   /* .message {
     display: flex;
     align-items: center;
   } */
+
   
   .sent {
     flex-direction: row-reverse;

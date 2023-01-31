@@ -92,7 +92,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							currentUser: json,
 							email: '',
 							password: '',
-							error: null
+							error: null,
+							isAuthenticated: true
 						})
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
 						navigate('/perfil')
@@ -100,14 +101,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setMessage("Username/Password Incorrect.")
 						setStore({
 							currentUser: null,
-							error: json
+							error: json,
+							isAuthenticated: false
 						})
 						if (sessionStorage.getItem('currentUser')) sessionStorage.removeItem('currentUser')
 					}
 				}
 				catch (err) {
 					console.error(err)
-					setStore({ loginMessage: "Error logging in" });
+					setStore({ loginMessage: "Error logging in", isAuthenticated: false });
 				}
 			},
 

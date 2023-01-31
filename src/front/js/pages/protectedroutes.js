@@ -5,12 +5,11 @@ import { Login } from "./login";
 import { useContext } from "react";
 
 const useAuth = () => {
-    const { store, actions } = useContext(Context);
-    return store.isAuthenticated;
-    };
+  const { store, actions } = useContext(Context);
+  return store.isAuthenticated;
+};
 
-
-    export const ProtectedRoutes = () => {
-        const isAuth = useAuth();
-        return isAuth ? <Outlet /> : <Login />;
-        };
+export const ProtectedRoutes = () => {
+  const isAuth = useAuth();
+  return isAuth ? <Outlet /> : <Login />;
+};
