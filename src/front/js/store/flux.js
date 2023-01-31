@@ -58,7 +58,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (formData, navigate) => {
-				const { currentUser } = getStore();
+				const { currentUser, isAuthenticated } = getStore();
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
 						method: "POST",
@@ -73,21 +73,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 							currentUser: json,
 							email: '',
 							password: '',
-							error: null
+							error: null,
+							isAuthenticated: true
 						})
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
-						navigate('/perfil')
+						navigate('/')
 					} else {
 						setStore({
 							currentUser: null,
-							error: json
+							error: json,
+							isAuthenticated: false
 						})
 						if (sessionStorage.getItem('currentUser')) sessionStorage.removeItem('currentUser')
 					}
 				}
 				catch (err) {
 					console.error(err)
-					setStore({ loginMessage: "Error logging in" });
+					setStore({ loginMessage: "Error logging in", isAuthenticated: false });
 				}
 			},
 

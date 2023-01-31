@@ -15,20 +15,15 @@ export const Login = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { store, actions } = useContext(Context);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const result = await actions.login(formData);
-  //   console.log(result);
-    // if (result.status === 'success') {
-    //   navigate("/home");
-    // }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    actions.login(formData, navigate);
+    const result = await actions.login(formData, navigate);
+    console.log(result);
+    if (result.status === 'success') {
+      navigate("/");
+    }
   };
-  
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
