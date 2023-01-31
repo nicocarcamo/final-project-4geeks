@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 
 export const Login = () => {
   const navigate = useNavigate()
+  const [message, setMessage] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -26,7 +27,7 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    actions.login(formData, navigate);
+    actions.login(formData, navigate, setMessage);
   };
   
 
@@ -65,7 +66,7 @@ export const Login = () => {
             </Button>
           </Segment>
         </Form>
-        {store.loginMessage && <Message>{store.loginMessage}</Message>}
+        {message && <Message>{message}</Message>}
         {!isLoggedIn && (
           <Message>
             New to us? <a href='/register'>Sign Up</a>

@@ -126,11 +126,12 @@ export const Register = () => {
             </Form.Field>
             {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
             <Button color='teal' fluid size='large' type="submit" disabled={!isPasswordValid}>Submit</Button>
-            {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+            {/* {errors.username && <p style={{ color: "red" }}>{errors.username}</p>} */}
             {allFieldsRequiredMessage && <p style={{ color: "red" }}>{allFieldsRequiredMessage}</p>}
-            {message && <p style={{ color: "green" }}>{message}</p>}
-            {createError && <p style={{ color: "red" }}>{createError}</p>}            
+            {/* {message && <p style={{ color: "green" }}>{message}</p>}
+            {createError && <p style={{ color: "red" }}>{createError}</p>}             */}
           </Form>
+          {message && <Message>{message}</Message>}
         </Segment>
         <Message>
             Already have a user? <a href='/login'>Login</a>

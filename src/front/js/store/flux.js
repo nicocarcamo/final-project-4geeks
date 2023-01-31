@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  }
 			},
 
-			login: async (formData, navigate) => {
+			login: async (formData, navigate, setMessage) => {
 				const { currentUser } = getStore();
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
@@ -96,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
 						navigate('/perfil')
 					} else {
+						setMessage("Username/Password Incorrect.")
 						setStore({
 							currentUser: null,
 							error: json
