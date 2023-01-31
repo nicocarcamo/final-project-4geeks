@@ -113,6 +113,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			logout: () => {
+                setStore({
+                    currentUser: null
+                })
+                sessionStorage.removeItem('currentUser');
+            },
+
 			getCurrentUser: async () => {
 				const jwtToken = localStorage.getItem("jwtToken");
 				const { currentUser } = getStore();
