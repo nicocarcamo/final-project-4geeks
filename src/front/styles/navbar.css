@@ -1,0 +1,50 @@
+.logo {
+  height: 50px;
+}
+.navbar {
+  background-color: #0b3b45;
+  display: flex;
+  /* justify-content: space-between; */
+}
+.navContent {
+  display: flex;
+}
+.link {
+  /* box-shadow: inset 0 0 0 0 #54b3d678; */
+  /* color: #54b3d6; */
+  margin: 0 -0.25rem;
+  padding: 0 0.25rem;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.link:hover {
+  border-radius: 10%;
+  box-shadow: inset 100px 0 0 0 #45737b;
+}
+
+.navbar-toggler {
+  background-color: darkcyan;
+}
+
+@media (min-width: 768px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-toggler {
+    display: none;
+  }
+}
+
+.navContent {
+  display: none;
+}
+
+.show {
+  display: flex;
+  flex-direction: column;
+}
+

@@ -41,7 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
-			createEvent: async (formData) => {
+			createEvent: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
 						method: "POST",
@@ -51,14 +51,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const json = await res.json();
-					setStore({ event: json, eventCreatedMessage: "Event created successfully!" });
+					setMessage("Event created successfully!" );
+					navigate('/unirseevento')
 				} catch (err) {
-					setStore({ message: err.response && err.response.data.message });
+					setMessage("Error creating event.");
 				}
 			},
 
-			login: async (formData, navigate) => {
-				const { currentUser, isAuthenticated } = getStore();
+			register: async (formData, navigate, setMessage) => {
+				try {
+					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+					  method: "POST",
+					  body: JSON.stringify(formData),
+					  headers: {
+						"Content-Type": "application/json"
+					  }
+					});
+					const json = await res.json();
+					setMessage("User created successfully, please log in!");
+					console.log("User created successfully!")
+					navigate('/login')
+				  } catch (err) {
+					setMessage("Username/email already exists");
+				  }
+			},
+
+			login: async (formData, navigate, setMessage) => {
+				const { currentUser } = getStore();
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/login`, {
 						method: "POST",
@@ -77,8 +96,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							isAuthenticated: true
 						})
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
-						navigate('/')
+						navigate('/perfil')
 					} else {
+						setMessage("Username/Password Incorrect.")
 						setStore({
 							currentUser: null,
 							error: json,

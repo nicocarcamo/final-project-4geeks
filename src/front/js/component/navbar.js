@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
-import { Dropdown, Icon } from "semantic-ui-react";
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { Context } from "../store/appContext";
+import logo from "../../img/logo2_style.png";
+import "../../styles/navbar.css";
+import { Dropdown, Icon } from "semantic-ui-react";
 
 
 export const Navbar = () => {
+  const location = useLocation();
+
+  const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
@@ -23,28 +27,29 @@ export const Navbar = () => {
     navigate("/login");
     };
 
+  // chequear la lógica detras de esto: si estamos logueados y nos vamos a register o login, no tenemos como volver al resto del sitio
+  // if (location.pathname === "/" || location.pathname === "/register") {
+  //   return null;
+  // } else {
   return (
-    <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-      <div className="container">
-        <div className="navbar-nav">
-          <Link to="/">
-            <span className="navbar-brand mb-0 h1">MeetMeUp</span>
-          </Link>
-          <div className="mx-2">
-            <Link to="/login" className="text-light">
-              Login
-            </Link>
-          </div>
-          <div className="mx-2">
-            <Link to="/register" className="text-light">
-              Register
-            </Link>
-          </div>
-          <div className="mx-2">
-            <Link to="/perfil" className="text-light">
-              Perfil
-            </Link>
-          </div>
+    <nav className="navbar navbar-expand-lg">
+      <div className="container d-flex justify-content-between">
+        <Link to="/">
+          <img className="logo" src={logo} />
+        </Link>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          class="navbar-toggler"
+          type="button"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          className={`navContent d-flex collapse navbar-collapse ${
+            isOpen ? "show" : ""
+          }`}
+        >
           <div className="mx-2">
             <Link to="/crearevento" className="text-light">
               Crear Evento
@@ -54,18 +59,14 @@ export const Navbar = () => {
             <Link to="/unirseevento" className="text-light">
               Unirse Evento
             </Link>
-          </div>
-          <div className="mx-2">
-            <Link to="/mievento" className="text-light">
-              Mi Evento
-            </Link>
-          </div>
-          <div className="mx-2">
+            </div>
+            <div className="mx-2">
             <Link to="/inbox" className="text-light">
               Inbox
             </Link>
           </div>
-          <div className="ml-auto">
+
+                   <div className="mx-5">
             <Dropdown
               text="Account"
               className="text-light"
@@ -81,6 +82,7 @@ export const Navbar = () => {
               </Dropdown.Menu>
             </Dropdown>
           </div>
+        
         </div>
       </div>
    
