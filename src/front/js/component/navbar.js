@@ -51,26 +51,22 @@ export const Navbar = () => {
           }`}
         >
           <div className="mx-2">
-            <Link to="/login" className="link text-light">
-              Login
+            <Link to="/crearevento" className="text-light">
+              Crear Evento
             </Link>
           </div>
           <div className="mx-2">
-            <Link to="/register" className="link text-light">
-              Register
+            <Link to="/unirseevento" className="text-light">
+              Unirse Evento
+            </Link>
+            </div>
+            <div className="mx-2">
+            <Link to="/inbox" className="text-light">
+              Inbox
             </Link>
           </div>
-          <div className="mx-2">
-            <Link to="/perfil" className="link text-light">
-              Perfil
-            </Link>
-          </div>
-          <div className="mx-2">
-            <Link to="/crearevento" className="link text-light">Crear Evento
-            </Link>
-                      </div>
 
-                   <div className="">
+                   <div className="mx-5">
             <Dropdown
               text="Account"
               className="text-light"
