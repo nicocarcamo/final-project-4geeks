@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react";
 
 export const CrearEvento = () => {
+	const [message, setMessage] = useState(null);
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate()
 
@@ -32,8 +33,7 @@ export const CrearEvento = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		actions.createEvent(formData);
-		navigate("/unirseevento")
+		actions.createEvent(formData, navigate, setMessage);
 	};	
   
 	const handleChange = (e) => {
@@ -89,7 +89,7 @@ export const CrearEvento = () => {
 				/>
 			  </Form.Field>
 			  <Button color='teal' fluid size='large' type="submit">Submit</Button>
-			  {store.eventCreatedMessage && <p style={{ color: "green" }}>{store.eventCreatedMessage}</p>}
+			  {message && <Message>{message}</Message>}
 			</Form>
 		  </Segment>
 		</Grid.Column>
