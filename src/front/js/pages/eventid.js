@@ -10,20 +10,12 @@ export function EventoDetalle() {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchEvent = async () => {
-      try {
-        const data = await actions.getEventById(id);
-        setEvent(data);
-      } catch (error) {
-        console.error("fetchEvent no funciona");
-        console.log(error);
-        setError(error);
-      }
-    };
-    
 
-    fetchEvent();
-  }, [actions, id]);
+    actions.getEventById(id)
+    .then(data => setEvent(data))
+    .catch(error => console.error(error))
+
+  }, []);
   
   if (error) return <div>Error: {error.message}</div>;
   if (!event) return <div>Loading...</div>;

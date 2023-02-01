@@ -25,7 +25,7 @@ useEffect(() => {
 
 const handleEventSelection = (event) => {
   setSelectedEvent(event);
-  navigate(`/unirseevento/${event.id}`);
+  navigate(`/crearevento/${event.id}`);
 };
 
 return (

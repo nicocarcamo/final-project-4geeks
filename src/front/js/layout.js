@@ -38,7 +38,7 @@ const Layout = () => {
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="/crearevento" element={<CrearEvento />} />
                 <Route path="/unirseevento" element={<UnirseEvento />} />
-                <Route path="/unirseevento/:id" element={<EventoDetalle />} />
+                <Route path="/crearevento/:id" element={<EventoDetalle />} /> 
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/mievento" element={<MiEvento />} />
                 <Route path="/demo" element={<Demo />} />
