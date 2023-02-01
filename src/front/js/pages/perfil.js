@@ -1,43 +1,49 @@
 
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Header, Button, Grid, Image } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
 
 
 export const Perfil = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
-	// const [profile, setProfile] = useState({});
 
 	useEffect(() => {
-        if (!store.currentUser) navigate('/login');
-        actions.getProfile();
-    }, [])
-
-	// useEffect(() => {
-    //     if (!store.currentUser) navigate('/login');
-    //     actions.getProfile();
-    // }, [store.currentUser])
-
+		if (!store.currentUser) navigate('/login');
+		actions.getProfile();
+	}, [])
 
 	const extra = (
 		<a>
-			<Icon name='user' />
-			16 Followers
+			<i className="fa-solid fa-location-dot me-1"></i>
+			16 Events near you!
 		</a>
 	)
 
 	return (
-		<div className="container d-flex justify-content-center mt-5">
-			<Card
-				image="https://t4.ftcdn.net/jpg/04/08/24/43/360_F_408244382_Ex6k7k8XYzTbiXLNJgIL8gssebpLLBZQ.jpg"
-				header={store.profile?.username}
-				meta={store.profile?.firstname}
-				description={store.profile?.email}
-				extra={extra}
-			/>
-		</div>
+		<>
+			<Grid textAlign="center" style={{ height: "90vh" }} verticalAlign="middle">
+				<Grid.Column style={{ maxWidth: 450 }}>
+					<Header as="h2" color="teal" textAlign="center">
+						<Image src="/rigo-baby.jpg" /> Mi perfil
+					</Header>
+					<div className="container d-flex justify-content-center mt-5">
+						<Card
+							// image={"https://robohash.org/" + store.profile?.username + ".png"}
+							image="https://xsgames.co/randomusers/avatar.php?g=pixel"
+							header={store.profile?.username}
+							meta={store.profile?.firstname + ' ' + store.profile?.lastname}
+							description={store.profile?.email}
+							extra={extra}
+						/>
+					</div>
+					<Button color='teal' size='medium' type='submit' className='mt-2'>
+						Edit Profile
+					</Button>
+				</Grid.Column>
+			</Grid>
+		</>
 	);
 };
 

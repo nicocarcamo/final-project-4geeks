@@ -76,6 +76,7 @@
 		"axios": "^1.2.4",
 		"bootstrap": "^5.2.3",
 		"firebase": "^9.16.0",
+		"leaflet": "^1.9.3",
 		"prop-types": "^15.6.1",
 		"react": "^16.8.4",
 		"react-bootstrap": "^2.7.0",
