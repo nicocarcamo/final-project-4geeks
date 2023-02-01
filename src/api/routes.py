@@ -97,6 +97,7 @@ def get_event_by_id(event_id):
     else:
         return jsonify({'error': 'Event not found'}), 404
 
+
 @api.route('/perfil', methods=['GET'])
 @jwt_required()
 def get_profile():
