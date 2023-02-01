@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			eventCreatedMessage: null,
 			events: [],
+			event: "",
 			loginMessage: null,
 			registerMessage: null,
 			currentUser: null,
@@ -57,6 +58,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setMessage("Error creating event.");
 				}
 			},
+
+			getEventById: async (eventId) => {
+				return (dispatch) => {
+					dispatch({ type: 'FETCH_EVENT_START' });	
+					return fetch(`${process.env.BACKEND_URL}/crearevento/${eventId}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					})
+					.then((response) => {
+						if (!response.ok) {
+						throw Error(response.statusText);
+						}
+						return response.json();
+					})
+					.then((data) => {
+						dispatch({ type: 'FETCH_EVENT_SUCCESS', payload: data });
+					})
+					.catch((error) => {
+						dispatch({ type: 'FETCH_EVENT_ERROR', payload: error });
+					});
+				};
+			},
+							
 
 			register: async (formData, navigate, setMessage) => {
 				try {
@@ -142,6 +168,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error getting current user", err);
 				}
 			},
+
+			
 			getProfile: () => {
 				const { currentUser } = getStore();
 
