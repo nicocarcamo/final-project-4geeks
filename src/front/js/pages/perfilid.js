@@ -2,19 +2,31 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from 'semantic-ui-react'
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 export const PerfilId = () => {
 	const { store, actions } = useContext(Context);
-	const navigate = useNavigate();
+	const [error, setError] = useState(null);
+	const [user, setUser] = useState(null);
+	const { id } = useParams();
 
 	useEffect(() => {
 		if (!store.currentUser) navigate('/login');
 		actions.getProfileById();
 	}, [])
 
+	useEffect(() => {
 
+		actions.getUser(id)
+		.then(data => setUser(data))
+		.catch(error => console.error(error))
+	
+	  }, []);
+	  
+	  if (error) return <div>Error: {error.message}</div>;
+	  if (!user) return <div>Loading...</div>;
+	
 
 	const extra = (
 		<a>

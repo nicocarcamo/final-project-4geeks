@@ -16,7 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			lastname: '',
 			password: '',
 			perfil: null,
-			users: []
+			users: [],
+			user: null
 		},
 
 		actions: {
@@ -43,6 +44,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
+		
+			getUser: async (userId) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/perfil/${userId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({
+						users: data
+					})					
+				return data;
+				} catch (error) {
+					console.log("Error loading user from backend", error)
+				}
+			},
+
 
 			getUsers: async () => {
 				try {
