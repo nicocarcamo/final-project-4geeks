@@ -63,6 +63,9 @@ body .contentRegister {
 .ui.message.msgRegister a:hover{
     color: aliceblue !important;
 }
+.ui.message{
+    top: -80px !important;
+}
 /* .register{
     padding-top: 30px !important;
 	position: absolute;

@@ -100,7 +100,7 @@ export const Login = () => {
                 <a href="/register">
                 <br/>
                   <span>
-                    <i class="fa-solid fa-angle-right"></i>Sign Up
+                    <i className="fa-solid fa-angle-right"></i>Sign Up
                   </span>
                 </a>
               </Message>

@@ -176,7 +176,7 @@ export const Register = () => {
               {message && <Message>{message}</Message>}
             </Segment>
             <Message className="msgRegister">
-              Already have a user? <a href="/login"><i class="fa-solid fa-angle-right"></i>Login</a>
+              Already have a user? <a href="/login"><i className="fa-solid fa-angle-right"></i>Login</a>
             </Message>
           </Grid.Column>
         </Grid>
