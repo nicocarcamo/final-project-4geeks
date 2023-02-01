@@ -64,6 +64,11 @@ export const Navbar = () => {
               Inbox
             </Link>
           </div>
+          <div className="mx-2">
+            <Link to="/perfil/all" className="text-light">
+              Buscar Usuarios
+            </Link>
+          </div>
 
           <div className="mx-5">
             <Dropdown

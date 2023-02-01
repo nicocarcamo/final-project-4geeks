@@ -3,10 +3,10 @@ import { Table, Button, Form } from 'semantic-ui-react';
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-export function UnirseEvento() {
+export function BuscarUsuarios() {
 const { store, actions } = useContext(Context);
 const navigate = useNavigate()
-const [events, setEvents] = useState([]);
+const [users, setUsers] = useState([]);
 const [currentUser, setCurrentUser] = useState(null);
 const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -15,47 +15,47 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-    actions.getEvents()
-    .then(data => setEvents(data))
+    actions.getUsers()
+    .then(data => setUsers(data))
     .catch(error => console.error(error));
   actions.getCurrentUser()
     .then(user => setCurrentUser(user))
     .catch(error => console.error(error));
 }, []);
 
-const handleEventSelection = (event) => {
-  // setSelectedEvent(event);
-  navigate(`/crearevento/${event.id}`);
+const handleProfileSelection = (user) => {
+//   setSelectedUser(user);
+  navigate(`/perfil/${user.id}`);
 };
 
 return (
     <div>
-      <h1>Unirse a evento</h1>
+      <h1>Buscar usuarios</h1>
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Nombre del evento</Table.HeaderCell>
-            <Table.HeaderCell>Descripcion</Table.HeaderCell>
-            <Table.HeaderCell>Integrantes</Table.HeaderCell>
-            <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
+            <Table.HeaderCell>Username</Table.HeaderCell>
+            <Table.HeaderCell>First Name</Table.HeaderCell>
+            <Table.HeaderCell>Last Name</Table.HeaderCell>
+            <Table.HeaderCell>Email</Table.HeaderCell>
             <Table.HeaderCell>Valor</Table.HeaderCell>
-            <Table.HeaderCell>Ubicacion</Table.HeaderCell>
+            {/* <Table.HeaderCell>Ubicacion</Table.HeaderCell>
             <Table.HeaderCell>Activo</Table.HeaderCell>
-            <Table.HeaderCell>Unirse</Table.HeaderCell>
+            <Table.HeaderCell>Unirse</Table.HeaderCell> */}
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {events.map(event => (
-            <Table.Row key={event.id}>
-              <Table.Cell>{event.nombreevento}</Table.Cell>
-              <Table.Cell>{event.descripcion}</Table.Cell>
-              <Table.Cell>{event.integrantes}</Table.Cell>
-              <Table.Cell>{event.publicooprivado}</Table.Cell>
-              <Table.Cell>{event.valor}</Table.Cell>
+          {users.map(user => (
+            <Table.Row key={user.id}>
+              <Table.Cell>{user.username}</Table.Cell>
+              <Table.Cell>{user.firstname}</Table.Cell>
+              <Table.Cell>{user.lastname}</Table.Cell>
+              <Table.Cell>{user.email}</Table.Cell>
+              {/* <Table.Cell>{event.valor}</Table.Cell>
               <Table.Cell>{event.ubicacion}</Table.Cell>
-              <Table.Cell>{event.activo}</Table.Cell>
+              <Table.Cell>{event.activo}</Table.Cell> */}
               <Table.Cell>
-              <Button onClick={() => handleEventSelection(event)} color="blue">
+              <Button onClick={() => handleProfileSelection(user)} color="blue">
   Ver detalles
 </Button>
               </Table.Cell>
