@@ -4,7 +4,6 @@ import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from 'semantic-ui-react'
 import { useNavigate } from 'react-router-dom';
 
-
 export const Perfil = () => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
@@ -30,8 +29,8 @@ export const Perfil = () => {
 					</Header>
 					<div className="container d-flex justify-content-center mt-5">
 						<Card
-							// image={"https://robohash.org/" + store.profile?.username + ".png"}
-							image="https://xsgames.co/randomusers/avatar.php?g=pixel"
+							image={"https://robohash.org/" + store.profile?.id + ".png"}
+							// image="https://xsgames.co/randomusers/avatar.php?g=pixel"
 							header={store.profile?.username}
 							meta={store.profile?.firstname + ' ' + store.profile?.lastname}
 							description={store.profile?.email}
