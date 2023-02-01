@@ -9,17 +9,18 @@ export function EventoDetalle() {
   const [event, setEvent] = useState(null);
   const { id } = useParams();
 
-
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const data = await actions.getEventbyId(id);
+        const data = await actions.getEventById(id);
         setEvent(data);
       } catch (error) {
         console.error("fetchEvent no funciona");
+        console.log(error);
         setError(error);
       }
     };
+    
 
     fetchEvent();
   }, [actions, id]);
@@ -44,4 +45,4 @@ export function EventoDetalle() {
       </Table>
     </div>
   );
-}
+  }  

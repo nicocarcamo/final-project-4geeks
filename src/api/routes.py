@@ -82,11 +82,12 @@ def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
 
-@api.route('/crearevento/<int:event_id>/')
+@api.route('/crearevento/<int:event_id>/', methods=['GET'])
 def get_event_by_id(event_id):
     event = CrearEvento.query.get(event_id)
     if event:
         return jsonify(event.serialize())
+        return jsonify({'error': 'EVENTO ENCONTRADO'}), 200
     else:
         return jsonify({'error': 'Event not found'}), 404
 
@@ -97,7 +98,7 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
-@app.route('/api/currentuser', methods=['GET'])
+@api.route('/currentuser', methods=['GET'])
 @jwt_required
 def current_user():
     current_user_email = get_jwt_identity()
