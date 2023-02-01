@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			eventCreatedMessage: null,
 			events: [],
-			event: "",
+			event: null,
 			loginMessage: null,
 			registerMessage: null,
 			currentUser: null,
@@ -61,19 +61,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getEventById: async (eventId) => {
-				try { 
-					const resp = await fetch(`${process.env.BACKEND_URL}/crearevento/${eventId}`, {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/crearevento/${eventId}`, {
 						method: 'GET',
-						headers: { 'Content-Type': 'application/json'},
-					});
-					if (resp.headers.get("Content-Type").includes("application/json")) {
-						const data = await resp.json()
-						setStore({ event: data })
-						return data;
-					} else {
-						const data = await resp.text()
-						console.log("Error: Response from the server is not in JSON format:", data)
-					}
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({ events: data })
+					return data;
 				} catch (error) {
 					console.log("Error loading events from backend", error)
 				}
