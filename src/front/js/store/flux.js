@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			eventCreatedMessage: null,
 			events: [],
+			event: "",
 			loginMessage: null,
 			registerMessage: null,
 			currentUser: null,
@@ -41,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
+
 			createEvent: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
@@ -58,6 +60,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getEventById: async (eventId) => {
+				try { 
+					const resp = await fetch(`${process.env.BACKEND_URL}/crearevento/${eventId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json'},
+					});
+					if (resp.headers.get("Content-Type").includes("application/json")) {
+						const data = await resp.json()
+						setStore({ event: data })
+						return data;
+					} else {
+						const data = await resp.text()
+						console.log("Error: Response from the server is not in JSON format:", data)
+					}
+				} catch (error) {
+					console.log("Error loading events from backend", error)
+				}
+			},
+								
 			register: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
@@ -142,6 +163,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error getting current user", err);
 				}
 			},
+
+			
 			getProfile: () => {
 				const { currentUser } = getStore();
 

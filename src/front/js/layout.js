@@ -8,6 +8,8 @@ import { Home } from "./pages/home";
 import { Perfil } from "./pages/perfil";
 import { CrearEvento } from "./pages/crearevento";
 import { UnirseEvento } from "./pages/unirseevento";
+import { EventoDetalle } from "./pages/eventid";
+
 import { MiEvento } from "./pages/mievento";
 import { Inbox } from "./pages/inbox";
 import { ProtectedRoutes } from "./pages/protectedroutes";
@@ -19,37 +21,36 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
-//create your first component
 const Layout = () => {
-  //the basename is used when your project is published in a subdirectory and not in the root of the domain
-  // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
   const basename = process.env.BASENAME || "";
 
-    return (
-        <div>
-            <BrowserRouter basename={basename}>
-                <ScrollToTop>
-                    <Navbar />
-                    <Routes>
-                        <Route element={<Login />} path="/login" />
-                        <Route element={<Register />} path="/register" />
-                        <Route element={<ProtectedRoutes />}>
-                            <Route element={<Home />} path="/" />
-                            <Route element={<Perfil />} path="/perfil" />
-                            <Route element={<CrearEvento />} path="/crearevento" />
-                            <Route element={<UnirseEvento />} path="/unirseevento" />   
-                            <Route element={<Inbox />} path="/inbox" />
-                            <Route element={<MiEvento />} path="/mievento" />
-                            <Route element={<Demo />} path="/demo" />
-                            <Route element={<Single />} path="/single/:theid" />
-                            <Route element={<h1>Not found!</h1>} />
-                        </Route>
-                    </Routes>
-                    <Footer />
-                </ScrollToTop>
-            </BrowserRouter>
-        </div>
-    );
+  return (
+    <div>
+      <BrowserRouter basename={basename}>
+        <ScrollToTop>
+          <Navbar />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route element={<ProtectedRoutes />}>
+
+                <Route path="/" element={<Home />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/crearevento" element={<CrearEvento />} />
+                <Route path="/unirseevento" element={<UnirseEvento />} />
+                <Route path="/unirseevento/:id" element={<EventoDetalle />} />
+                <Route path="/inbox" element={<Inbox />} />
+                <Route path="/mievento" element={<MiEvento />} />
+                <Route path="/demo" element={<Demo />} />
+                <Route path="/single/:theid" element={<Single />} />
+                <Route path="*" element={<h1>Not found!</h1>} />
+            </Route>
+          </Routes>
+          <Footer />
+        </ScrollToTop>
+      </BrowserRouter>
+    </div>
+  );
 };
 
 export default injectContext(Layout);
