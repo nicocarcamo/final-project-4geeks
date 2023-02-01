@@ -9,6 +9,7 @@ export function EventoDetalle() {
   const [event, setEvent] = useState(null);
   const { id } = useParams();
 
+
   useEffect(() => {
     const fetchEvent = async () => {
       try {
