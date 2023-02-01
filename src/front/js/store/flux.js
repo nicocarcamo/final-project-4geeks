@@ -21,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
+
 			getMessage: async () => {
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
@@ -31,6 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
 			getEvents: async () => {
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/crearevento", {
@@ -107,20 +109,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getProfileById: async (profileId) => {
-				try {
-					const resp = await fetch(`${process.env.BACKEND_URL}/api/perfil/${profileId}`, {
-						method: 'GET',
-						headers: { 'Content-Type': 'application/json' },
-					})
-					const data = await resp.json()
-					setStore({ users: data })
-					return data;
-				} catch (error) {
-					console.log("Error loading user from backend", error)
-				}
-			},
-
 			addIntegrante: async (eventId) => {
 				const { currentUser } = getStore();
 				try {
@@ -142,9 +130,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error(error);
 				}
 			},
-			
-			  
-								
+										
 			register: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
@@ -228,8 +214,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error getting current user", err);
 				}
 			},
-
-			
+	
 			getProfile: () => {
 				const { currentUser } = getStore();
 
