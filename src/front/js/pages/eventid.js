@@ -46,17 +46,20 @@ import { Button, Card, Image } from 'semantic-ui-react'
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
 
+
 export function EventoDetalle() {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [event, setEvent] = useState(null);
   const { id } = useParams();
-  // const navigate = useNavigate()
+
+const navigate = useNavigate()
 
   useEffect(() => {
     actions.getEventById(id)
       .then(data => setEvent(data))
       .catch(error => console.error(error))
+
   }, []);
 
   if (error) return <div>Error: {error.message}</div>;
@@ -99,3 +102,4 @@ export function EventoDetalle() {
     </Card>
   );
 }  
+
