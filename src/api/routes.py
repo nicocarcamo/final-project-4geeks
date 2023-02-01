@@ -60,8 +60,6 @@ def get_all_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
 
-
-
 @api.route('/crearevento', methods=['POST'])
 def create_event():
     nombreevento = request.json['nombreevento']
@@ -96,6 +94,7 @@ def get_event_by_id(event_id):
         return jsonify({'error': 'EVENTO ENCONTRADO'}), 200
     else:
         return jsonify({'error': 'Event not found'}), 404
+
 
 @api.route('/perfil', methods=['GET'])
 @jwt_required()

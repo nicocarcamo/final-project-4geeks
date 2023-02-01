@@ -8,7 +8,7 @@ const { store, actions } = useContext(Context);
 const navigate = useNavigate()
 const [users, setUsers] = useState([]);
 const [currentUser, setCurrentUser] = useState(null);
-const [selectedEvent, setSelectedEvent] = useState(null);
+const [selectedUser, setSelectedUser] = useState(null);
 
 useEffect(() => {
     if (!store.currentUser) navigate('/login');
@@ -25,7 +25,8 @@ useEffect(() => {
 
 const handleProfileSelection = (user) => {
 //   setSelectedUser(user);
-  navigate(`/perfil/${user.id}`);
+setSelectedUser(user);
+navigate(`/perfil/${user.id}`);
 };
 
 return (
