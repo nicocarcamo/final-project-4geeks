@@ -76,8 +76,9 @@ def create_event():
     # lat = request.json['lat']
     # lng= request.json['lng']
 
+    # pasar lat y lng como parámetro
     crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active, lat, lng)
+        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
@@ -95,7 +96,7 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
-@app.route('/api/currentuser', methods=['GET'])
+@app.route('/currentuser', methods=['GET'])
 @jwt_required
 def current_user():
     current_user_email = get_jwt_identity()
