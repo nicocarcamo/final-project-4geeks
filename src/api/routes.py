@@ -71,6 +71,12 @@ def create_event():
     valor = request.json['valor']
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
+
+    # el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
+    # lat = request.json['lat']
+    # lng= request.json['lng']
+
+    # pasar lat y lng como parámetro
     crearevento = CrearEvento(
         nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
@@ -90,7 +96,7 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
-@app.route('/api/currentuser', methods=['GET'])
+@app.route('/currentuser', methods=['GET'])
 @jwt_required
 def current_user():
     current_user_email = get_jwt_identity()

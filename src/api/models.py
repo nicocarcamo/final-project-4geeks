@@ -88,6 +88,11 @@ class CrearEvento(db.Model):
     publicooprivado = db.Column(db.String(120), unique=False)
     valor = db.Column(db.String(120), nullable=False)
     ubicacion = db.Column(db.String(120), nullable=False)
+
+    # el evento debe recibir latitud y longitud para marcar el mapa
+    # lat = db.Column(db.Float)
+    # lng = db.Column(db.Float)
+    
     is_active = db.Column(db.Boolean, default=True)
     event = db.relationship("UnirseEvento", back_populates="event")
 
