@@ -9,6 +9,7 @@ import { Perfil } from "./pages/perfil";
 import { CrearEvento } from "./pages/crearevento";
 import { UnirseEvento } from "./pages/unirseevento";
 import { EventoDetalle } from "./pages/eventid";
+import { BuscarUsuarios } from "./pages/buscarusuario";
 
 import { MiEvento } from "./pages/mievento";
 import { Inbox } from "./pages/inbox";
@@ -41,6 +42,7 @@ const Layout = () => {
                 <Route path="/crearevento/:id" element={<EventoDetalle />} /> 
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/mievento" element={<MiEvento />} />
+                <Route path="/perfil/all" element={<BuscarUsuarios />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route path="/single/:theid" element={<Single />} />
                 <Route path="*" element={<h1>Not found!</h1>} />

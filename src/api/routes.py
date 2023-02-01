@@ -104,9 +104,14 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
+@api.route('/perfil/all', methods=['GET'])
+def get_all_profiles():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users]), 200
 
-@app.route('/currentuser', methods=['GET'])
-@jwt_required
+# corregir
+@api.route('/currentuser', methods=['GET'])
+@jwt_required()
 def current_user():
     current_user_email = get_jwt_identity()
     user = User.query.get(id)
