@@ -38,7 +38,7 @@ return (
             <Table.HeaderCell>First Name</Table.HeaderCell>
             <Table.HeaderCell>Last Name</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
-            <Table.HeaderCell>Valor</Table.HeaderCell>
+            <Table.HeaderCell>Perfil</Table.HeaderCell>
             {/* <Table.HeaderCell>Ubicacion</Table.HeaderCell>
             <Table.HeaderCell>Activo</Table.HeaderCell>
             <Table.HeaderCell>Unirse</Table.HeaderCell> */}
