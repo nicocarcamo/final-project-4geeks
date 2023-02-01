@@ -82,13 +82,22 @@ def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
 
-@app.route('/crearevento/<event_id>', methods=['GET'])
-def select_events(event_id):
-    event = CrearEvento.query.get(event_id)
-    if event is not None:
-        event = event.serialize()
-        return jsonify(event), 200
-    return jsonify({'error': 'Event not found'}), 404
+@app.route('/crearevento/<int:event_id>', methods=['GET'])
+def get_event_by_id(event_id):
+    event = CrearEvento(nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, is_active).query.get(event_id)
+    if event:
+        return jsonify({
+            'id': event.id,
+            'nombreevento': event.nombreevento,
+            'descripcion': event.descripcion,
+            'integrantes': event.integrantes,
+            'publicooprivado': event.publicooprivado,
+            'valor': event.valor,
+            'ubicacion': event.ubicacion
+        })
+    else:
+        return jsonify({'error': 'Event not found'}), 404
+
 
 @api.route('/perfil', methods=['GET'])
 @jwt_required()

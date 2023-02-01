@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'semantic-ui-react';
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import { EventoDetalle } from './eventid';
 
 export function UnirseEvento() {
 const { store, actions } = useContext(Context);
@@ -26,8 +24,9 @@ useEffect(() => {
 }, []);
 
 const handleEventSelection = (event) => {
-    setSelectedEvent(event);
-}
+  setSelectedEvent(event);
+  navigate(`/unirseevento/${event.id}`);
+};
 
 return (
     <div>
@@ -56,13 +55,9 @@ return (
               <Table.Cell>{event.ubicacion}</Table.Cell>
               <Table.Cell>{event.activo}</Table.Cell>
               <Table.Cell>
-                <Button
-                  as={Link}
-                  to={`/unirseevento/${event.id}`}
-                  color="blue"
-                >
-                  Ver detalles
-                </Button>
+              <Button onClick={() => handleEventSelection(event)} color="blue">
+  Ver detalles
+</Button>
               </Table.Cell>
             </Table.Row>
           ))}

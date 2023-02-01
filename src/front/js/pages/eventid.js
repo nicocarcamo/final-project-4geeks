@@ -1,25 +1,46 @@
-import React from 'react';
-import { Card, Header, Image } from 'semantic-ui-react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Table } from 'semantic-ui-react';
+import { Context } from "../store/appContext";
+import { useParams } from "react-router-dom";
 
-export const EventoDetalle = (props) => {
-  const { event } = props;
+export function EventoDetalle() {
+  const { store, actions } = useContext(Context);
+  const [error, setError] = useState(null);
+  const [event, setEvent] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const data = await actions.getEventbyId(id);
+        setEvent(data);
+      } catch (error) {
+        console.error("fetchEvent no funciona");
+        setError(error);
+      }
+    };
+
+    fetchEvent();
+  }, [actions, id]);
+  
+  if (error) return <div>Error: {error.message}</div>;
+  if (!event) return <div>Loading...</div>;
 
   return (
-    <Card>
-      {/* <Image src={event.imageUrl} wrapped ui={false} /> */}
-      <Card.Content>
-        <Header as='h3'>{event.nombreevento}</Header>
-        <Card.Description>
-          <p>{event.descripcion}</p>
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <p>Integrantes: {event.integrantes}</p>
-        <p>Visibilidad: {event.publicooprivado}</p>
-        <p>Valor: {event.valor}</p>
-        <p>Ubicación: {event.ubicacion}</p>
-      </Card.Content>
-    </Card>
+    <div>
+      <h1>Detalles del evento</h1>
+      <Table celled>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>Nombre: {event.nombreevento}</Table.Cell>
+            <Table.Cell>Descripción: {event.descripcion}</Table.Cell>
+            <Table.Cell>Integrantes: {event.integrantes}</Table.Cell>
+            <Table.Cell>Tipo: {event.publicooprivado}</Table.Cell>
+            <Table.Cell>Valor: {event.valor}</Table.Cell>
+            <Table.Cell>Ubicación: {event.ubicacion}</Table.Cell>
+          </Table.Row>
+        </Table.Body>
+      </Table>
+    </div>
   );
-};
-
+}

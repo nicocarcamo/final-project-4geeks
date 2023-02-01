@@ -59,30 +59,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getEventById: async (eventId) => {
-				return (dispatch) => {
-					dispatch({ type: 'FETCH_EVENT_START' });	
-					return fetch(`${process.env.BACKEND_URL}/crearevento/${eventId}`, {
+			getEventbyId: (eventId) => {
+				return () => {
+				  return fetch(`${process.env.BACKEND_URL}/crearevento/${eventId}`, {
 					method: 'GET',
 					headers: {
-						'Content-Type': 'application/json',
+					  'Content-Type': 'application/json',
 					},
-					})
-					.then((response) => {
-						if (!response.ok) {
-						throw Error(response.statusText);
-						}
-						return response.json();
-					})
-					.then((data) => {
-						dispatch({ type: 'FETCH_EVENT_SUCCESS', payload: data });
-					})
-					.catch((error) => {
-						dispatch({ type: 'FETCH_EVENT_ERROR', payload: error });
-					});
+				  })
+				  .then((response) => {
+					if (!response.ok) {
+					  throw Error(response.statusText);
+					}
+					return response.json();
+				  });
 				};
-			},
-							
+			  },						  
 
 			register: async (formData, navigate, setMessage) => {
 				try {
