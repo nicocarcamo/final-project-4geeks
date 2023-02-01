@@ -13,7 +13,6 @@ export const PerfilId = () => {
 
 	useEffect(() => {
 		if (!store.currentUser) navigate('/login');
-		actions.getProfileById();
 	}, [])
 
 	useEffect(() => {
@@ -44,8 +43,8 @@ export const PerfilId = () => {
 					</Header>
 					<div className="container d-flex justify-content-center mt-5">
 						<Card
-							// image={"https://robohash.org/" + store.profile?.username + ".png"}
-							image="https://xsgames.co/randomusers/avatar.php?g=pixel"
+							image={"https://robohash.org/" + id + ".png"}
+							// image="https://xsgames.co/randomusers/avatar.php?g=pixel"
 							header={store.users?.username}
 							meta={store.users?.firstname + ' ' + store.users?.lastname}
 							description={store.users?.email}
