@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			eventCreatedMessage: null,
 			events: [],
+			event: "",
 			loginMessage: null,
 			registerMessage: null,
 			currentUser: null,
@@ -15,6 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			lastname: '',
 			password: '',
 			perfil: null,
+			users: [],
+			user: null
 		},
 
 		actions: {
@@ -41,6 +44,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
+		
+			getUser: async (userId) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/perfil/${userId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({
+						users: data
+					})					
+				return data;
+				} catch (error) {
+					console.log("Error loading user from backend", error)
+				}
+			},
+
+
+			getUsers: async () => {
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/perfil/all", {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({ users: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading users from backend", error)
+				}
+			},
+
 			createEvent: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
@@ -58,6 +93,58 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getEventById: async (eventId) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/crearevento/${eventId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({ events: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading event from backend", error)
+				}
+			},
+
+			getProfileById: async (profileId) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/perfil/${profileId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({ users: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading user from backend", error)
+				}
+			},
+
+			addIntegrante: async (eventId) => {
+				const { currentUser } = getStore();
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/crearevento/${eventId}`, {
+						method: 'PUT',
+						headers: { 
+							'Content-Type': 'application/json', 
+							"Authorization": `Bearer ${currentUser.access_token}`
+						},
+						body: JSON.stringify({ integrantes: `${currentUser.username}` })
+					})
+					.then(data => {
+						console.log(data);
+					})
+					.catch(error => {
+						console.error(error);
+					});
+				} catch (error) {
+					console.error(error);
+				}
+			},
+			
+			  
+								
 			register: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
@@ -126,8 +213,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 					const res = await fetch(
-						`${process.env.BACKEND_URL}/api/currentuser`,
-						{
+						`${process.env.BACKEND_URL}/api/currentuser`, {
 							method: "GET",
 							headers: {
 								"Content-Type": "application/json",
@@ -142,6 +228,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error getting current user", err);
 				}
 			},
+
+			
 			getProfile: () => {
 				const { currentUser } = getStore();
 

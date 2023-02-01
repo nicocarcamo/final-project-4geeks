@@ -60,8 +60,6 @@ def get_all_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
 
-
-
 @api.route('/crearevento', methods=['POST'])
 def create_event():
     nombreevento = request.json['nombreevento']
@@ -71,6 +69,12 @@ def create_event():
     valor = request.json['valor']
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
+
+    # el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
+    # lat = request.json['lat']
+    # lng= request.json['lng']
+
+    # pasar lat y lng como parámetro
     crearevento = CrearEvento(
         nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
@@ -82,6 +86,15 @@ def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
 
+@api.route('/crearevento/<int:event_id>/', methods=['GET'])
+def get_event_by_id(event_id):
+    event = CrearEvento.query.get(event_id)
+    if event:
+        return jsonify(event.serialize())
+        return jsonify({'error': 'EVENTO ENCONTRADO'}), 200
+    else:
+        return jsonify({'error': 'Event not found'}), 404
+
 
 @api.route('/perfil', methods=['GET'])
 @jwt_required()
@@ -90,8 +103,23 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
-@app.route('/api/currentuser', methods=['GET'])
-@jwt_required
+@api.route('/perfil/all', methods=['GET'])
+def get_all_profiles():
+    users = User.query.all()
+    return jsonify([user.serialize() for user in users]), 200
+
+@api.route('/perfil/<int:perfil_id>/', methods=['GET'])
+def get_profile_by_id(perfil_id):
+    perfil = User.query.get(perfil_id)
+    if perfil:
+        return jsonify(perfil.serialize())
+        return jsonify({'success': 'PERFIL ENCONTRADO'}), 200
+    else:
+        return jsonify({'error': 'Perfil not found'}), 404
+
+# corregir
+@api.route('/currentuser', methods=['GET'])
+@jwt_required()
 def current_user():
     current_user_email = get_jwt_identity()
     user = User.query.get(id)
