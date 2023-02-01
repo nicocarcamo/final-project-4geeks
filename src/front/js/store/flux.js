@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			message: null,
 			eventCreatedMessage: null,
 			events: [],
+			event: null,
 			loginMessage: null,
 			registerMessage: null,
 			currentUser: null,
@@ -41,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading events from backend", error)
 				}
 			},
+
 			createEvent: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/crearevento`, {
@@ -58,6 +60,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			getEventById: async (eventId) => {
+				try {
+					const resp = await fetch(`${process.env.BACKEND_URL}/api/crearevento/${eventId}`, {
+						method: 'GET',
+						headers: { 'Content-Type': 'application/json' },
+					})
+					const data = await resp.json()
+					setStore({ events: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading events from backend", error)
+				}
+			},
+								
 			register: async (formData, navigate, setMessage) => {
 				try {
 					const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
@@ -142,6 +158,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error getting current user", err);
 				}
 			},
+
+			
 			getProfile: () => {
 				const { currentUser } = getStore();
 
