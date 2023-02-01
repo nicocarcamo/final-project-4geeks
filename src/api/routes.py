@@ -109,6 +109,15 @@ def get_all_profiles():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
 
+@api.route('/perfil/<int:perfil_id>/', methods=['GET'])
+def get_profile_by_id(perfil_id):
+    perfil = User.query.get(perfil_id)
+    if perfil:
+        return jsonify(perfil.serialize())
+        return jsonify({'success': 'PERFIL ENCONTRADO'}), 200
+    else:
+        return jsonify({'error': 'Perfil not found'}), 404
+
 # corregir
 @api.route('/currentuser', methods=['GET'])
 @jwt_required()

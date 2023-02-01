@@ -23,10 +23,10 @@ useEffect(() => {
     .catch(error => console.error(error));
 }, []);
 
-// const handleEventSelection = (event) => {
-//   setSelectedEvent(event);
-//   navigate(`/crearevento/${event.id}`);
-// };
+const handleProfileSelection = (user) => {
+//   setSelectedUser(user);
+  navigate(`/perfil/${user.id}`);
+};
 
 return (
     <div>
@@ -38,7 +38,7 @@ return (
             <Table.HeaderCell>First Name</Table.HeaderCell>
             <Table.HeaderCell>Last Name</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
-            {/* <Table.HeaderCell>Valor</Table.HeaderCell> */}
+            <Table.HeaderCell>Valor</Table.HeaderCell>
             {/* <Table.HeaderCell>Ubicacion</Table.HeaderCell>
             <Table.HeaderCell>Activo</Table.HeaderCell>
             <Table.HeaderCell>Unirse</Table.HeaderCell> */}
@@ -54,11 +54,11 @@ return (
               {/* <Table.Cell>{event.valor}</Table.Cell>
               <Table.Cell>{event.ubicacion}</Table.Cell>
               <Table.Cell>{event.activo}</Table.Cell> */}
-              {/* <Table.Cell>
-              <Button onClick={() => handleEventSelection(event)} color="blue">
+              <Table.Cell>
+              <Button onClick={() => handleProfileSelection(user)} color="blue">
   Ver detalles
 </Button>
-              </Table.Cell> */}
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

@@ -24,7 +24,7 @@ useEffect(() => {
 }, []);
 
 const handleEventSelection = (event) => {
-  setSelectedEvent(event);
+  // setSelectedEvent(event);
   navigate(`/crearevento/${event.id}`);
 };
 

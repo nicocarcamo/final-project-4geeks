@@ -10,7 +10,7 @@ import { CrearEvento } from "./pages/crearevento";
 import { UnirseEvento } from "./pages/unirseevento";
 import { EventoDetalle } from "./pages/eventid";
 import { BuscarUsuarios } from "./pages/buscarusuario";
-
+import { PerfilId } from "./pages/perfilid";
 import { MiEvento } from "./pages/mievento";
 import { Inbox } from "./pages/inbox";
 import { ProtectedRoutes } from "./pages/protectedroutes";
@@ -42,6 +42,7 @@ const Layout = () => {
                 <Route path="/crearevento/:id" element={<EventoDetalle />} /> 
                 <Route path="/inbox" element={<Inbox />} />
                 <Route path="/mievento" element={<MiEvento />} />
+                <Route path="/perfil/:id" element={<PerfilId />} />
                 <Route path="/perfil/all" element={<BuscarUsuarios />} />
                 <Route path="/demo" element={<Demo />} />
                 <Route path="/single/:theid" element={<Single />} />
