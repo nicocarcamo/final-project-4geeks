@@ -14,7 +14,6 @@ import { PerfilId } from "./pages/perfilid";
 import { MiEvento } from "./pages/mievento";
 import { Inbox } from "./pages/inbox";
 import { ProtectedRoutes } from "./pages/protectedroutes";
-
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
