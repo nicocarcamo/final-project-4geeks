@@ -11,7 +11,7 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
+// import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 // import "../../styles/crearEvento.css";
 
 export const CrearEvento = () => {
