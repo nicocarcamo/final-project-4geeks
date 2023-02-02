@@ -49,9 +49,8 @@ export const Login = () => {
     <div className="content">
       <div className="blur"></div>
       <div className="innerContent">
-        <Grid
+        <Grid className="gridInnerContent"
           textAlign="center"
-          style={{ height: "100vh" }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
@@ -93,7 +92,7 @@ export const Login = () => {
                 </Button>
               </Segment>
             </Form>
-            {message && <Message>{message}</Message>}
+            {message && <Message className="messageError">{message}</Message>}
             {!isLoggedIn && (
               <Message className="msg">
                 <span> New to us?</span>

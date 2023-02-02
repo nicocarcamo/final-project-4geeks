@@ -31,7 +31,8 @@ body .contentRegister {
   width: 100vw;
   height: 100vh;
   filter: blur(5px);
-  z-index: -1;
+  z-index: 0;
+  top: 0;
   }
 
 
@@ -78,6 +79,7 @@ body .contentRegister {
   color: aliceblue !important;
   background-color: rgba(126, 149, 150, 0.495) !important;
   margin-left: 210px;
+  padding: 15px 0px !important;
 }
 .ui.message.msgRegister a{
     color: rgb(11, 41, 67);
@@ -85,9 +87,7 @@ body .contentRegister {
 .ui.message.msgRegister a:hover{
     color: aliceblue !important;
 }
-.ui.message{
-    top: -80px !important;
-}
+
 /* .register{
     padding-top: 30px !important;
 	position: absolute;
