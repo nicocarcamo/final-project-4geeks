@@ -3,13 +3,13 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import MapPicker from "../component/MapPicker";
 import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
+	Button,
+	Form,
+	Grid,
+	Header,
+	Image,
+	Message,
+	Segment,
 } from "semantic-ui-react";
 import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/crearEvento.css";
@@ -19,19 +19,20 @@ export const CrearEvento = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!store.currentUser) navigate("/login");
-  }, []);
+	useEffect(() => {
+		if (!store.currentUser) navigate('/login');
+	}, [])
 
-  const [formData, setFormData] = useState({
-    nombreevento: "",
-    descripcion: "",
-    integrantes: "",
-    publicooprivado: "",
-    valor: "",
-    ubicacion: "",
-    is_active: true,
-  });
+	const [formData, setFormData] = useState({
+		nombreevento: "",
+		descripcion: "",
+		integrantes: "",
+		publicooprivado: "",
+		valor: "",
+		ubicacion: "",
+		is_active: true
+	});
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,6 +106,7 @@ export const CrearEvento = () => {
           <MapPicker />
         </Grid.Column>
       </Grid>
+	  <MapPicker />
     </div>
   );
 };
