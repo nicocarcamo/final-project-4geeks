@@ -23,11 +23,11 @@ export const Perfil = () => {
 
   return (
     <div className="profileBackground">
-		<div className="blurProfile"><img src={fondo}/></div>
+		<div className="blurProfile"></div>
       <div className="contentProfile">
-        <Grid
+        <Grid className="gridProfile"
           textAlign="center"
-          style={{ height: "90vh" }}
+          // style={{ height: "90vh" }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>

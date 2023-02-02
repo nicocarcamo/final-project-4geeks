@@ -1,4 +1,4 @@
-.blurProfile {
+/* .blurProfile {
   background-size: cover;
   position: absolute;
   width: auto;
@@ -10,12 +10,28 @@
   right: -40px;
   bottom: -40px;
   z-index: -1;
-}
-
+} 
 .blurProfile img {
   width: -webkit-fill-available;
 }
-
+*/
+.gridProfile{
+  top: 70px;
+  position: relative;
+  margin-bottom: 100px !important;
+}
+.blurProfile{
+  position: fixed;
+  background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
+  z-index: -1;
+  top: 0;
+}
 /* .contentProfile{
     z-index: 1;
     position: relative;
