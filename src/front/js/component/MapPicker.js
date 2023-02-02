@@ -26,10 +26,10 @@ const MapPicker = () => {
   }, []);
 
   return (
-    <div>
-      <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
+    <div className='divMap'>
+      <div id="map" className='mx-auto contentMap' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
       {selectedLocation && (
-        <p>
+        <p className='coordenadas'>
           Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}
         </p>
       )}

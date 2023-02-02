@@ -44,19 +44,17 @@ export const CrearEvento = () => {
 
   return (
     <>
-      <div className="backgroundCrearE">
-        <img src={backgroundCrearE} />
-      </div>
-      <Grid
+      <div className="backgroundCrearE"></div>
+      <Grid className="gridCrearEvento"
         textAlign="center"
         style={{ height: "90vh" }}
         verticalAlign="middle"
       >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
-            <Image src="/rigo-baby.jpg" /> Create Nuevo Evento
+        <Grid.Column className="gridColumCrearEvento" style={{ maxWidth: 450 }}>
+          <Header className="headerCrearEvento" as="h2" textAlign="center">
+            Create Nuevo Evento
           </Header>
-          <Segment>
+          <Segment className="segmentCrearEvento">
             <Form size="large" onSubmit={handleSubmit}>
               <Form.Field>
                 <Form.Input
