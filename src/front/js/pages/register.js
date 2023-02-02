@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 import "../../styles/register.css";
 import logo from "../../img/logo2_style.png";
-import fondo from "../../img/background.jpg";
+import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
@@ -84,23 +84,25 @@ export const Register = () => {
 
   return (
     <div className="contentRegister">
-      <div className="blurRegister"></div>
+      <div className="blurRegister">
+        {/* <img src={backgroundRegister} /> */}
+      </div>
       <div className="innerContentRegister">
         <Grid
+          className="formRegister"
           textAlign="center"
-          style={{ height: "100vh" }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header
-              className="headerRegister"
+              className="headerRegister d-flex"
               as="h2"
               color="teal"
               textAlign="center"
             >
               <Image src={logo} /> <span>Create New Account</span>
             </Header>
-            <Segment>
+            <Segment className="segmentRegister">
               <Form className="register" size="large" onSubmit={handleSubmit}>
                 <Form.Field>
                   <Form.Input
@@ -176,7 +178,10 @@ export const Register = () => {
               {message && <Message>{message}</Message>}
             </Segment>
             <Message className="msgRegister">
-              Already have a user? <a href="/login"><i className="fa-solid fa-angle-right"></i>Login</a>
+              Already have a user?{" "}
+              <a href="/login">
+                <i className="fa-solid fa-angle-right"></i>Login
+              </a>
             </Message>
           </Grid.Column>
         </Grid>

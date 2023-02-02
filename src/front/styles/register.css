@@ -1,30 +1,39 @@
 body .contentRegister {
-  overflow-y: hidden;
   margin: 0;
   padding: 0;
   height: 100%;
 }
-.blurRegister {
-  position: absolute;
-  margin: -50px;
-  padding: -50px;
-  top: -20px;
-  left: -20px;
-  right: -40px;
-  bottom: -40px;
-  width: auto;
-  height: auto;
-  background-image: url(https://img.freepik.com/fotos-premium/pintura-paisaje-acuarela-globos-aerostaticos_49537-310.jpg?w=826);
-  /* background-image: url(https://picsum.photos/400/200?grayscale); */
-  filter: blur(10px);
+/* .blurRegister {
   background-size: cover;
-  z-index: 0;
+  position: absolute;
+  width: -webkit-fill-available;
+  height: auto;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.blurRegister img {
+  width: -webkit-fill-available;
+  overflow: hidden;
 }
 
 .innerContentRegister {
   position: relative;
   z-index: 1;
-}
+} */
+
+.blurRegister{
+  position: fixed;
+  background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
+  z-index: -1;
+  }
+
 
 .button{
     background-color: rgba(126, 149, 150, 0.495) !important;
@@ -32,30 +41,43 @@ body .contentRegister {
 .button:hover{
   background-color: rgba(21, 194, 203, 0.862) !important;
 }
+.formRegister{
+  display: flex;
+}
 
 .headerRegister span {
   background-color: rgba(126, 149, 150, 0.495);
-  position: absolute;
-  top: -160px;
-  left: -120px;
+  top: 20px;
+  left: -0px;
   z-index: 2;
   border: 2px solid #000;
   color: rgb(52, 60, 88);
   width: 300px;
+  position: relative;
 }
 .headerRegister img {
   transform: scale(5);
   padding: 5px;
+  top: 250px;
   justify-content: center;
   background-color: rgba(126, 149, 150, 0.495) !important;
 }
+.segmentRegister{
+  left: 100px;
+  top: 20px;
+  margin-left: 150px !important;
+  background-color: rgba(126, 149, 150, 0.495) !important;
+  border: 3px solid #000 !important;
+}
+
 .ui.message.msgRegister{
-    position: static;
-    border: 3px solid #000;
-    margin-top: 60px !important;
-    margin-left: 250px !important;
-    color: aliceblue !important;
-    background-color: rgba(126, 149, 150, 0.495) !important;
+  position: relative;
+  border: 3px solid #000;
+  top: 10px !important;
+  left: 250px !important;
+  color: aliceblue !important;
+  background-color: rgba(126, 149, 150, 0.495) !important;
+  margin-left: 210px;
 }
 .ui.message.msgRegister a{
     color: rgb(11, 41, 67);
@@ -77,12 +99,6 @@ body .contentRegister {
 	z-index: 2;   
     
 } */
-
-div.ui.segment {
-  margin-left: 150px;
-  background-color: rgba(126, 149, 150, 0.495) !important;
-  border: 3px solid #000;
-}
 
 /* div .ui.message{
     position: absolute;
