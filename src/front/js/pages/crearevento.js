@@ -23,8 +23,11 @@ export const CrearEvento = () => {
 	}, [])
 
 	const updateSelectedAddress = (address) => {
-		setSelectedAddress(address);
-	  };
+		setSelectedAddress((currenAddrees) => {
+			return currenAddrees = address;
+		})
+		console.log(selectedAddress)
+	};
 
 	const [formData, setFormData] = useState({
 		nombreevento: "",
@@ -33,11 +36,13 @@ export const CrearEvento = () => {
 		publicooprivado: "",
 		valor: "",
 		ubicacion: "",
+		address: selectedAddress,
 		is_active: true
 	});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(formData)
 		actions.createEvent(formData, navigate, setMessage);
 	};
 

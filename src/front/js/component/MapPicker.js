@@ -5,7 +5,7 @@ const MapPicker = ({ onAddressChange }) => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  // const [selectedAddress, setSelectedAddress] = useState(null);
 
   useEffect(() => {
     mapRef.current = L.map('map', {
@@ -32,7 +32,7 @@ const MapPicker = ({ onAddressChange }) => {
         return response.json();
       })
       .then(data => {
-        setSelectedAddress(data.display_name);
+        // setSelectedAddress(data.display_name);
         onAddressChange(data.display_name);
       })
       .catch(error => {
@@ -43,11 +43,11 @@ const MapPicker = ({ onAddressChange }) => {
   return (
     <div>
       <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
-      {selectedAddress && (
+      {/* {selectedAddress && (
         <p className='text-center'>
           {selectedAddress}
         </p>
-      )}
+      )} */}
     </div>
   );
 };
