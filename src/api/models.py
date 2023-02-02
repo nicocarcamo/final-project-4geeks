@@ -16,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
-    user = db.relationship("UnirseEvento", back_populates="user")
+    user = db.relationship("CrearEvento", back_populates="organizador")
 
     def __init__(self, username, firstname, lastname, email, password, is_active):
         self.username = username
@@ -47,7 +47,6 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-
 class Event(db.Model):
     __tablename__ = "events"
     id = db.Column(db.Integer, primary_key=True)
@@ -56,7 +55,6 @@ class Event(db.Model):
     fecha = db.Column(db.String(120), nullable=False)
     hora = db.Column(db.String(120), nullable=False)
     asistentes = db.Column(db.String)
-    creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
 
     def serialize(self):
         return {
@@ -65,7 +63,6 @@ class Event(db.Model):
             "lugar": self.lugar,
             "fecha": self.fecha,
             "hora": self.hora,
-            "creador_evento": self.creador_evento
         }
 
     def save(self):
@@ -82,6 +79,8 @@ class Event(db.Model):
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
+    organizador_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    organizador = db.relationship("User", back_populates="user")
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
     integrantes = db.Column(db.String(120), nullable=False)
@@ -94,47 +93,26 @@ class CrearEvento(db.Model):
     # lng = db.Column(db.Float)
     
     is_active = db.Column(db.Boolean, default=True)
-    event = db.relationship("UnirseEvento", back_populates="event")
+    events = db.relationship("UnirseEvento", back_populates="event")
 
-    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, is_active):
+    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, organizador, organizador_id, is_active):
         self.nombreevento = nombreevento
         self.descripcion = descripcion
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
         self.valor = valor
         self.ubicacion = ubicacion
+        self.organizador = organizador
+        self.organizador_id = organizador.id
         self.is_active = is_active
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "nombreevento": self.nombreevento,
-            "descripcion": self.descripcion,
-            "integrantes": self.integrantes,
-            "publicooprivado": self.publicooprivado,
-            "valor": self.valor,
-            "ubicacion": self.ubicacion,
-            "is_active": self.is_active
-        }
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def update(self):
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
 class UnirseEvento(db.Model):
     __tablename__ = 'unirseevento'
     event_id = db.Column(db.Integer, db.ForeignKey('crearevento.id'), primary_key=True)    
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     is_active = db.Column(db.Boolean, default=True)
-    event = db.relationship("CrearEvento", back_populates="event")
-    user = db.relationship("User", back_populates="user")
+    event = db.relationship("CrearEvento", back_populates="events")
+    # user = db.relationship("User", back_populates="user")
 
     def __init__(self,event, user):
         self.event = event
@@ -143,4 +121,3 @@ class UnirseEvento(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
-

@@ -16,14 +16,21 @@ export const CrearEvento = () => {
 	const [message, setMessage] = useState(null);
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate()
+	const [currentUser, setCurrentUser] = useState(null);
 
-	useEffect(() => {
-		if (!store.currentUser) navigate('/login');
-	}, [])
+	// useEffect(() => {
+	// 	if (!store.currentUser) navigate('/login');
+	// }, [])
 
-	const [formData, setFormData] = useState({
+
+useEffect(() => {
+	if (store.currentUser) setFormData({ ...formData, organizador: store.currentUser.id });
+}, [store.currentUser])
+
+	const [formData, setFormData, ] = useState({
 		nombreevento: "",
 		descripcion: "",
+		organizador: "",
 		integrantes: "",
 		publicooprivado: "",
 		valor: "",
@@ -88,6 +95,14 @@ export const CrearEvento = () => {
 									name="ubicacion"
 									placeholder="Ubicacion"
 									label="Ubicacion"
+									onChange={handleChange}
+								/>
+							</Form.Field>
+							<Form.Field>
+								<Form.Input
+									name="valor"
+									placeholder="Valor"
+									label="Valor"
 									onChange={handleChange}
 								/>
 							</Form.Field>
