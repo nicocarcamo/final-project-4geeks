@@ -27,7 +27,7 @@ const MapPicker = () => {
 
   return (
     <div>
-      <div id="map" style={{ height: '500px', width: '100%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
+      <div id="map" style={{ height: '300px', width: '100%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
       {selectedLocation && (
         <p>
           Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}
