@@ -34,9 +34,7 @@ export function UnirseEvento() {
 
   return (
     <>
-      <div className="backgroundUnirse">
-        <img src={backgroundUnirse} />
-      </div>
+      <div className="backgroundUnirse"></div>
       <div className="contentUnirse">
         <h1>Unirse a evento</h1>
         <Table celled>
