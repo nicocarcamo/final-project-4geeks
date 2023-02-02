@@ -1,0 +1,17 @@
+.backgroundUnirse {
+  background-size: cover;
+  position: absolute;
+  width: -webkit-fill-available;
+  height: auto;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.backgroundUnirse img {
+  width: -webkit-fill-available;
+}
+
+.contentUnirse {
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,17 @@
+.backgroundBuscarU {
+  background-size: cover;
+  position: absolute;
+  width: -webkit-fill-available;
+  height: auto;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.backgroundBuscarU img {
+  width: -webkit-fill-available;
+}
+
+.contentBuscar{
+    position: relative;
+    z-index: 1;
+}

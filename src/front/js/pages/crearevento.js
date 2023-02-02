@@ -11,8 +11,8 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-// import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
-// import "../../styles/crearEvento.css";
+import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
+import "../../styles/crearEvento.css";
 
 export const CrearEvento = () => {
   const [message, setMessage] = useState(null);
@@ -45,7 +45,6 @@ export const CrearEvento = () => {
   return (
     <>
       <div className="backgroundCrearE">
-        {" "}
         <img src={backgroundCrearE} />
       </div>
       <Grid
@@ -108,7 +107,6 @@ export const CrearEvento = () => {
           <MapPicker />
         </Grid.Column>
       </Grid>
-      <MapPicker />
     </>
   );
 };
