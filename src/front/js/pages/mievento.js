@@ -28,10 +28,8 @@ export function MiEvento({ evento }) {
   }, []);
 
   return (
-    <div>
-      <div className="backgroundMyEvents">
-        <img src={backgroundMyEvents} />
-      </div>
+    <div className="bodyContent">
+      <div className="backgroundMyEvents"></div>
 
       <div className="container mt-5 contentMyEvents">
         <h1 className="text-center">Mis eventos</h1>
