@@ -5,6 +5,8 @@ const MapPicker = () => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
 
   useEffect(() => {
     mapRef.current = L.map('map', {
@@ -25,12 +27,25 @@ const MapPicker = () => {
     });
   }, []);
 
+  if (selectedLocation) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.lat}&lon=${selectedLocation.lng}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setSelectedAddress(data.display_name);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
   return (
     <div>
       <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
-      {selectedLocation && (
+      {selectedAddress && (
         <p className='text-center'>
-          Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}
+          Address: {selectedAddress}
         </p>
       )}
     </div>
