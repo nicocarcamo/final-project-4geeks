@@ -1,23 +1,37 @@
-.chat html {
+.backgroundChat img{
+  background-size: cover;
+  position: absolute;
+  width: -webkit-fill-available;
+  height: auto;
+  filter: blur(10px);
+  /* margin: -50px; */
+  /* top: -20px; */
+  /* left: -20px; */
+  /* right: -40px; */
+  /* bottom: -40px; */
+  z-index: -1;
+}
+
+.backgroundChat .chat html {
     min-height: 100%;
     position: relative;
   }
 
-  .chat body {
+  .backgroundChat .chat body {
     background-color: #c0c8d8;
     margin: 0;
     margin-bottom: 40px;
   }
   
-  .chat {
+  .backgroundChat .chat {
     text-align: center;
     max-width: 728px;
     margin: 0 auto;
     border-radius: 15px 50px !important;
-    
+    z-index: 1;
   }
   
-  .chat header {
+  .backgroundChat .chat header {
     background-color: #2d2f3b;
     height: 10vh;
     min-height: 50px;
@@ -36,7 +50,7 @@
     border-radius: 10px;
   }
   
-  .chat section {
+  .backgroundChat .chat section {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,7 +60,7 @@
     border: 2px solid #fff;
   }
   
-  .chat main {
+  .backgroundChat .chat main {
     padding: 10px;
     height: 80vh;
     margin: 10vh 0 10vh;
@@ -56,7 +70,7 @@
     
   }
   
-  .chat form {
+  .backgroundChat .chat form {
     height: 10vh;
     position: fixed;
     bottom: 0;
@@ -69,14 +83,14 @@
     
   }
   
-  .chat form button {
+  .backgroundChat .chat form button {
     width: 20%;
     background-color: rgb(65, 65, 93);
     border: 2px solid;
   }
   
   
-  .inputChat {
+  .backgroundChat .chat .inputChat {
     line-height: 1.5;
     width: 100%;
     font-size: 1.5rem;
@@ -93,7 +107,7 @@
 
   }
   
-  .chat button {
+  .backgroundChat .chat button {
     background-color: #282c34;
     border: none;
     color: white;
@@ -106,24 +120,24 @@
     
   }
   
-  .chat button:disabled {
+  .backgroundChat .chat button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
   
   
-  .sign {
+  .backgroundChat .chat .sign {
     max-width: 400px;
     margin: 0 auto;
     border: 2px solid #fff !important;
   }
 
-  ul, li {
+  .backgroundChat .chat ul, .backgroundChat .chat li {
     text-align: left;
     list-style: none;
   }
  
-  .parrafo {
+  .backgroundChat .chat .parrafo {
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -135,31 +149,34 @@
   }
   
 
-  /* .message {
+  .message {
     display: flex;
-    align-items: center;
-  } */
+  }
 
   
-  .sent {
+  .chat .sent {
     flex-direction: row-reverse;
   }
   
-  .sent p {
+  .chat .sent p {
     color: white;
     background: #0b93f6;
     align-self: flex-end;
   }
-  .received p {
+  .chat .received p {
     background: #e5e5ea;
     color: black;
   }
   
-  .avatarChat {
+  .chat .avatarChat {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin: 2px 5px;
+    z-index: 2;
+    filter: none;
+    position: relative;
+
   }
   
   /* footer{

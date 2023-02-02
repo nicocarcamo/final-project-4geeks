@@ -10,7 +10,9 @@ import {
 } from "react-firebase-hooks/firestore";
 import { Button } from "semantic-ui-react";
 import { async } from "@firebase/util";
+import fondoChat from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/inbox.css";
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyB-d4_LjPuLy2Yyg1Llqtb4bmJbZsxs1gw",
@@ -32,7 +34,9 @@ function SignIn() {
   };
   return (
     <div>
-      <button className="sign btn btn-secondary" onClick={signGoogle}>Sign in with Google</button>
+      <button className="sign btn btn-secondary" onClick={signGoogle}>
+        Sign in with Google
+      </button>
     </div>
   );
 }
@@ -51,12 +55,12 @@ function SignOut() {
 function Chat() {
   const messagesRef = firestore.collection("messages");
 
-  const consulta = messagesRef.orderBy("createdAt");  //.limit(number)
+  const consulta = messagesRef.orderBy("createdAt"); //.limit(number)
 
   const [messages] = useCollectionData(consulta, { idField: "id" });
   const [formValue, setFormValue] = useState("");
 
-  const jumpBottom = useRef()
+  const jumpBottom = useRef();
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -69,7 +73,7 @@ function Chat() {
       photoURL,
     });
     setFormValue("");
-    // falta mejorar 
+    // falta mejorar
     // jumpBottom.current.scrollIntoView({behavior: 'smooth'})
   };
 
@@ -79,15 +83,20 @@ function Chat() {
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
-          <div ref={jumpBottom}></div>
+        <div ref={jumpBottom}></div>
       </main>
 
       <form onSubmit={sendMessage}>
-        <input className="inputChat" placeholder="Mensaje..."
+        <input
+          className="inputChat"
+          placeholder="Mensaje..."
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button className="btn btn-secondary" type="submit"> Send </button>
+        <button className="btn btn-secondary" type="submit">
+          {" "}
+          Send{" "}
+        </button>
       </form>
     </div>
   );
@@ -110,13 +119,16 @@ export const Inbox = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <div className="chat">
-      <header>
-        <SignOut />
-      </header>
-		{/* project.meetmeup@gmail.com - 4geeks4life */}
-      <section>{user ? <Chat /> : <SignIn />}</section>
-      {/* <section><Chat /></section> */}
+    <div className="backgroundChat">
+      <img src={fondoChat}/>
+      <div className="chat">
+        <header>
+          <SignOut />
+        </header>
+        {/* project.meetmeup@gmail.com - 4geeks4life */}
+        <section>{user ? <Chat /> : <SignIn />}</section>
+        {/* <section><Chat /></section> */}
+      </div>
     </div>
   );
 };

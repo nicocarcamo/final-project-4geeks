@@ -55,7 +55,7 @@ export const Login = () => {
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header className="header" as="h2" color="teal" textAlign="center">
+            <Header className="headerLogin" as="h2" color="teal" textAlign="center">
               <Image src={logo} />
               {/* <span>Log-in</span> */}
             </Header>

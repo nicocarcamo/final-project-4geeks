@@ -1,0 +1,12 @@
+.backgroundCrearE {
+  background-size: cover;
+  position: absolute;
+  width: -webkit-fill-available;
+  height: auto;
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.backgroundCrearE img {
+  width: -webkit-fill-available;
+}

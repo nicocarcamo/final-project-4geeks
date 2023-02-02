@@ -1,0 +1,54 @@
+.blurProfile {
+  background-size: cover;
+  position: absolute;
+  width: auto;
+  height: auto;
+  filter: blur(10px);
+  margin: -50px;
+  top: -20px;
+  left: -20px;
+  right: -40px;
+  bottom: -40px;
+  z-index: -1;
+}
+
+.blurProfile img {
+  width: -webkit-fill-available;
+}
+
+/* .contentProfile{
+    z-index: 1;
+    position: relative;
+} */
+
+.headerProfile {
+  border: 2px dashed #0b3b45 !important;
+  color: #0b3b45 !important;
+}
+
+.ui.card.cardProfile {
+  background-color: rgb(0, 0, 0, 0);
+  border: 3px solid #0b3b45;
+}
+
+.cardProfile > .content > .header {
+  color: rgb(255 255 255 / 50%) !important;
+  padding-bottom: 10px !important;
+  text-decoration: underline !important;
+}
+
+.cardProfile > .content > .meta {
+  text-transform: uppercase !important;
+}
+
+.cardProfile > .content > .meta,
+.cardProfile > .content > .description,
+.cardProfile > .extra > a {
+  color: rgb(255 255 255 / 30%) !important;
+}
+
+.cardProfile > .extra a:hover {
+  box-shadow: inset 0 0 0 0 #54b3d678 !important;
+  color: #54b3d6 !important;
+  transition: color 0.3s, ease-in-outbox-shadow 0.3s ease-in-out !important;
+}
