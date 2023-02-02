@@ -1,12 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import L from 'leaflet';
 
-const MapPicker = () => {
+const MapPicker = ({ onAddressChange }) => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState(null);
-
 
   useEffect(() => {
     mapRef.current = L.map('map', {
@@ -34,6 +33,7 @@ const MapPicker = () => {
       })
       .then(data => {
         setSelectedAddress(data.display_name);
+        onAddressChange(data.display_name);
       })
       .catch(error => {
         console.error(error);
@@ -45,7 +45,7 @@ const MapPicker = () => {
       <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
       {selectedAddress && (
         <p className='text-center'>
-          Address: {selectedAddress}
+          {selectedAddress}
         </p>
       )}
     </div>
