@@ -29,7 +29,7 @@ const MapPicker = () => {
     <div>
       <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
       {selectedLocation && (
-        <p>
+        <p className='text-center'>
           Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}
         </p>
       )}
