@@ -16,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
-    user = db.relationship("CrearEvento", back_populates="organizador")
+    user = db.relationship("CrearEvento", back_populates="username_id")
 
     def __init__(self, username, firstname, lastname, email, password, is_active):
         self.username = username
@@ -79,8 +79,8 @@ class Event(db.Model):
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
-    organizador_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    organizador = db.relationship("User", back_populates="user")
+    username = db.Column(db.String(120), db.ForeignKey('user.username'))
+    username_id = db.relationship("User", back_populates="user")
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
     integrantes = db.Column(db.String(120), nullable=False)
@@ -88,23 +88,18 @@ class CrearEvento(db.Model):
     valor = db.Column(db.String(120), nullable=False)
     ubicacion = db.Column(db.String(120), nullable=False)
 
-    # el evento debe recibir latitud y longitud para marcar el mapa
-    # lat = db.Column(db.Float)
-    # lng = db.Column(db.Float)
-    
     is_active = db.Column(db.Boolean, default=True)
     events = db.relationship("UnirseEvento", back_populates="event")
 
-    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, organizador, organizador_id, is_active):
+    def __init__(self, nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active, username):
         self.nombreevento = nombreevento
         self.descripcion = descripcion
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
         self.valor = valor
         self.ubicacion = ubicacion
-        self.organizador = organizador
-        self.organizador_id = organizador.id
         self.is_active = is_active
+        self.username = username
 
 class UnirseEvento(db.Model):
     __tablename__ = 'unirseevento'

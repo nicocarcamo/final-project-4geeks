@@ -62,24 +62,26 @@ def get_all_users():
 
 @api.route('/crearevento', methods=['POST'])
 def create_event():
-    nombreevento = request.json['nombreevento']
-    descripcion = request.json['descripcion']
-    integrantes = request.json['integrantes']
-    publicooprivado = request.json['publicooprivado']
-    valor = request.json['valor']
-    ubicacion = request.json['ubicacion']
-    is_active = request.json['is_active']
+    nombreevento = request.json.get('nombreevento')
+    descripcion = request.json.get('descripcion')
+    integrantes = request.json.get('integrantes')
+    publicooprivado = request.json.get('publicooprivado')
+    valor = request.json.get('valor')
+    ubicacion = request.json.get('ubicacion')
+    is_active = request.json.get('is_active')
+    username = request.json.get('username')
+    
+    try:
+        crearevento = CrearEvento(
+            nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active, username)
+        db.session.add(crearevento)
+        db.session.commit()
+    except Exception as e:
+        print(f"An error occurred while creating the event: {str(e)}")
+        return jsonify({'message': 'Failed to create event'}), 400
 
-    # el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
-    # lat = request.json['lat']
-    # lng= request.json['lng']
-
-    # pasar lat y lng como parámetro
-    crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
-    db.session.add(crearevento)
-    db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
+
 
 @api.route('/crearevento', methods=['GET'])
 def get_all_events():

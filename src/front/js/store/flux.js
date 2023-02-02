@@ -89,7 +89,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const json = await res.json();
 					setMessage("Event created successfully!" );
-					navigate('/unirseevento')
+					navigate('/perfil')
 				} catch (err) {
 					setMessage("Error creating event.");
 				}

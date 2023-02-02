@@ -47,6 +47,7 @@ return (
         <Table.Body>
           {events.map(event => (
             <Table.Row key={event.id}>
+            
               <Table.Cell>{event.nombreevento}</Table.Cell>
               <Table.Cell>{event.descripcion}</Table.Cell>
               <Table.Cell>{event.integrantes}</Table.Cell>
