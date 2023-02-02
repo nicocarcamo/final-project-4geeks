@@ -74,7 +74,7 @@ function Chat() {
     });
     setFormValue("");
     // falta mejorar
-    // jumpBottom.current.scrollIntoView({behavior: 'smooth'})
+    jumpBottom.current.scrollIntoView({behavior: 'smooth'})
   };
 
   return (
@@ -120,7 +120,7 @@ export const Inbox = () => {
 
   return (
     <div className="backgroundChat">
-      <img src={fondoChat}/>
+      <div className="blurChat"></div>
       <div className="chat">
         <header>
           <SignOut />

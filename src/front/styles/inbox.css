@@ -1,18 +1,17 @@
-.backgroundChat img{
+.blurChat{
+  position: fixed;
+  background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+  background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
-  width: -webkit-fill-available;
-  height: auto;
-  filter: blur(10px);
-  /* margin: -50px; */
-  /* top: -20px; */
-  /* left: -20px; */
-  /* right: -40px; */
-  /* bottom: -40px; */
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
   z-index: -1;
+  top: 0;
 }
 
-.backgroundChat .chat html {
+.backgroundChat .chat html{
     min-height: 100%;
     position: relative;
   }
@@ -51,23 +50,23 @@
   }
   
   .backgroundChat .chat section {
-    display: flex;
+     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 100vh;
-    background-color: rgb(61, 59, 69);
+    min-height: 85vh;
+    background-color: rgb(61, 59, 69, .7);
     border-radius: 0px 0px 15px 15px;
-    border: 2px solid #fff;
+   /* border: 2px solid #fff; */
+
   }
   
   .backgroundChat .chat main {
     padding: 10px;
     height: 80vh;
-    margin: 10vh 0 10vh;
+    margin: 0vh 0 5vh;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    
   }
   
   .backgroundChat .chat form {
@@ -80,6 +79,7 @@
     max-width: 728px;
     display: flex;
     font-size: 1.5rem;
+    z-index: 2;
     
   }
   

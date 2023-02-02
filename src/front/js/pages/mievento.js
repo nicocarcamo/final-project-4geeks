@@ -28,7 +28,7 @@ export function MiEvento({ evento }) {
   }, []);
 
   return (
-    <div className="bodyContent">
+    <div className="bodyContentMisEventos">
       <div className="backgroundMyEvents"></div>
 
       <div className="container mt-5 contentMyEvents">

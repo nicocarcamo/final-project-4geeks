@@ -34,10 +34,8 @@ export function BuscarUsuarios() {
   };
 
   return (
-    <div>
-      <div className="backgroundBuscarU">
-        <img src={backgroundBuscarU} />
-      </div>
+    <div className="bodyContentBuscarUsuarios">
+      <div className="backgroundBuscarU"></div>
       <div className="contentBuscar">
         <h1>Buscar usuarios</h1>
         <Table celled>
