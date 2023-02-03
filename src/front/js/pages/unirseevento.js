@@ -32,49 +32,56 @@ export function UnirseEvento() {
     navigate(`/crearevento/${event.id}`);
   };
 
-  return (
-    <>
-      <div className="backgroundUnirse"></div>
-      <div className="contentUnirse">
-        <h1>Unirse a evento</h1>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Nombre del evento</Table.HeaderCell>
-              <Table.HeaderCell>Descripcion</Table.HeaderCell>
-              <Table.HeaderCell>Integrantes</Table.HeaderCell>
-              <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
-              <Table.HeaderCell>Valor</Table.HeaderCell>
-              <Table.HeaderCell>Imagen</Table.HeaderCell>
-              <Table.HeaderCell>Ubicacion</Table.HeaderCell>
-              <Table.HeaderCell>Activo</Table.HeaderCell>
-              <Table.HeaderCell>Unirse</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {events.map((event) => (
-              <Table.Row key={event.id}>
-                <Table.Cell>{event.nombreevento}</Table.Cell>
-                <Table.Cell>{event.descripcion}</Table.Cell>
-                <Table.Cell>{event.integrantes}</Table.Cell>
-                <Table.Cell>{event.publicooprivado}</Table.Cell>
-                <Table.Cell>{event.valor}</Table.Cell>
-                <Table.Cell>{event.imagen}</Table.Cell>
-                <Table.Cell>{event.ubicacion}</Table.Cell>
-                <Table.Cell>{event.activo}</Table.Cell>
-                <Table.Cell>
-                  <Button
-                    onClick={() => handleEventSelection(event)}
-                    color="blue"
-                  >
-                    Ver detalles
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
+return (
+  <div class="ui grid m-5">
+  {events.map(event => (
+    <div class="four wide column" key={event.id}>
+      <div class="ui card mt-5">
+        <div class="blurring dimmable image">
+          <div class="ui dimmer">
+            <div class="content">
+              <div class="center">
+                <div class="ui red button view">Ver</div>
+              </div>
+            </div>
+            <img class="center" src="src/front/img/rigo-baby.jpg" />
+          </div>
+          <span class="date  d-flex justify-content-end mx-4">
+                <i class="history icon"></i>
+                05/01/2023
+              </span>
+          <div class="content m-3">
+            <div class="meta">
+
+            </div>
+            <div class="m-2">
+              <h2>{event.nombreevento}</h2>
+              <div class="description">{event.descripcion}</div>
+              <div class="description">Integrantes: {event.integrantes}</div>
+              <div class="description">{event.ubicacion}</div>
+            </div>
+          </div>
+          <div class="extra content">
+            <div class="ui right labeled button" tabindex="0">
+              <div class="ui red icon tiny button">
+                <i class="thumbs outline up large icon"></i>
+              </div>
+              <a class="ui basic blue left pointing label">Unirse!</a>
+            </div>
+            <div class="ui left labeled right floated button" tabindex="0">
+            <Button onClick={() => handleEventSelection(event)} color="green">
+                Ver detalles
+              </Button> 
+              <div class="ui red icon tiny button">
+                <i class="external share large icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
+  ))}
+</div>
+
   );
 }

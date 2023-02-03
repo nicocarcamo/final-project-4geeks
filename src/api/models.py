@@ -96,7 +96,7 @@ class CrearEvento(db.Model):
     valor = db.Column(db.String(120), nullable=False)
     # date_time = db.Column(db.DateTime, nullable=False)
     # imagen = db.Column(db.String(120))
-    ubicacion = db.Column(db.String(120), nullable=False)
+    ubicacion = db.Column(db.String(600), nullable=False)
 
     # el evento debe recibir latitud y longitud para marcar el mapa
     # lat = db.Column(db.Float)
