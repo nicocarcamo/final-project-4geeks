@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import L from 'leaflet';
 
-const MapPicker = () => {
+const MapPicker = ({ onAddressChange }) => {
   const mapRef = useRef(null);
   const markerRef = useRef(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   useEffect(() => {
     mapRef.current = L.map('map', {
@@ -23,16 +24,40 @@ const MapPicker = () => {
     markerRef.current.on('dragend', event => {
       setSelectedLocation(event.target.getLatLng());
     });
+
   }, []);
+
+  // console.log(selectedLocation)
+
+
+
+  if (selectedLocation) {
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${selectedLocation.lat}&lon=${selectedLocation.lng}`)
+      .then(response => {
+        // console.log(response)
+        return response.json();
+      })
+      .then(data => {
+        // setSelectedAddress(data.display_name);
+        console.log(data)
+        onAddressChange(data.display_name);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   return (
     <div className='divMap'>
       <div id="map" className='mx-auto contentMap' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
-      {selectedLocation && (
-        <p className='coordenadas'>
-          Latitude: {selectedLocation.lat}, Longitude: {selectedLocation.lng}
+       {selectedAddress && (
+        <p className='text-center'>
+          {selectedAddress}
+
         </p>
-      )}
+      )} 
+    <div>
+
     </div>
   );
 };

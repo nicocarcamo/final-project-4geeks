@@ -20,7 +20,9 @@ import "../../styles/crearEvento.css";
 
 
 export const CrearEvento = () => {
+
   const [message, setMessage] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const { store, actions } = useContext(Context);
   // const [eventImage, setEventImage] = useState(null);
   const navigate = useNavigate();
@@ -29,25 +31,11 @@ export const CrearEvento = () => {
     if (!store.currentUser) navigate("/login");
   }, []);
 
-  const [formData, setFormData] = useState({
-    nombreevento: "",
-    descripcion: "",
-    integrantes: "",
-    publicooprivado: "",
-    valor: "",
-    imagen: null,
-    ubicacion: "",
-    is_active: true,
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    actions.createEvent(formData, navigate, setMessage);
-  };
 
   // const uploadImage = (files) =>{
   //   cdh92emp
   // }
+
 
   // const onDrop = async (files) => {
   //   const file = files[0];
@@ -62,6 +50,37 @@ export const CrearEvento = () => {
   //     formData
   //   );
 
+	const updateSelectedAddress = (address) => {
+		setSelectedAddress((currentAddrees) => {
+			return currentAddrees = address;
+		})
+		console.log(selectedAddress)
+	};
+
+
+	// const updateSelectedAddress = (address) => {
+	// 	setSelectedAddress(address)
+	// 	console.log(selectedAddress)
+	// }
+
+	const [formData, setFormData] = useState({
+		nombreevento: "",
+		descripcion: "",
+		integrantes: "",
+		publicooprivado: "",
+		valor: "",
+		ubicacion: "",
+		address: selectedAddress,
+		is_active: true
+	});
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(formData)
+		actions.createEvent(formData, navigate, setMessage);
+	};
+
+
   //   setEventImage(response.data.secure_url);
   // };
 
@@ -71,6 +90,7 @@ export const CrearEvento = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
 
   return (
     <div className="crearEventoDiv">
@@ -154,9 +174,9 @@ export const CrearEvento = () => {
               {message && <Message>{message}</Message>}
             </Form>
           </Segment>
-          <MapPicker />
         </Grid.Column>
       </Grid>
+      <MapPicker onAddressChange={updateSelectedAddress} />
     </div>
-  );
+      );
 };
