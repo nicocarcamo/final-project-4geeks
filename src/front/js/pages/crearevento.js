@@ -23,11 +23,17 @@ export const CrearEvento = () => {
 	}, [])
 
 	const updateSelectedAddress = (address) => {
-		setSelectedAddress((currenAddrees) => {
-			return currenAddrees = address;
+		setSelectedAddress((currentAddrees) => {
+			return currentAddrees = address;
 		})
 		console.log(selectedAddress)
 	};
+
+
+	// const updateSelectedAddress = (address) => {
+	// 	setSelectedAddress(address)
+	// 	console.log(selectedAddress)
+	// }
 
 	const [formData, setFormData] = useState({
 		nombreevento: "",
@@ -99,7 +105,6 @@ export const CrearEvento = () => {
 									label="Ubicacion"
 									onChange={handleChange}
 									value={selectedAddress}
-									readOnly
 								/>
 							</Form.Field>
 							<Button color='teal' fluid size='large' type="submit">Submit</Button>
