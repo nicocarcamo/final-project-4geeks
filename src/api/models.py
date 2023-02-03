@@ -16,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
-    user = db.relationship("CrearEvento", back_populates="username_id")
+    user = db.relationship("CrearEvento", backref="user", lazy=True)
 
     def __init__(self, username, firstname, lastname, email, password, is_active):
         self.username = username
@@ -80,7 +80,6 @@ class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), db.ForeignKey('user.username'), nullable=False)
-    username_id = db.relationship("User", back_populates="user")
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
     integrantes = db.Column(db.String(120), nullable=False)
@@ -100,6 +99,19 @@ class CrearEvento(db.Model):
         self.ubicacion = ubicacion
         self.is_active = is_active
         self.username = username
+
+    def serialize(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'nombreevento': self.nombreevento,
+            'descripcion': self.descripcion,
+            'integrantes': self.integrantes,
+            'publicooprivado': self.publicooprivado,
+            'valor': self.valor,
+            'ubicacion': self.ubicacion,
+            'is_active': self.is_active,
+        }
 
 class UnirseEvento(db.Model):
     __tablename__ = 'unirseevento'

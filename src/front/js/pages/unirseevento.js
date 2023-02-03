@@ -23,6 +23,22 @@ useEffect(() => {
     .catch(error => console.error(error));
 }, []);
 
+useEffect(() => {
+  actions.getEvents()
+    .then(data => {
+      const eventsWithUsernames = data.map(event => {
+        event.username = store.users.find(user => user.id === event.user_id).username;
+        return event;
+      });
+      setEvents(eventsWithUsernames);
+    })
+    .catch(error => console.error(error));
+  actions.getCurrentUser()
+    .then(user => setCurrentUser(user))
+    .catch(error => console.error(error));
+}, []);
+
+
 const handleEventSelection = (event) => {
   navigate(`/crearevento/${event.id}`);
 };
