@@ -88,7 +88,7 @@ class CrearEvento(db.Model):
     ubicacion = db.Column(db.String(120), nullable=False)
 
     is_active = db.Column(db.Boolean, default=True)
-    events = db.relationship("UnirseEvento", back_populates="event")
+    # events = db.relationship("UnirseEvento", back_populates="event")
 
     def __init__(self, nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active, username):
         self.nombreevento = nombreevento
@@ -118,7 +118,7 @@ class UnirseEvento(db.Model):
     event_id = db.Column(db.Integer, db.ForeignKey('crearevento.id'), primary_key=True)    
     # user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     is_active = db.Column(db.Boolean, default=True)
-    event = db.relationship("CrearEvento", back_populates="events")
+    # event = db.relationship("CrearEvento", back_populates="events")
     # user = db.relationship("User", back_populates="user")
 
     def __init__(self,event, user):
