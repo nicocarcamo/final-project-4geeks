@@ -55,6 +55,7 @@ class Event(db.Model):
     lugar = db.Column(db.String(120), nullable=False)
     fecha = db.Column(db.String(120), nullable=False)
     hora = db.Column(db.String(120), nullable=False)
+    # imagen = db.Column(db.String(120))
     asistentes = db.Column(db.String)
     creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
 
@@ -65,6 +66,7 @@ class Event(db.Model):
             "lugar": self.lugar,
             "fecha": self.fecha,
             "hora": self.hora,
+            # "imagen": self.imagen,
             "creador_evento": self.creador_evento
         }
 
@@ -87,6 +89,7 @@ class CrearEvento(db.Model):
     integrantes = db.Column(db.String(120), nullable=False)
     publicooprivado = db.Column(db.String(120), unique=False)
     valor = db.Column(db.String(120), nullable=False)
+    # imagen = db.Column(db.String(120))
     ubicacion = db.Column(db.String(120), nullable=False)
 
     # el evento debe recibir latitud y longitud para marcar el mapa
@@ -102,6 +105,7 @@ class CrearEvento(db.Model):
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
         self.valor = valor
+        # self.imagen = imagen
         self.ubicacion = ubicacion
         self.is_active = is_active
 
@@ -113,6 +117,7 @@ class CrearEvento(db.Model):
             "integrantes": self.integrantes,
             "publicooprivado": self.publicooprivado,
             "valor": self.valor,
+            # "imagen": self.imagen,
             "ubicacion": self.ubicacion,
             "is_active": self.is_active
         }

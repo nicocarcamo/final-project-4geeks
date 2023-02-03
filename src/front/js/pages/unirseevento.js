@@ -45,6 +45,7 @@ export function UnirseEvento() {
               <Table.HeaderCell>Integrantes</Table.HeaderCell>
               <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
               <Table.HeaderCell>Valor</Table.HeaderCell>
+              <Table.HeaderCell>Imagen</Table.HeaderCell>
               <Table.HeaderCell>Ubicacion</Table.HeaderCell>
               <Table.HeaderCell>Activo</Table.HeaderCell>
               <Table.HeaderCell>Unirse</Table.HeaderCell>
@@ -58,6 +59,7 @@ export function UnirseEvento() {
                 <Table.Cell>{event.integrantes}</Table.Cell>
                 <Table.Cell>{event.publicooprivado}</Table.Cell>
                 <Table.Cell>{event.valor}</Table.Cell>
+                <Table.Cell>{event.imagen}</Table.Cell>
                 <Table.Cell>{event.ubicacion}</Table.Cell>
                 <Table.Cell>{event.activo}</Table.Cell>
                 <Table.Cell>

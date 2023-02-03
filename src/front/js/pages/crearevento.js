@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import MapPicker from "../component/MapPicker";
+import { useDropzone } from "react-dropzone";
+import axios from "axios";
+import ImagenUploaded from "../component/ImageUpload";
 import {
   Button,
   Form,
@@ -14,9 +17,12 @@ import {
 import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/crearEvento.css";
 
+
+
 export const CrearEvento = () => {
   const [message, setMessage] = useState(null);
   const { store, actions } = useContext(Context);
+  // const [eventImage, setEventImage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,6 +35,7 @@ export const CrearEvento = () => {
     integrantes: "",
     publicooprivado: "",
     valor: "",
+    imagen: null,
     ubicacion: "",
     is_active: true,
   });
@@ -38,21 +45,45 @@ export const CrearEvento = () => {
     actions.createEvent(formData, navigate, setMessage);
   };
 
+  // const uploadImage = (files) =>{
+  //   cdh92emp
+  // }
+
+  // const onDrop = async (files) => {
+  //   const file = files[0];
+
+  //   // Carga la imagen a Cloudinary y obtiene la URL de la imagen
+  //   const formData = new FormData();
+  //   formData.append("file", file);
+  //   formData.append("upload_preset", "cdh92emp");
+
+  //   const response = await axios.post(
+  //     "https://api.cloudinary.com/v1_1/ddx94eu6o/image/upload",
+  //     formData
+  //   );
+
+  //   setEventImage(response.data.secure_url);
+  // };
+
+  // const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <>
+    <div className="crearEventoDiv">
       <div className="backgroundCrearE"></div>
-      <Grid className="gridCrearEvento"
+      <Grid
+        className="gridCrearEvento"
         textAlign="center"
         style={{ height: "90vh" }}
         verticalAlign="middle"
       >
         <Grid.Column className="gridColumCrearEvento" style={{ maxWidth: 450 }}>
           <Header className="headerCrearEvento" as="h2" textAlign="center">
-            Create Nuevo Evento
+            Crear Nuevo Evento
           </Header>
           <Segment className="segmentCrearEvento">
             <Form size="large" onSubmit={handleSubmit}>
@@ -89,6 +120,27 @@ export const CrearEvento = () => {
                 />
               </Form.Field>
               <Form.Field>
+                <ImagenUploaded />
+                {/* <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {eventImage ? (
+                    <img src={eventImage} alt="Uploaded Image" width="50px" height="50px" />
+                  ) : (
+                    <p className="pImg">
+                      Arrastra y suelta una imagen aquí o haz clic para
+                      seleccionar una imagen
+                    </p>
+                  )}
+                </div> */}
+                {/* <Form.Input
+                  name="imagen"
+                  placeholder="Seleccione un archivo"
+                  label="Imagen del evento"
+                  type="file"
+                  onChange={handleChange}
+                /> */}
+              </Form.Field>
+              <Form.Field>
                 <Form.Input
                   name="ubicacion"
                   placeholder="Ubicacion"
@@ -105,6 +157,6 @@ export const CrearEvento = () => {
           <MapPicker />
         </Grid.Column>
       </Grid>
-    </>
+    </div>
   );
 };

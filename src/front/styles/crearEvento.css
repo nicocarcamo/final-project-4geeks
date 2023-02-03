@@ -37,6 +37,12 @@
   background: rgb(255,255,255, 0.2) !important;
 }
 
+.pImg{
+  border: 2px dashed #0b3b45 !important;
+  background: rgb(255,255,255, 0.2) !important;
+
+}
+
 .divMap {
   position: relative;
 }

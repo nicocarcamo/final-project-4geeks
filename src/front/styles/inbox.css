@@ -165,7 +165,7 @@
   }
   .chat .received p {
     background: #e5e5ea;
-    color: black;
+    color: black !important;
   }
   
   .chat .avatarChat {
