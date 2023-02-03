@@ -1,45 +1,51 @@
 
 body {
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     margin: 0;
     padding: 0;
     height: 100%;
 }
 .blur {
     position: absolute;
-    margin: -50px;
-    padding: -50px;
-    top: -20px;
+    /* margin: -50px; */
+    /* padding: -50px !important; */
+    top: -50px;
     left: -20px;
     right: -40px;
-    bottom: -40px;
-    width: auto;
-    height: auto;
-    background-image: url(https://img.freepik.com/fotos-premium/pintura-paisaje-acuarela-globos-aerostaticos_49537-310.jpg?w=826);
+    /* overflow-y: scroll; */
+    /* bottom: -40px; */
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
     filter: blur(10px);
     background-size: cover;
     z-index: 0;
 }
 
+.gridInnerContent{
+    top: 200px;
+    left: 100px;
+    position: relative;
+}
 .innerContent {
     position: relative;
     z-index: 1;
 }
 
-.header{
+.headerLogin{
     position: absolute;
 	top: calc(50% - 35px);
 	left: calc(50% - 255px);
 	z-index: 2;
 }
-.header img{
+.headerLogin img{
     transform: scale(5);
     padding: 5px;
     justify-content: center;
     background-color: rgba(126, 149, 150, 0.495) !important;
     /* border: 1px dotted #000; */
 }
-.ui.message.msg{
+.ui.msg{
     position: static;
     border: 3px solid #000;
     margin-top: 60px !important;
@@ -64,7 +70,7 @@ body {
     border: 3px solid #000;
     margin: 0;
 }
-div .ui.message{
+div .ui.messageError{
     position: absolute;
     top: -50px;
     left: 100px;
@@ -72,9 +78,9 @@ div .ui.message{
     border: 10px solid rgba(220, 20, 60, 0.601);
     color: aliceblue;
 }
-.ui.message.msg a{
+.ui.msg a{
     color: rgb(11, 41, 67) !important;
 }
-.ui.message.msg a:hover{
+.ui.msg a:hover{
     color: aliceblue !important;
 }
