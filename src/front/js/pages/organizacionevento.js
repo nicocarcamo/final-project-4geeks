@@ -9,6 +9,7 @@ export function OrganizacionEvento() {
 
   return (
     <div id="album" class="d-flex justify-content-center my-5">
+            <div className="backgroundCrearE"></div>
       <div class="ui piled compact segment p-4">
         <div class="floating ui red label">9</div>
         <div class="ui card">
