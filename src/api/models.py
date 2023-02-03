@@ -33,7 +33,7 @@ class User(db.Model):
             "email": self.email,
             "firstname": self.firstname,
             "lastname": self.lastname
-            # do not serialize the password, its a security breach
+            # do not serialize the password please, its a security breach
         }
     
     def save(self):
