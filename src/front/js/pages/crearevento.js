@@ -14,12 +14,26 @@ import {
 
 export const CrearEvento = () => {
 	const [message, setMessage] = useState(null);
+	const [selectedAddress, setSelectedAddress] = useState(null);
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (!store.currentUser) navigate('/login');
 	}, [])
+
+	const updateSelectedAddress = (address) => {
+		setSelectedAddress((currentAddrees) => {
+			return currentAddrees = address;
+		})
+		console.log(selectedAddress)
+	};
+
+
+	// const updateSelectedAddress = (address) => {
+	// 	setSelectedAddress(address)
+	// 	console.log(selectedAddress)
+	// }
 
 	const [formData, setFormData] = useState({
 		nombreevento: "",
@@ -28,12 +42,13 @@ export const CrearEvento = () => {
 		publicooprivado: "",
 		valor: "",
 		ubicacion: "",
+		address: selectedAddress,
 		is_active: true
 	});
 
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(formData)
 		actions.createEvent(formData, navigate, setMessage);
 	};
 
@@ -89,6 +104,7 @@ export const CrearEvento = () => {
 									placeholder="Ubicacion"
 									label="Ubicacion"
 									onChange={handleChange}
+									value={selectedAddress}
 								/>
 							</Form.Field>
 							<Button color='teal' fluid size='large' type="submit">Submit</Button>
@@ -98,7 +114,7 @@ export const CrearEvento = () => {
 
 				</Grid.Column>
 			</Grid>
-			<MapPicker />
+			<MapPicker onAddressChange={updateSelectedAddress} />
 		</>
 
 	);
