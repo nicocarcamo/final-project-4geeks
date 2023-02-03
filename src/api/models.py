@@ -79,7 +79,7 @@ class Event(db.Model):
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(120), db.ForeignKey('user.username'))
+    username = db.Column(db.String(120), db.ForeignKey('user.username'), nullable=False)
     username_id = db.relationship("User", back_populates="user")
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
