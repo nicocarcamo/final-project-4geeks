@@ -23,8 +23,23 @@ useEffect(() => {
     .catch(error => console.error(error));
 }, []);
 
+useEffect(() => {
+  actions.getEvents()
+    .then(data => {
+      const eventsWithUsernames = data.map(event => {
+        event.username = store.users.find(user => user.id === event.user_id).username;
+        return event;
+      });
+      setEvents(eventsWithUsernames);
+    })
+    .catch(error => console.error(error));
+  actions.getCurrentUser()
+    .then(user => setCurrentUser(user))
+    .catch(error => console.error(error));
+}, []);
+
+
 const handleEventSelection = (event) => {
-  // setSelectedEvent(event);
   navigate(`/crearevento/${event.id}`);
 };
 
@@ -36,6 +51,7 @@ return (
           <Table.Row>
             <Table.HeaderCell>Nombre del evento</Table.HeaderCell>
             <Table.HeaderCell>Descripcion</Table.HeaderCell>
+            <Table.HeaderCell>Creador del evento</Table.HeaderCell>
             <Table.HeaderCell>Integrantes</Table.HeaderCell>
             <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
             <Table.HeaderCell>Valor</Table.HeaderCell>
@@ -50,6 +66,7 @@ return (
             
               <Table.Cell>{event.nombreevento}</Table.Cell>
               <Table.Cell>{event.descripcion}</Table.Cell>
+              <Table.Cell>{event.username}</Table.Cell>
               <Table.Cell>{event.integrantes}</Table.Cell>
               <Table.Cell>{event.publicooprivado}</Table.Cell>
               <Table.Cell>{event.valor}</Table.Cell>
