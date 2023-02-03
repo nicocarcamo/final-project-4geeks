@@ -43,10 +43,6 @@ export function OrganizacionEvento() {
           </div>
           <div class="extra content">
             <div class="ui right labeled button" tabindex="0">
-              <div class="ui red icon tiny button">
-                <i class="thumbs outline up large icon"></i>
-              </div>
-              <a class="ui basic blue left pointing label">Unirse!</a>
             </div>
             <div class="ui left labeled right floated button" tabindex="0">
               <a class="ui basic green right pointing label">Compartir!</a>
