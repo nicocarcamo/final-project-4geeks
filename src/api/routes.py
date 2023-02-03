@@ -85,8 +85,26 @@ def create_event():
 
 @api.route('/crearevento', methods=['GET'])
 def get_all_events():
-    events = CrearEvento.query.all()
-    return jsonify([event.serialize() for event in events]), 200
+    try:
+        events = CrearEvento.query.all()
+        events_data = [
+            {
+                'id': event.id,
+                'nombreevento': event.nombreevento,
+                'descripcion': event.descripcion,
+                'integrantes': event.integrantes,
+                'publicooprivado': event.publicooprivado,
+                'ubicacion': event.ubicacion,
+                'valor': event.valor,
+                'is_active': event.is_active,
+                'username': event.username
+            }
+            for event in events
+        ]
+        return jsonify(events_data)
+    except Exception as e:
+        print(f"An error occurred while retrieving the events: {str(e)}")
+        return jsonify({'message': 'Failed to retrieve events'}), 500
 
 @api.route('/crearevento/<int:event_id>/', methods=['GET'])
 def get_event_by_id(event_id):

@@ -24,7 +24,6 @@ useEffect(() => {
 }, []);
 
 const handleEventSelection = (event) => {
-  // setSelectedEvent(event);
   navigate(`/crearevento/${event.id}`);
 };
 
@@ -36,6 +35,7 @@ return (
           <Table.Row>
             <Table.HeaderCell>Nombre del evento</Table.HeaderCell>
             <Table.HeaderCell>Descripcion</Table.HeaderCell>
+            <Table.HeaderCell>Creador del evento</Table.HeaderCell>
             <Table.HeaderCell>Integrantes</Table.HeaderCell>
             <Table.HeaderCell>Publico/Privado</Table.HeaderCell>
             <Table.HeaderCell>Valor</Table.HeaderCell>
@@ -50,6 +50,7 @@ return (
             
               <Table.Cell>{event.nombreevento}</Table.Cell>
               <Table.Cell>{event.descripcion}</Table.Cell>
+              <Table.Cell>{event.username}</Table.Cell>
               <Table.Cell>{event.integrantes}</Table.Cell>
               <Table.Cell>{event.publicooprivado}</Table.Cell>
               <Table.Cell>{event.valor}</Table.Cell>
