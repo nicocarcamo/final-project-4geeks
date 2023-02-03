@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Table, Button, Form } from 'semantic-ui-react';
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function UnirseEvento() {
 const { store, actions } = useContext(Context);
@@ -62,8 +63,8 @@ return (
               <div class="ui red icon tiny button">
                 <i class="thumbs outline up large icon"></i>
               </div>
-              <a class="ui basic blue left pointing label">Unirse!</a>
-            </div>
+              <Link to="/organizacionevento" class="ui basic blue left pointing label">
+Unirse!            </Link>            </div>
             <div class="ui left labeled right floated button" tabindex="0">
             <Button onClick={() => handleEventSelection(event)} color="green">
                 Ver detalles
