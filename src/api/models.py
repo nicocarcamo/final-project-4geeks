@@ -7,6 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhos
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
@@ -35,14 +36,14 @@ class User(db.Model):
             "lastname": self.lastname
             # do not serialize the password, its a security breach
         }
-    
+
     def save(self):
         db.session.add(self)
         db.session.commit()
 
     def update(self):
         db.session.commit()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
@@ -53,19 +54,22 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
     lugar = db.Column(db.String(120), nullable=False)
-    fecha = db.Column(db.String(120), nullable=False)
-    hora = db.Column(db.String(120), nullable=False)
+    # date_time = db.Column(db.DateTime, nullable=False)
+    # fecha = db.Column(db.String(120), nullable=False)
+    # hora = db.Column(db.String(120), nullable=False)
     # imagen = db.Column(db.String(120))
     asistentes = db.Column(db.String)
-    creador_evento = db.Column(db.String(120), db.ForeignKey("users.username"), nullable=False)
+    creador_evento = db.Column(db.String(120), db.ForeignKey(
+        "users.username"), nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
             "nombre_evento": self.nombre_evento,
             "lugar": self.lugar,
-            "fecha": self.fecha,
-            "hora": self.hora,
+            # "fecha": self.fecha,
+            # "hora": self.hora,
+            # "date_time": self.date_time,
             # "imagen": self.imagen,
             "creador_evento": self.creador_evento
         }
@@ -76,10 +80,11 @@ class Event(db.Model):
 
     def update(self):
         db.session.commit()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+
 
 class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
@@ -89,13 +94,14 @@ class CrearEvento(db.Model):
     integrantes = db.Column(db.String(120), nullable=False)
     publicooprivado = db.Column(db.String(120), unique=False)
     valor = db.Column(db.String(120), nullable=False)
+    # date_time = db.Column(db.DateTime, nullable=False)
     # imagen = db.Column(db.String(120))
     ubicacion = db.Column(db.String(120), nullable=False)
 
     # el evento debe recibir latitud y longitud para marcar el mapa
     # lat = db.Column(db.Float)
     # lng = db.Column(db.Float)
-    
+
     is_active = db.Column(db.Boolean, default=True)
     event = db.relationship("UnirseEvento", back_populates="event")
 
@@ -105,6 +111,7 @@ class CrearEvento(db.Model):
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
         self.valor = valor
+        # self.date_time = date_time
         # self.imagen = imagen
         self.ubicacion = ubicacion
         self.is_active = is_active
@@ -117,6 +124,7 @@ class CrearEvento(db.Model):
             "integrantes": self.integrantes,
             "publicooprivado": self.publicooprivado,
             "valor": self.valor,
+            # "date_time": self.date_time,
             # "imagen": self.imagen,
             "ubicacion": self.ubicacion,
             "is_active": self.is_active
@@ -133,19 +141,20 @@ class CrearEvento(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+
 class UnirseEvento(db.Model):
     __tablename__ = 'unirseevento'
-    event_id = db.Column(db.Integer, db.ForeignKey('crearevento.id'), primary_key=True)    
+    event_id = db.Column(db.Integer, db.ForeignKey(
+        'crearevento.id'), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     is_active = db.Column(db.Boolean, default=True)
     event = db.relationship("CrearEvento", back_populates="event")
     user = db.relationship("User", back_populates="user")
 
-    def __init__(self,event, user):
+    def __init__(self, event, user):
         self.event = event
         self.user = user
-    
+
     def save(self):
         db.session.add(self)
         db.session.commit()
-

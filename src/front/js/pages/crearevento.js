@@ -16,8 +16,7 @@ import {
 } from "semantic-ui-react";
 import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/crearEvento.css";
-
-
+import TimePicker from "react-time-picker";
 
 export const CrearEvento = () => {
   const [message, setMessage] = useState(null);
@@ -37,6 +36,7 @@ export const CrearEvento = () => {
     valor: "",
     imagen: null,
     ubicacion: "",
+
     is_active: true,
   });
 
@@ -44,6 +44,7 @@ export const CrearEvento = () => {
     e.preventDefault();
     actions.createEvent(formData, navigate, setMessage);
   };
+
 
   // const uploadImage = (files) =>{
   //   cdh92emp
@@ -66,7 +67,6 @@ export const CrearEvento = () => {
   // };
 
   // const { getRootProps, getInputProps } = useDropzone({ onDrop });
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -140,6 +140,9 @@ export const CrearEvento = () => {
                   onChange={handleChange}
                 /> */}
               </Form.Field>
+              {/* <Form.Field>
+                <TimePicker />
+              </Form.Field> */}
               <Form.Field>
                 <Form.Input
                   name="ubicacion"
