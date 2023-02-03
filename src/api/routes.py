@@ -3,7 +3,9 @@ from flask import Flask, request, jsonify, Blueprint
 from api.models import app, db, User, CrearEvento
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 import datetime
+import os
 
 api = Blueprint('api', __name__)
 
@@ -15,6 +17,7 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
+
 @api.route('/login', methods=['POST'])
 def login():
     email = request.json.get('email')
@@ -23,8 +26,10 @@ def login():
     user = User.query.filter_by(email=email).first()
 
     # cambiar mensaje de error por "username/password incorrect" en ambos casos
-    if not user: return jsonify({ "status": "fail", "message": "username incorrect" }), 401
-    if not check_password_hash(user.password, password): return jsonify({ "status": "fail", "message": "password incorrect" }), 401
+    if not user:
+        return jsonify({"status": "fail", "message": "username incorrect"}), 401
+    if not check_password_hash(user.password, password):
+        return jsonify({"status": "fail", "message": "password incorrect"}), 401
 
     # modificar el expire time del token
     expires = datetime.timedelta(days=2)
@@ -49,16 +54,18 @@ def register():
     password = generate_password_hash(request.json.get('password'))
     is_active = request.json.get('is_active')
 
-    user = User(username,firstname,lastname, email, password, is_active)
-    
+    user = User(username, firstname, lastname, email, password, is_active)
+
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': 'User created successfully :)'}), 201
+
 
 @api.route('/register', methods=['GET'])
 def get_all_users():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
+
 
 @api.route('/crearevento', methods=['POST'])
 def create_event():
@@ -67,24 +74,32 @@ def create_event():
     integrantes = request.json['integrantes']
     publicooprivado = request.json['publicooprivado']
     valor = request.json['valor']
+    # imagen = request.files.get("imagen")
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
 
-    # el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
-    # lat = request.json['lat']
-    # lng= request.json['lng']
+# el evento debe registrar latitud y longitud en la api para marcar el punto en el mapa
+# lat = request.json['lat']
+# lng= request.json['lng']
 
-    # pasar lat y lng como parámetro
+# pasar lat y lng como parámetro
     crearevento = CrearEvento(
         nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201
 
+
+# @app.route("/crearevento/<event_id>/imagen")
+# def get_event_image(event_id):
+#     return send_file(image_path, mimetype="image/jpeg")
+
+
 @api.route('/crearevento', methods=['GET'])
 def get_all_events():
     events = CrearEvento.query.all()
     return jsonify([event.serialize() for event in events]), 200
+
 
 @api.route('/crearevento/<int:event_id>/', methods=['GET'])
 def get_event_by_id(event_id):
@@ -103,10 +118,12 @@ def get_profile():
     user = User.query.get(id)
     return jsonify(user.serialize()), 200
 
+
 @api.route('/perfil/all', methods=['GET'])
 def get_all_profiles():
     users = User.query.all()
     return jsonify([user.serialize() for user in users]), 200
+
 
 @api.route('/perfil/<int:perfil_id>/', methods=['GET'])
 def get_profile_by_id(perfil_id):
@@ -118,6 +135,8 @@ def get_profile_by_id(perfil_id):
         return jsonify({'error': 'Perfil not found'}), 404
 
 # corregir
+
+
 @api.route('/currentuser', methods=['GET'])
 @jwt_required()
 def current_user():
@@ -126,6 +145,7 @@ def current_user():
     if user:
         return jsonify({'email': user.email, 'name': user.name})
     return jsonify({'error': 'User not found'}), 404
+
 
 if __name__ == 'api':
     db.init_app(app)

@@ -1,32 +1,36 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Table, Button, Form } from 'semantic-ui-react';
+import React, { useState, useEffect, useContext } from "react";
+import { Table, Button, Form } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import backgroundUnirse from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
+import "../../styles/unirseEvento.css";
 
 export function UnirseEvento() {
-const { store, actions } = useContext(Context);
-const navigate = useNavigate()
-const [events, setEvents] = useState([]);
-const [currentUser, setCurrentUser] = useState(null);
-const [selectedEvent, setSelectedEvent] = useState(null);
+  const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
-useEffect(() => {
-    if (!store.currentUser) navigate('/login');
-}, [])
+  useEffect(() => {
+    if (!store.currentUser) navigate("/login");
+  }, []);
 
-useEffect(() => {
-    actions.getEvents()
-    .then(data => setEvents(data))
-    .catch(error => console.error(error));
-  actions.getCurrentUser()
-    .then(user => setCurrentUser(user))
-    .catch(error => console.error(error));
-}, []);
+  useEffect(() => {
+    actions
+      .getEvents()
+      .then((data) => setEvents(data))
+      .catch((error) => console.error(error));
+    actions
+      .getCurrentUser()
+      .then((user) => setCurrentUser(user))
+      .catch((error) => console.error(error));
+  }, []);
 
-const handleEventSelection = (event) => {
-  // setSelectedEvent(event);
-  navigate(`/crearevento/${event.id}`);
-};
+  const handleEventSelection = (event) => {
+    // setSelectedEvent(event);
+    navigate(`/crearevento/${event.id}`);
+  };
 
 return (
   <div class="ui grid m-5">
@@ -78,6 +82,7 @@ return (
     </div>
   ))}
 </div>
+
 
   );
 }
