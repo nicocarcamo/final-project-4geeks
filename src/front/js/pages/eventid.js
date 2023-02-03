@@ -1,8 +1,12 @@
+
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
+
+import ImagenUploaded from "../component/ImageUpload";
+
 
 export function EventoDetalle() {
   const { store, actions } = useContext(Context);
@@ -28,6 +32,20 @@ export function EventoDetalle() {
       id,
       store.currentUser.username,
       store.currentUser.access_token
+    );
+
+  };
+
+  const ImageView = () => {
+    const [imageUrl] = ImagenUploaded();
+
+    return (
+      <div>
+        <img
+          src={`https://res.cloudinary.com/ddx94eu6o/image/upload/${imageUrl}`}
+          alt="Subida de imagen"
+        />
+      </div>
     );
   };
 
@@ -81,6 +99,7 @@ export function EventoDetalle() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

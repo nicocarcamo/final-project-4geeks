@@ -48,13 +48,16 @@ const MapPicker = ({ onAddressChange }) => {
   }
 
   return (
-    <div>
-      <div id="map" className='mx-auto' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
-      {/* {selectedAddress && (
+    <div className='divMap'>
+      <div id="map" className='mx-auto contentMap' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
+       {selectedAddress && (
         <p className='text-center'>
           {selectedAddress}
+
         </p>
-      )} */}
+      )} 
+    <div>
+
     </div>
   );
 };
