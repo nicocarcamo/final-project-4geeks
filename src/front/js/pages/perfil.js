@@ -56,55 +56,58 @@ export const Perfil = () => {
   // };
 
   return (
-    <>
-      <Grid
-        textAlign="center"
-        style={{ height: "90vh", border: "thin solid lightgray" }}
-        verticalAlign="middle"
-      >
-        <Grid.Column style={{ maxWidth: 450 }}>
-          <div className="container d-flex justify-content-center mt-5">
-            <h1>Mi Perfil</h1>
-          </div>
-          <div className="container d-flex justify-content-center m-2">
-            <Card
-              style={{
-                borderRadius: "50%",
-                width: "250px",
-                height: "250px",
-                objectFit: "cover",
-                overflow: "hidden",
-                margin: "0 auto",
-                border: "thin solid lightgray",
-              }}
-              image={"https://robohash.org/" + store.profile?.id + ".png"}
-              // image="https://xsgames.co/randomusers/avatar.php?g=pixel"
-              header={store.profile?.username}
-              meta={store.profile?.firstname + " " + store.profile?.lastname}
-              description={store.profile?.email}
-              extra={extra}
-            />
-          </div>
-          <Card className="container d-flex justify-content-center">
-            <div>
-              <h3 className="container d-flex justify-content-center my-2">
-                {store.users?.username}
-              </h3>
+    <div className="profileBackground">
+      <div className="blurProfile"></div>
+      <div className="contentProfile">
+        <Grid
+          textAlign="center"
+          style={{ height: "90vh", border: "thin solid lightgray" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <div className="container d-flex justify-content-center mt-5">
+              <h1>Mi Perfil</h1>
             </div>
+            <div className="container d-flex justify-content-center m-2">
+              <Card
+                style={{
+                  borderRadius: "50%",
+                  width: "250px",
+                  height: "250px",
+                  objectFit: "cover",
+                  overflow: "hidden",
+                  margin: "0 auto",
+                  border: "thin solid lightgray",
+                }}
+                image={"https://robohash.org/" + store.profile?.id + ".png"}
+                // image="https://xsgames.co/randomusers/avatar.php?g=pixel"
+                header={store.profile?.username}
+                meta={store.profile?.firstname + " " + store.profile?.lastname}
+                description={store.profile?.email}
+                extra={extra}
+              />
+            </div>
+            <Card className="container d-flex justify-content-center">
+              <div>
+                <h3 className="container d-flex justify-content-center my-2">
+                  {store.users?.username}
+                </h3>
+              </div>
 
-            <div>
-              <h6 className="container d-flex justify-content-center my-1">{`${store.profile?.firstname} ${store.profile?.lastname}`}</h6>
-            </div>
-            <div>
-              <p className="container d-flex justify-content-center mb-3">{`${store.profile?.email}`}</p>
-            </div>
-          </Card>
+              <div>
+                <h6 className="container d-flex justify-content-center my-1">{`${store.profile?.firstname} ${store.profile?.lastname}`}</h6>
+              </div>
+              <div>
+                <p className="container d-flex justify-content-center mb-3">{`${store.profile?.email}`}</p>
+              </div>
+            </Card>
 
-          <Button color="teal" size="medium" type="submit" className="mt-2">
-            Editar mi Perfil{" "}
-          </Button>
-        </Grid.Column>
-      </Grid>
-    </>
+            <Button color="teal" size="medium" type="submit" className="mt-2">
+              Editar mi Perfil{" "}
+            </Button>
+          </Grid.Column>
+        </Grid>
+      </div>
+    </div>
   );
 };
