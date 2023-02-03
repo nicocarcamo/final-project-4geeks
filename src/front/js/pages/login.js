@@ -82,32 +82,17 @@ export const Login = () => {
                   onChange={handleChange}
                 />
 
-                <Button
-                  className="button"
-                  color="teal"
-                  fluid
-                  size="large"
-                  type="submit"
-                >
-                  Login
-                </Button>
-              </Segment>
-            </Form>
-            {message && <Message>{message}</Message>}
-            {!isLoggedIn && (
-              <Message className="msg">
-                <span> New to us?</span>
-                <a href="/register">
-                <br/>
-                  <span>
-                    <i className="fa-solid fa-angle-right"></i>Sign Up
-                  </span>
-                </a>
-              </Message>
-            )}
-          </Grid.Column>
-        </Grid>
-      </div>
-    </div>
-  );
-};
+            <Button color='teal' fluid size='large' type='submit'>
+              Login
+            </Button>
+          </Segment>
+        </Form>
+        {message && <Message>{message}</Message>}
+        {!isLoggedIn && (
+        <Message>
+          New to us? <a href='/register'>Sign Up</a>
+      </Message>)}
+    </Grid.Column>
+  </Grid>
+  )
+        }

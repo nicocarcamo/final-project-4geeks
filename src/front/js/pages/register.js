@@ -57,10 +57,24 @@ export const Register = () => {
       }
     });
 
-    if (!formValid) {
-      setErrors(errors);
-      setAllFieldsRequiredMessage("All fields are required");
-      return;
+
+    if(!formValid){
+       setErrors(errors)
+       setAllFieldsRequiredMessage("All fields are required")
+       return
+    }
+    try {
+      const res = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const json = await res.json();
+      setMessage(json.message);
+    } catch (err) {
+      setMessage(err.response && err.response.data.message);
     }
     actions.register(formData, navigate, setMessage);
   };
@@ -143,44 +157,22 @@ export const Register = () => {
                   />
                 </Form.Field>
 
-                <Form.Field>
-                  <Form.Input
-                    className="input"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    label="Password"
-                    onChange={handleChange}
-                  />
-                </Form.Field>
-                {passwordError && (
-                  <p style={{ color: "red" }}>{passwordError}</p>
-                )}
-                <Button
-                  className="button"
-                  color="teal"
-                  fluid
-                  size="large"
-                  type="submit"
-                  disabled={!isPasswordValid}
-                >
-                  Submit
-                </Button>
-                {/* {errors.username && <p style={{ color: "red" }}>{errors.username}</p>} */}
-                {allFieldsRequiredMessage && (
-                  <p style={{ color: "red" }}>{allFieldsRequiredMessage}</p>
-                )}
-                {/* {message && <p style={{ color: "green" }}>{message}</p>}
-            {createError && <p style={{ color: "red" }}>{createError}</p>}             */}
-              </Form>
-              {message && <Message>{message}</Message>}
-            </Segment>
-            <Message className="msgRegister">
-              Already have a user? <a href="/login"><i className="fa-solid fa-angle-right"></i>Login</a>
-            </Message>
-          </Grid.Column>
-        </Grid>
-      </div>
-    </div>
+            <Form.Field>
+              <Form.Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                label="Password"
+                onChange={handleChange}
+              />
+            </Form.Field>
+            {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
+            <Button color='teal' fluid size='large' type="submit" disabled={!isPasswordValid}>Submit</Button>
+            {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
+            {allFieldsRequiredMessage && <p style={{ color: "red" }}>{allFieldsRequiredMessage}</p>}
+          </Form>
+        </Segment>
+      </Grid.Column>
+    </Grid>
   );
 };
