@@ -1,0 +1,19 @@
+.backgroundMyEvents {
+  position: fixed;
+  background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
+  z-index: -1;
+  top: 0;
+  }
+  .contentMyEvents {
+    position: relative;
+    /* z-index: 1; */
+  }
+  .bodyContentMisEventos{
+    margin-bottom: 400px;
+  }
