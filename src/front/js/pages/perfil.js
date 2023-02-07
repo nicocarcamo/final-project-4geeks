@@ -4,10 +4,20 @@ import { Card, Header, Button, Grid, Image } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import fondo from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/perfil.css";
+import {Icon} from 'semantic-ui-react'
+
 
 export const Perfil = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");

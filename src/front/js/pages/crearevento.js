@@ -17,6 +17,7 @@ import {
 import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/crearEvento.css";
 import TimePicker from "react-time-picker";
+import {Icon} from 'semantic-ui-react'
 
 export const CrearEvento = () => {
   const [message, setMessage] = useState(null);
@@ -24,6 +25,14 @@ export const CrearEvento = () => {
   const { store, actions } = useContext(Context);
   // const [eventImage, setEventImage] = useState(null);
   const navigate = useNavigate();
+
+  //icon importation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = 
+  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
+import {Icon} from 'semantic-ui-react'
 
 import ImagenUploaded from "../component/ImageUpload";
 
@@ -12,10 +13,15 @@ export function EventoDetalle() {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [event, setEvent] = useState(null);
-
   const { id } = useParams();
-
   const navigate = useNavigate();
+  //icon importation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = 
+  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
 
   useEffect(() => {
     actions
@@ -51,6 +57,7 @@ export function EventoDetalle() {
 
   return (
     <div id="album" class="d-flex justify-content-center my-5">
+       <div className="backgroundCrearE"></div>
       <div class="ui piled compact segment p-4">
         <div class="floating ui red label">9</div>
         <div class="ui card">
