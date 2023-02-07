@@ -3,9 +3,18 @@ import { Context } from "../store/appContext";
 // import "../../styles/home.css";
 import { Container, Button } from 'semantic-ui-react'
 import { Carrusel } from "./carruselhome";
+import {Icon} from 'semantic-ui-react'
 
 
 export const Home = () => {
+	  //icon importation
+	  const [isLoggedIn, setIsLoggedIn] = useState(false);
+	  const styleLink = document.createElement("link");
+	  styleLink.rel = "stylesheet";
+	  styleLink.href = 
+	  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+	  document.head.appendChild(styleLink);
+
 	const { store, actions } = useContext(Context);
 	
 	useEffect(() => {

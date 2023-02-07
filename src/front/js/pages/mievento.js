@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import backgroundMyEvents from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/misEventos.css";
+import {Icon} from 'semantic-ui-react'
 
 export function MiEvento({ evento }) {
   const { store, actions } = useContext(Context);
@@ -12,6 +13,14 @@ export function MiEvento({ evento }) {
   const [events, setEvents] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");

@@ -3,9 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
+import {Icon} from 'semantic-ui-react'
 
 export function OrganizacionEvento() {
- 
+   //icon importation
+   const [isLoggedIn, setIsLoggedIn] = useState(false);
+   const { store, actions } = useContext(Context);
+   const styleLink = document.createElement("link");
+   styleLink.rel = "stylesheet";
+   styleLink.href = 
+   "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+   document.head.appendChild(styleLink);
 
   return (
     <div id="album" class="d-flex justify-content-center my-5">
@@ -61,11 +69,11 @@ export function OrganizacionEvento() {
             <img src="/images/avatar/small/matt.jpg" />
           </a>
           <div class="content">
-            <a class="author">Matt</a>
+            <a class="author">Matías</a>
             <div class="metadata">
-              <span class="date">Today at 5:42PM</span>
+              <span class="date">Hoy a las 5:42PM</span>
             </div>
-            <div class="text">How artistic!</div>
+            <div class="text">Nos vemos hoy?</div>
             <div class="actions">
               <a class="reply">Reply</a>
             </div>
@@ -76,12 +84,12 @@ export function OrganizacionEvento() {
             <img src="/images/avatar/small/elliot.jpg" />
           </a>
           <div class="content">
-            <a class="author">Elliot Fu</a>
+            <a class="author">Roberto Celedón</a>
             <div class="metadata">
-              <span class="date">Yesterday at 12:30AM</span>
+              <span class="date">Ayer a las 12:30AM</span>
             </div>
             <div class="text">
-              <p>This has been very useful for my research. Thanks as well!</p>
+              <p>Sí, recuerden llevar pelota!</p>
             </div>
             <div class="actions">
               <a class="reply">Reply</a>
@@ -93,11 +101,11 @@ export function OrganizacionEvento() {
                 <img src="/images/avatar/small/jenny.jpg" />
               </a>
               <div class="content">
-                <a class="author">Jenny Hess</a>
+                <a class="author">Camila Ibañez</a>
                 <div class="metadata">
-                  <span class="date">Just now</span>
+                  <span class="date">Ahora</span>
                 </div>
-                <div class="text">Elliot you are always so right :)</div>
+                <div class="text">Sí! Yo llevo la mía</div>
                 <div class="actions">
                   <a class="reply">Reply</a>
                 </div>
@@ -110,11 +118,11 @@ export function OrganizacionEvento() {
             <img src="/images/avatar/small/joe.jpg" />
           </a>
           <div class="content">
-            <a class="author">Joe Henderson</a>
+            <a class="author">Caro</a>
             <div class="metadata">
-              <span class="date">5 days ago</span>
+              <span class="date">5 días atrás</span>
             </div>
-            <div class="text">Dude, this is awesome. Thanks so much</div>
+            <div class="text">Acuérdense que va a hacer calor, lleven agua!</div>
             <div class="actions">
               <a class="reply">Reply</a>
             </div>

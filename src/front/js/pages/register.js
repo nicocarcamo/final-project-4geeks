@@ -14,10 +14,21 @@ import {
 import "../../styles/register.css";
 import logo from "../../img/logo2_style.png";
 import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
+import {Icon} from 'semantic-ui-react'
+
 
 export const Register = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
+
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   const [formData, setFormData] = useState({
     username: "",

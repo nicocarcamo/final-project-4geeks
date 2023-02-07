@@ -2,12 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
+import {Icon} from 'semantic-ui-react'
+
 
 export const PerfilId = () => {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const { id } = useParams();
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");
