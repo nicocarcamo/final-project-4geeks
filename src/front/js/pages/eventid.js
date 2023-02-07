@@ -72,7 +72,7 @@ export function EventoDetalle() {
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
           <span class="date  d-flex justify-content-end mx-4">
-                <i class="history icon"></i>
+                <i class="calendar alternate icon"></i>
                 05/01/2023
               </span>
           <div class="content m-3">
@@ -87,15 +87,15 @@ export function EventoDetalle() {
               <div class="description">{event.publicooprivado}</div>
               <div class="description">{event.valor}</div>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
+              <i class="backward icon teal"> </i>
                 Volver a eventos
-                <i class="calendar icon red"> </i>
               </Link>
             </div>
           </div>
           <div class="extra content">
             <div class="ui right labeled button" tabindex="0">
               <div class="ui red icon tiny button">
-                <i class="thumbs outline up large icon"></i>
+                <i class="add square up large icon"></i>
               </div>
             <Link to="/organizacionevento" class="ui basic blue left pointing label">
 Unirse!            </Link>

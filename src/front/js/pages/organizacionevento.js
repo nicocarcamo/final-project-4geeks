@@ -16,9 +16,9 @@ export function OrganizacionEvento() {
    document.head.appendChild(styleLink);
 
   return (
-    <div id="album" class="d-flex justify-content-center my-5">
+    <div id="album" class="d-flex justify-content-center">
             <div className="backgroundCrearE"></div>
-      <div class="ui piled compact segment p-4">
+      <div class="ui piled compact segment">
         <div class="floating ui red label">9</div>
         <div class="ui card">
           <div class="blurring dimmable image">
@@ -32,7 +32,7 @@ export function OrganizacionEvento() {
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
           <span class="date  d-flex justify-content-end mx-4">
-            <i class="history icon"></i>
+            <i class="calendar alternate icon"></i>
             05/01/2023
           </span>
           <div class="content m-3">
@@ -45,8 +45,8 @@ export function OrganizacionEvento() {
               <div class="description">Pubico</div>
               <div class="description">Valor</div>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
+              <i class="backward icon teal"> </i>
                 Volver a eventos
-                <i class="calendar icon red"> </i>
               </Link>
             </div>
           </div>
@@ -66,7 +66,7 @@ export function OrganizacionEvento() {
         <h3>Conversa con los otros integrantes!</h3>
         <div class="comment">
           <a class="avatar">
-            <img src="/images/avatar/small/matt.jpg" />
+            <img src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" />
           </a>
           <div class="content">
             <a class="author">Matías</a>
@@ -75,13 +75,13 @@ export function OrganizacionEvento() {
             </div>
             <div class="text">Nos vemos hoy?</div>
             <div class="actions">
-              <a class="reply">Reply</a>
+              <a class="reply">Responde</a>
             </div>
           </div>
         </div>
         <div class="comment">
           <a class="avatar">
-            <img src="/images/avatar/small/elliot.jpg" />
+            <img src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
           </a>
           <div class="content">
             <a class="author">Roberto Celedón</a>
@@ -92,13 +92,13 @@ export function OrganizacionEvento() {
               <p>Sí, recuerden llevar pelota!</p>
             </div>
             <div class="actions">
-              <a class="reply">Reply</a>
+              <a class="reply">Responde</a>
             </div>
           </div>
           <div class="comments">
             <div class="comment">
               <a class="avatar">
-                <img src="/images/avatar/small/jenny.jpg" />
+                <img src="https://react.semantic-ui.com/images/avatar/small/stevie.jpg" />
               </a>
               <div class="content">
                 <a class="author">Camila Ibañez</a>
@@ -107,7 +107,7 @@ export function OrganizacionEvento() {
                 </div>
                 <div class="text">Sí! Yo llevo la mía</div>
                 <div class="actions">
-                  <a class="reply">Reply</a>
+                  <a class="reply">Responde</a>
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@ export function OrganizacionEvento() {
         </div>
         <div class="comment">
           <a class="avatar">
-            <img src="/images/avatar/small/joe.jpg" />
+            <img src="https://react.semantic-ui.com/images/avatar/large/molly.png" />
           </a>
           <div class="content">
             <a class="author">Caro</a>
@@ -124,7 +124,7 @@ export function OrganizacionEvento() {
             </div>
             <div class="text">Acuérdense que va a hacer calor, lleven agua!</div>
             <div class="actions">
-              <a class="reply">Reply</a>
+              <a class="reply">Responde</a>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ export function OrganizacionEvento() {
             <textarea></textarea>
           </div>
           <div class="ui blue labeled submit icon button">
-            <i class="icon edit"></i> Add Reply
+            <i class="icon edit"></i> Responder
           </div>
         </form>
       </div>

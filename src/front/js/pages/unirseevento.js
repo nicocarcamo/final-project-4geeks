@@ -61,7 +61,7 @@ export function UnirseEvento() {
                     <img className="center" src="src/front/img/rigo-baby.jpg" />
                   </div>
                   <span className="date  d-flex justify-content-end mx-4">
-                    <i className="history icon"></i>
+                    <i className="calendar alternate icon"></i>
                     05/01/2023
                   </span>
                   <div className="content m-3">
@@ -78,7 +78,7 @@ export function UnirseEvento() {
                   <div className="extra content">
                     <div className="ui right labeled button" tabindex="0">
                       <div className="ui red icon tiny button">
-                        <i className="thumbs outline up large icon"></i>
+                        <i className="add square up large icon"></i>
                       </div>
                       <Link
                         to="/organizacionevento"
