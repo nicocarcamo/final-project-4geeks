@@ -72,7 +72,7 @@ export const Navbar = () => {
 
           <div className="mx-5">
             <Dropdown
-              text="Account"
+              text="Mi Cuenta"
               className="text-light"
               pointing="top right"
               open={open}
@@ -82,7 +82,7 @@ export const Navbar = () => {
                 <Dropdown.Item
                   as={Link}
                   to="/perfil"
-                  text="Perfil"
+                  text="Mi Perfil"
                   description={<Icon name="user" />}
                 />
                 <Dropdown.Item
@@ -93,7 +93,7 @@ export const Navbar = () => {
                 />
                 <Dropdown.Divider />
                 <Dropdown.Item
-                  text="Logout"
+                  text="Salir"
                   onClick={handleSubmit}
                   description={<Icon name="sign out" />}
                 />
