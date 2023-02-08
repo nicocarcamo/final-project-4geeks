@@ -130,8 +130,8 @@ export const Register = () => {
                     className="input"
                     type="text"
                     name="firstname"
-                    placeholder="Nombre"
-                    label="Nombre"
+                    placeholder="Primer Nombre"
+                    label="Primer Nombre"
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -190,8 +190,10 @@ export const Register = () => {
             </Segment>
             <Message className="msgRegister">
               Ya tienes una cuenta?{" "}
+              <br></br>
               <a href="/login">
-                <i className="fa-solid fa-angle-right"></i>Ingresa
+              <i class="user icon"></i>
+Ingresa
               </a>
             </Message>
           </Grid.Column>

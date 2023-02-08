@@ -102,12 +102,12 @@ export const Login = () => {
             {message && <Message className="messageError">{message}</Message>}
             {!isLoggedIn && (
               <Message className="msg">
-                <span> Eres nuevo?</span>
+             Eres nuevo?
+                <br></br>
                 <a href="/register">
-                <br/>
-                  <span>
-                    <i className="fa-solid fa-angle-right"></i>Regístrate
-                  </span>
+            
+                  <i class="user plus icon"></i>
+ Regístrate
                 </a>
               </Message>
             )}
