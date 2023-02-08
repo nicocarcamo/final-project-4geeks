@@ -181,9 +181,6 @@ export const Register = () => {
                     // onChange={handleChange2}
                   />
                 </Form.Field>
-                {passwordError && (
-                  <p style={{ color: "red" }}>{passwordError}</p>
-                )}
                 <Button
                   className="button"
                   color="teal"
