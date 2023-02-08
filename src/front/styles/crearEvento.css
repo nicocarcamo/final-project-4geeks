@@ -1,0 +1,75 @@
+.backgroundCrearE {
+  position: fixed;
+  background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(5px);
+  z-index: -1;
+  top: 0;
+}
+
+.headerCrearEvento {
+  border: 2px dashed #0b3b45 !important;
+  color: #0b3b45 !important;
+  /* top: 20px; */
+  position: relative;
+}
+
+.gridCrearE {
+  display: flex;
+  height: 90vh;
+  align-content: flex-start;
+}
+
+.gridColumCrearEvento {
+  display: flex;
+}
+
+.segmentCrearEvento {
+  float: left;
+  display: flex;
+  /* position: relative; */
+  flex-direction: column;
+  left: -150px;
+  background: rgb(255, 255, 255, 0.2) !important;
+}
+
+.pImg {
+  border: 2px dashed #0b3b45 !important;
+  background: rgb(255, 255, 255, 0.2) !important;
+}
+
+.divMap {
+  position: relative;
+}
+
+/* .contentMap {
+  height: 300px !important;
+  width: 95% !important;
+  max-height: none;
+  max-width: none;
+  position: absolute;
+  top: 100px !important;
+  left: 300px;
+  outline: auto;
+  border-radius: 4%;
+} */
+
+.contentMap {
+  height: 250px !important;
+  width: 300px !important;
+  /* max-height: none; */
+  /* max-width: none; */
+  position: absolute;
+  bottom: 170px !important;
+  right: 100px;
+  outline: auto;
+  border-radius: 4%;
+}
+
+.coordenadas {
+  color: aliceblue;
+}

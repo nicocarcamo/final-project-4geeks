@@ -13,6 +13,8 @@ import { Context } from "../store/appContext";
 import "../../styles/login.css";
 import logo from "../../img/logo2_style.png";
 import fondo from "../../img/background.jpg";
+import {Icon} from 'semantic-ui-react'
+
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -22,9 +24,14 @@ export const Login = () => {
     password: "",
   });
 
+  //icon importation
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { store, actions } = useContext(Context);
-
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = 
+  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const result = await actions.login(formData);
@@ -49,13 +56,12 @@ export const Login = () => {
     <div className="content">
       <div className="blur"></div>
       <div className="innerContent">
-        <Grid
+        <Grid className="gridInnerContent"
           textAlign="center"
-          style={{ height: "100vh" }}
           verticalAlign="middle"
         >
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header className="header" as="h2" color="teal" textAlign="center">
+            <Header className="headerLogin" as="h2" color="teal" textAlign="center">
               <Image src={logo} />
               {/* <span>Log-in</span> */}
             </Header>
@@ -67,7 +73,7 @@ export const Login = () => {
                   type="text"
                   icon="user"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="Dirección de email"
                   name="email"
                   onChange={handleChange}
                 />
@@ -76,7 +82,7 @@ export const Login = () => {
                   className="input"
                   icon="lock"
                   iconPosition="left"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   name="password"
                   type="password"
                   onChange={handleChange}
@@ -89,18 +95,18 @@ export const Login = () => {
                   size="large"
                   type="submit"
                 >
-                  Login
+                  Ingresa
                 </Button>
               </Segment>
             </Form>
-            {message && <Message>{message}</Message>}
+            {message && <Message className="messageError">{message}</Message>}
             {!isLoggedIn && (
               <Message className="msg">
-                <span> New to us?</span>
+                <span> Eres nuevo?</span>
                 <a href="/register">
                 <br/>
                   <span>
-                    <i className="fa-solid fa-angle-right"></i>Sign Up
+                    <i className="fa-solid fa-angle-right"></i>Regístrate
                   </span>
                 </a>
               </Message>

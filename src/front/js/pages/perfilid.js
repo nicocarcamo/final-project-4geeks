@@ -2,12 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
+import {Icon} from 'semantic-ui-react'
+
 
 export const PerfilId = () => {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const { id } = useParams();
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");
@@ -21,12 +31,12 @@ export const PerfilId = () => {
   }, []);
 
   if (error) return <div>Error: {error.message}</div>;
-  if (!user) return <div>Loading...</div>;
+  if (!user) return <div>Cargando...</div>;
 
   const extra = (
     <a>
       <i className="fa-solid fa-location-dot me-1"></i>
-      16 Events near you!
+      16 Eventos cerca tuyo!
     </a>
   );
 
@@ -68,12 +78,12 @@ export const PerfilId = () => {
               </div>
               <div>
                 {" "}
-                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email} ${store.users?.is_active}`}</p>
+                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email}`}</p>
               </div>
           </Card>
 
           <Button color="teal" size="medium" type="submit" className="mt-2">
-Follow          </Button>
+Seguir          </Button>
         </Grid.Column>
       </Grid>
     </>

@@ -1,6 +1,7 @@
 import React from 'react';
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import Carousel from 'react-bootstrap/Carousel';
+import {Icon} from 'semantic-ui-react'
 
 export const Carrusel = () => {
   return (
