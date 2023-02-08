@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import backgroundBuscarU from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/buscarUsuarios.css";
+import {Icon} from 'semantic-ui-react'
 
 export function BuscarUsuarios() {
   const { store, actions } = useContext(Context);
@@ -11,6 +12,14 @@ export function BuscarUsuarios() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+
+    //icon importation
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const styleLink = document.createElement("link");
+    styleLink.rel = "stylesheet";
+    styleLink.href = 
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+    document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");
@@ -41,9 +50,9 @@ export function BuscarUsuarios() {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Username</Table.HeaderCell>
-              <Table.HeaderCell>First Name</Table.HeaderCell>
-              <Table.HeaderCell>Last Name</Table.HeaderCell>
+              <Table.HeaderCell>Nombre de Usuario</Table.HeaderCell>
+              <Table.HeaderCell>Nombre</Table.HeaderCell>
+              <Table.HeaderCell>Apellido</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>Perfil</Table.HeaderCell>
               {/* <Table.HeaderCell>Ubicacion</Table.HeaderCell>

@@ -34,20 +34,19 @@
   /* position: relative; */
   flex-direction: column;
   left: -150px;
-  background: rgb(255,255,255, 0.2) !important;
+  background: rgb(255, 255, 255, 0.2) !important;
 }
 
-.pImg{
+.pImg {
   border: 2px dashed #0b3b45 !important;
-  background: rgb(255,255,255, 0.2) !important;
-
+  background: rgb(255, 255, 255, 0.2) !important;
 }
 
 .divMap {
   position: relative;
 }
 
-.contentMap {
+/* .contentMap {
   height: 300px !important;
   width: 95% !important;
   max-height: none;
@@ -57,8 +56,20 @@
   left: 300px;
   outline: auto;
   border-radius: 4%;
+} */
+
+.contentMap {
+  height: 250px !important;
+  width: 300px !important;
+  /* max-height: none; */
+  /* max-width: none; */
+  position: absolute;
+  bottom: 170px !important;
+  right: 100px;
+  outline: auto;
+  border-radius: 4%;
 }
 
-.coordenadas{
+.coordenadas {
   color: aliceblue;
 }

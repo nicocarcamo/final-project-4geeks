@@ -75,6 +75,8 @@ def create_event():
     publicooprivado = request.json['publicooprivado']
     valor = request.json['valor']
     # imagen = request.files.get("imagen")
+    # event_date_time = request.json['event_date_time']
+    # event = Event(date_time=event_date_time)
     ubicacion = request.json['ubicacion']
     is_active = request.json['is_active']
 

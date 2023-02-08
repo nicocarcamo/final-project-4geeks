@@ -88,10 +88,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const json = await res.json();
-					setMessage("Event created successfully!" );
+					setMessage("Evento creado correctamente!" );
 					navigate('/unirseevento')
 				} catch (err) {
-					setMessage("Error creating event.");
+					setMessage("Error creando evento.");
 				}
 			},
 
@@ -145,7 +145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("User created successfully!")
 					navigate('/login')
 				  } catch (err) {
-					setMessage("Username/email already exists");
+					setMessage("Nombre de Usuario/Email ya existen.");
 				  }
 			},
 
@@ -171,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem('currentUser', JSON.stringify(json))
 						navigate('/perfil')
 					} else {
-						setMessage("Username/Password Incorrect.")
+						setMessage("Email/Contraseña incorrectos.")
 						setStore({
 							currentUser: null,
 							error: json,

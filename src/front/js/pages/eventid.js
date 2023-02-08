@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
+import {Icon} from 'semantic-ui-react'
 
 import ImagenUploaded from "../component/ImageUpload";
 
@@ -12,10 +13,15 @@ export function EventoDetalle() {
   const { store, actions } = useContext(Context);
   const [error, setError] = useState(null);
   const [event, setEvent] = useState(null);
-
   const { id } = useParams();
-
   const navigate = useNavigate();
+  //icon importation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = 
+  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
 
   useEffect(() => {
     actions
@@ -51,6 +57,7 @@ export function EventoDetalle() {
 
   return (
     <div id="album" class="d-flex justify-content-center my-5">
+       <div className="backgroundCrearE"></div>
       <div class="ui piled compact segment p-4">
         <div class="floating ui red label">9</div>
         <div class="ui card">
@@ -65,7 +72,7 @@ export function EventoDetalle() {
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
           <span class="date  d-flex justify-content-end mx-4">
-                <i class="history icon"></i>
+                <i class="calendar alternate icon"></i>
                 05/01/2023
               </span>
           <div class="content m-3">
@@ -80,17 +87,18 @@ export function EventoDetalle() {
               <div class="description">{event.publicooprivado}</div>
               <div class="description">{event.valor}</div>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
+              <i class="backward icon teal"> </i>
                 Volver a eventos
-                <i class="calendar icon red"> </i>
               </Link>
             </div>
           </div>
           <div class="extra content">
             <div class="ui right labeled button" tabindex="0">
               <div class="ui red icon tiny button">
-                <i class="thumbs outline up large icon"></i>
+                <i class="add square up large icon"></i>
               </div>
-              <a class="ui basic blue left pointing label">Unirse!</a>
+            <Link to="/organizacionevento" class="ui basic blue left pointing label">
+Unirse!            </Link>
             </div>
             <div class="ui left labeled right floated button" tabindex="0">
               <a class="ui basic green right pointing label">Compartir!</a>
