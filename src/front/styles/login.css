@@ -34,13 +34,13 @@ body {
 
 .headerLogin{
     position: absolute;
-	top: calc(50% - 35px);
+	top: calc(50% - 72px);
 	left: calc(50% - 255px);
 	z-index: 2;
 }
 .headerLogin img{
     transform: scale(5);
-    padding: 5px;
+    padding: 7px;
     justify-content: center;
     background-color: rgba(126, 149, 150, 0.495) !important;
     /* border: 1px dotted #000; */
@@ -48,8 +48,8 @@ body {
 .ui.msg{
     position: static;
     border: 3px solid #000;
-    margin-top: 60px !important;
-    margin-left: 250px !important;
+    margin-top: 70px !important;
+    margin-left: 220px !important;
     color: aliceblue !important;
     background-color: rgba(126, 149, 150, 0.495) !important;
 }
@@ -57,7 +57,7 @@ body {
     padding-top: 30px !important;
 	position: absolute;
 	top: calc(50% - 75px);
-	left: calc(50% - 50px);
+	left: calc(50% - 62px);
 	height: 150px;
 	width: 350px;
 	padding: 10px;
