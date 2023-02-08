@@ -73,7 +73,7 @@ export const Login = () => {
                   type="text"
                   icon="user"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="Dirección de email"
                   name="email"
                   onChange={handleChange}
                 />
@@ -82,7 +82,7 @@ export const Login = () => {
                   className="input"
                   icon="lock"
                   iconPosition="left"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   name="password"
                   type="password"
                   onChange={handleChange}
@@ -95,18 +95,18 @@ export const Login = () => {
                   size="large"
                   type="submit"
                 >
-                  Login
+                  Ingresa
                 </Button>
               </Segment>
             </Form>
             {message && <Message className="messageError">{message}</Message>}
             {!isLoggedIn && (
               <Message className="msg">
-                <span> New to us?</span>
+                <span> Eres nuevo?</span>
                 <a href="/register">
                 <br/>
                   <span>
-                    <i className="fa-solid fa-angle-right"></i>Sign Up
+                    <i className="fa-solid fa-angle-right"></i>Regístrate
                   </span>
                 </a>
               </Message>

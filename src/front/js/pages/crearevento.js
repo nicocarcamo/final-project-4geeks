@@ -179,15 +179,15 @@ export const CrearEvento = () => {
               </Form.Field> */}
               <Form.Field>
                 <Form.Input
-                  name="ubicacion"
-                  placeholder="Ubicacion"
-                  label="Ubicacion"
+                  name="ubicación"
+                  placeholder="Ubicación"
+                  label="Ubicación"
                   onChange={handleChange}
                   value={selectedAddress}
                 />
               </Form.Field>
               <Button color="teal" fluid size="large" type="submit">
-                Submit
+                Crear Evento
               </Button>
               {message && <Message>{message}</Message>}
             </Form>

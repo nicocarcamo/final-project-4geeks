@@ -31,12 +31,12 @@ export const PerfilId = () => {
   }, []);
 
   if (error) return <div>Error: {error.message}</div>;
-  if (!user) return <div>Loading...</div>;
+  if (!user) return <div>Cargando...</div>;
 
   const extra = (
     <a>
       <i className="fa-solid fa-location-dot me-1"></i>
-      16 Events near you!
+      16 Eventos cerca tuyo!
     </a>
   );
 
@@ -78,12 +78,12 @@ export const PerfilId = () => {
               </div>
               <div>
                 {" "}
-                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email} ${store.users?.is_active}`}</p>
+                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email}`}</p>
               </div>
           </Card>
 
           <Button color="teal" size="medium" type="submit" className="mt-2">
-Follow          </Button>
+Seguir          </Button>
         </Grid.Column>
       </Grid>
     </>
