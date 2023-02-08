@@ -2,71 +2,76 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  ModalActions,
-  Segment,
+Button,
+Form,
+Grid,
+Header,
+Image,
+Message,
+ModalActions,
+Segment,
 } from "semantic-ui-react";
 import "../../styles/register.css";
 import logo from "../../img/logo2_style.png";
 import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import {Icon} from 'semantic-ui-react'
 
-
 export const Register = () => {
-  const { store, actions } = useContext(Context);
-  const navigate = useNavigate();
+const { store, actions } = useContext(Context);
+const navigate = useNavigate();
 
+//icon importation
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
 
-    //icon importation
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const styleLink = document.createElement("link");
-    styleLink.rel = "stylesheet";
-    styleLink.href = 
-    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-    document.head.appendChild(styleLink);
+const [formData, setFormData] = useState({
+username: "",
+firstname: "",
+lastname: "",
+email: "",
+password: "",
+confirmPassword: "",
+is_active: true,
+});
+const [message, setMessage] = useState(null);
+const [createError, setCreateError] = useState(null);
+const [isPasswordValid, setIsPasswordValid] = useState(false);
+const [passwordError, setPasswordError] = useState(null);
+const [errors, setErrors] = useState({});
+const [allFieldsRequiredMessage, setAllFieldsRequiredMessage] = useState("");
+const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(false);
 
-  const [formData, setFormData] = useState({
-    username: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
-    is_active: true,
-  });
-  const [message, setMessage] = useState(null);
-  const [createError, setCreateError] = useState(null);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [passwordError, setPasswordError] = useState(null);
-  const [errors, setErrors] = useState({});
-  const [allFieldsRequiredMessage, setAllFieldsRequiredMessage] = useState("");
+const validatePassword = (password) => {
+const regex = /^(?=.[a-z])(?=.[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+return regex.test(password);
+};
 
-  const validatePassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    return regex.test(password);
-  };
+const validateConfirmPassword = (password, confirmPassword) => {
+return password === confirmPassword;
+};
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    let formValid = true;
-    let errors = {};
-    const fieldsToValidate = [
-      "username",
-      "firstname",
-      "lastname",
-      "email",
-      "password",
-    ];
-    fieldsToValidate.forEach((field) => {
-      if (!formData[field]) {
-        formValid = false;
-        errors[field] = `${field} is required`;
-      }
-    });
+const handleSubmit = async (e) => {
+e.preventDefault();
+let formValid = true;
+let errors = {};
+const fieldsToValidate = [
+"username",
+"firstname",
+"lastname",
+"email",
+"password",
+"confirmPassword"
+];
+fieldsToValidate.forEach((field) => {
+if (!formData[field]) {
+formValid = false;
+errors[field] = `${field} is required`;
+}
+});
 
     if (!formValid) {
       setErrors(errors);
@@ -87,6 +92,21 @@ export const Register = () => {
       } else {
         setPasswordError(null);
         setIsPasswordValid(true);
+      }
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleChange2 = (e) => {
+    if (e.target.name === "confirmPassword") {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+      if (formData.password !== e.target.value) {
+        setConfirmPasswordError("Las contraseñas no coinciden");
+        setIsConfirmPasswordValid(false);
+      } else {
+        setConfirmPasswordError(null);
+        setIsConfirmPasswordValid(true);
       }
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -169,6 +189,19 @@ export const Register = () => {
                 {passwordError && (
                   <p style={{ color: "red" }}>{passwordError}</p>
                 )}
+               <Form.Field>
+  <Form.Input
+    className="input"
+    type="password"
+    name="confirmPassword"
+    placeholder="Confirmar contraseña"
+    label="Confirmar contraseña"
+    onChange={handleChange}
+  />
+</Form.Field>
+{confirmPasswordError && (
+  <p style={{ color: "red" }}>{confirmPasswordError}</p>
+)}
                 <Button
                   className="button"
                   color="teal"

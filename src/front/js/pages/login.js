@@ -100,7 +100,7 @@ export const Login = () => {
               </Segment>
             </Form>
             {message && <Message className="messageError">{message}</Message>}
-            {!isLoggedIn && (
+            {!isLoggedIn}
               <Message className="msg">
              Eres nuevo?
                 <br></br>
@@ -109,8 +109,16 @@ export const Login = () => {
                   <i class="user plus icon"></i>
  Regístrate
                 </a>
+                <br></br>
+                <br></br>
+
+                Olvidaste la contraseña?                <br></br>
+                <a href="/recupera">
+            
+                  <i class="user plus icon"></i>
+ Recupérala
+                </a>
               </Message>
-            )}
           </Grid.Column>
         </Grid>
       </div>
