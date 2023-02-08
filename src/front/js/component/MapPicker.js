@@ -49,14 +49,14 @@ const MapPicker = ({ onAddressChange }) => {
 
   return (
     <div className='divMap'>
-      <div id="map" className='mx-auto contentMap' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} />
+      <div id="map" className='mx-auto contentMap' style={{ height: '300px', width: '95%', imageRendering: 'crisp-edges', maxHeight: 'none', maxWidth: 'none' }} >
        {selectedAddress && (
         <p className='text-center'>
           {selectedAddress}
 
         </p>
       )} 
-    <div>
+    </div>
 
     </div>
   );
