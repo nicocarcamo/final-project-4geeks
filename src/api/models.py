@@ -53,24 +53,27 @@ class Event(db.Model):
     __tablename__ = "events"
     id = db.Column(db.Integer, primary_key=True)
     nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
-    lugar = db.Column(db.String(120), nullable=False)
+    ubicacion = db.Column(db.String(120), nullable=False)
     # date_time = db.Column(db.DateTime, nullable=False)
     # fecha = db.Column(db.String(120), nullable=False)
     # hora = db.Column(db.String(120), nullable=False)
-    # imagen = db.Column(db.String(120))
-    asistentes = db.Column(db.String)
+    integrantes = db.Column(db.String(120))
+    publicooprivado = db.Column(db.String(120))
+    image_url = db.Column(db.String(120))
     creador_evento = db.Column(db.String(120), db.ForeignKey(
-        "users.username"), nullable=False)
+        "user.username"), nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
             "nombre_evento": self.nombre_evento,
-            "lugar": self.lugar,
+            "ubicacion": self.ubicacion,
+            "integrantes": self.integrantes,
+            "publicooprivado": self.publicooprivado,
             # "fecha": self.fecha,
             # "hora": self.hora,
             # "date_time": self.date_time,
-            # "imagen": self.imagen,
+            "image_url": self.image_url,
             "creador_evento": self.creador_evento
         }
 
@@ -95,7 +98,7 @@ class CrearEvento(db.Model):
     publicooprivado = db.Column(db.String(120), unique=False)
     valor = db.Column(db.String(120), nullable=False)
     # date_time = db.Column(db.DateTime, nullable=False)
-    # imagen = db.Column(db.String(120))
+    image_url = db.Column(db.String(256))
     ubicacion = db.Column(db.String(600), nullable=False)
 
     # el evento debe recibir latitud y longitud para marcar el mapa
@@ -105,14 +108,14 @@ class CrearEvento(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     event = db.relationship("UnirseEvento", back_populates="event")
 
-    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, ubicacion, is_active):
+    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, image_url, ubicacion, is_active):
         self.nombreevento = nombreevento
         self.descripcion = descripcion
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
         self.valor = valor
         # self.date_time = date_time
-        # self.imagen = imagen
+        self.image_url = image_url
         self.ubicacion = ubicacion
         self.is_active = is_active
 
@@ -125,7 +128,7 @@ class CrearEvento(db.Model):
             "publicooprivado": self.publicooprivado,
             "valor": self.valor,
             # "date_time": self.date_time,
-            # "imagen": self.imagen,
+            "image_url": self.image_url,
             "ubicacion": self.ubicacion,
             "is_active": self.is_active
         }

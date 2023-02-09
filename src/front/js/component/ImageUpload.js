@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
 
+
 const ImagenUploaded = () => {
   const [eventImage, setEventImage] = useState(null);
   const onDrop = async (files) => {
@@ -19,7 +20,7 @@ const ImagenUploaded = () => {
 
   return (
     <div {...getRootProps()}>
-      <input {...getInputProps()} />
+      <input {...getInputProps()}/>
       {eventImage ? (
         <img src={eventImage} alt="Uploaded Image" width="50px" height="50px" />
       ) : (

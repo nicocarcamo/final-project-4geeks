@@ -10,6 +10,14 @@ import os
 api = Blueprint('api', __name__)
 
 
+# cloudinary.config(
+#   cloud_name = "ddx94eu6o",
+#   api_key = "725671973735529",
+#   api_secret = "jP8Dgx_uyjwc-G1Mv1ogHT6l_-o"
+# )
+
+
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
     response_body = {
@@ -74,7 +82,7 @@ def create_event():
     integrantes = request.json['integrantes']
     publicooprivado = request.json['publicooprivado']
     valor = request.json['valor']
-    # imagen = request.files.get("imagen")
+    image_url = request.json['image_url']
     # event_date_time = request.json['event_date_time']
     # event = Event(date_time=event_date_time)
     ubicacion = request.json['ubicacion']
@@ -86,7 +94,7 @@ def create_event():
 
 # pasar lat y lng como parámetro
     crearevento = CrearEvento(
-        nombreevento, descripcion, publicooprivado, integrantes, valor, ubicacion, is_active)
+        nombreevento, descripcion, integrantes, publicooprivado, valor, image_url, ubicacion, is_active)
     db.session.add(crearevento)
     db.session.commit()
     return jsonify({'message': 'Event created successfully'}), 201

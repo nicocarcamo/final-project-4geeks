@@ -5,7 +5,8 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import backgroundMyEvents from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import "../../styles/misEventos.css";
-import {Icon} from 'semantic-ui-react'
+import { Icon } from "semantic-ui-react";
+import { ImagenUploaded } from "../component/ImageUpload";
 
 export function MiEvento({ evento }) {
   const { store, actions } = useContext(Context);
@@ -14,13 +15,13 @@ export function MiEvento({ evento }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-    //icon importation
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const styleLink = document.createElement("link");
-    styleLink.rel = "stylesheet";
-    styleLink.href = 
+  //icon importation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href =
     "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-    document.head.appendChild(styleLink);
+  document.head.appendChild(styleLink);
 
   useEffect(() => {
     if (!store.currentUser) navigate("/login");
@@ -45,55 +46,37 @@ export function MiEvento({ evento }) {
   return (
     <div className="contentMyEvents">
       <div className="backgroundMyEvents"></div>
-      <div className="ui grid m-5">
+      <div className="events-list">
         {events.map((event) => (
-          <div className="four wide column" key={event.id}>
-            <div className="ui card mt-5">
-              <div className="blurring dimmable image">
-                <div className="ui dimmer">
-                  <div className="content">
-                    <div className="center">
-                      <div className="ui red button view">Ver</div>
-                    </div>
-                  </div>
-                  <img className="center" src="src/front/img/rigo-baby.jpg" />
-                </div>
-                <span className="date  d-flex justify-content-end mx-4">
-                  <i className="history icon"></i>
-                  05/01/2023
-                </span>
-                <div className="content m-3">
-                  <div className="meta"></div>
-                  <div className="m-2">
-                    <h2>{event.nombreevento}</h2>
-                    <div className="description">{event.descripcion}</div>
-                    <div className="description">
-                      Integrantes: {event.integrantes}
-                    </div>
-                    <div className="description">{event.ubicacion}</div>
-                  </div>
-                </div>
-                <div className="extra content">
-                  <div className="ui right labeled button" tabindex="0">
-                    <div className="ui red icon tiny button">
-                      <i className="thumbs outline up large icon"></i>
-                    </div>
-                    <a className="ui basic blue left pointing label">Unirse!</a>
-                  </div>
-                  <div
-                    className="ui left labeled right floated button"
-                    tabindex="0"
-                  >
-                    <Button
-                      onClick={() => handleEventSelection(event)}
-                      color="green"
-                    >
-                      Ver detalles
-                    </Button>
-                    <div className="ui red icon tiny button">
-                      <i className="external share large icon"></i>
-                    </div>
-                  </div>
+          <div className="event-card" key={event.id}>
+            <span className="date  d-flex justify-content-end mx-4">
+              <i className="history icon"></i>
+              05/01/2023
+            </span>
+            <img src={event.image_url} />
+            <div className="content m-3">
+              <div className="meta"></div>
+              <div className="m-2">
+                <h2>{event.nombreevento}</h2>
+                <h3>{event.descripcion}</h3>
+                <h3>Tipo: {event.publicooprivado}</h3>
+                <h3>N° Asistentes: {event.integrantes}</h3>
+                <h3>Dirección: {event.ubicacion}</h3>
+              </div>
+            </div>
+            <div className="extra content d-flex">
+              <div
+                className="ui left labeled right floated button"
+                tabindex="0"
+              >
+                <Button
+                  onClick={() => handleEventSelection(event)}
+                  color="green"
+                >
+                  Ver detalles
+                </Button>
+                <div className="ui red icon tiny button">
+                  <i className="external share large icon"></i>
                 </div>
               </div>
             </div>

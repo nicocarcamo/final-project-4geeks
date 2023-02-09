@@ -1,0 +1,7 @@
+.colorFondoMiEvento,.colorFondoMiEvento::before, .colorFondoMiEvento::after{
+    background-color: rgb(255, 255, 255, .4) !important;
+}
+
+.colorFondoMiEventoUI{
+    background-color: rgb(255, 255, 255, .8) !important;
+}
