@@ -6,7 +6,7 @@ body {
     height: 100%;
 }
 .blur {
-    position: absolute;
+
     /* margin: -50px; */
     /* padding: -50px !important; */
     top: -50px;
@@ -16,21 +16,32 @@ body {
     /* bottom: -40px; */
     width: -webkit-fill-available;
     height: -webkit-fill-available;
-    background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
-    filter: blur(10px);
-    background-size: cover;
+   
+    /* filter: blur(10px); */
+
     z-index: 0;
 }
 
-.gridInnerContent{
-    top: 200px;
-    left: 100px;
-    position: relative;
+.column {
+    margin-top: 200px;
 }
-.innerContent {
+
+.gridInnerContent{
+    /* top: 200px;
+    left: 100px;
+    position: relative; */
+    margin-top: 100px;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* .innerContent {
     position: relative;
     z-index: 1;
-}
+} */
 
 .headerLogin{
     position: absolute;
@@ -43,7 +54,6 @@ body {
     padding: 7px;
     justify-content: center;
     background-color: rgba(126, 149, 150, 0.495) !important;
-    /* border: 1px dotted #000; */
 }
 .ui.msg{
     position: static;
