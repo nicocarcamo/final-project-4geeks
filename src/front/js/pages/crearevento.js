@@ -18,6 +18,9 @@ import backgroundCrearE from "../../img/mountain-wall-mural-peel-stick-152953_18
 import "../../styles/crearEvento.css";
 import TimePicker from "react-time-picker";
 import { Icon } from "semantic-ui-react";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
+import moment from "moment";
 
 export const CrearEvento = () => {
   const [message, setMessage] = useState(null);
@@ -56,8 +59,10 @@ export const CrearEvento = () => {
     integrantes: "",
     publicooprivado: "",
     valor: "",
-    ubicacion: "",
+    fechaEvento: "",
     image_url: "",
+    ubicacion: "",
+    fechaCreacion: "",
     // address: selectedAddress,
     is_active: true,
   });
@@ -68,7 +73,7 @@ export const CrearEvento = () => {
     });
     console.log(selectedAddress);
   };
-  formData.ubicacion = selectedAddress
+  formData.ubicacion = selectedAddress;
 
   // const updateSelectedAddress = (address) => {
   // 	setSelectedAddress(address)
@@ -100,8 +105,22 @@ export const CrearEvento = () => {
     setEventImage(response.data.secure_url);
   };
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
-  formData.image_url = eventImage
+  formData.image_url = eventImage;
   //-----------------------------------------
+
+  //Agregar Fecha y hora---------------------
+  const [date, setDate] = useState(new Date());
+
+  formData.fechaEvento = moment(date).format("DD/MM/YYYY HH:mm");
+  // formData.fechaEvento = date;
+  //-----------------------------------------
+
+  // Agregar fecha actual ------
+
+  const [fechaDeCreacion, setFechaDeCreacion] = useState(new Date());
+  // const options = { timeZone: 'America/Santiago' };
+  // formData.fechaCreacion =  moment(fechaDeCreacion).format("DD/MM/YYYY HH:mm");
+  // ---------------------------
 
   return (
     <div className="crearEventoDiv">
@@ -150,13 +169,32 @@ export const CrearEvento = () => {
                   onChange={handleChange}
                 />
               </Form.Field>
+
+              <Form.Field>
+                <Datetime
+                  renderInput={(props, openCalendar) => (
+                    <button type="button" onClick={openCalendar}>
+                      Open Calendar
+                    </button>
+                  )}
+                  onChange={setDate}
+                  value={date}
+                />
+              </Form.Field>
+
               <Form.Field>
                 {/* <ImagenUploaded name="image_url" onChange={handleChange} /> */}
 
                 <div {...getRootProps()}>
                   <input {...getInputProps()} />
                   {eventImage ? (
-                    <img src={eventImage} name="image_url" alt="Uploaded Image" width="50px" height="50px" />
+                    <img
+                      src={eventImage}
+                      name="image_url"
+                      alt="Uploaded Image"
+                      width="50px"
+                      height="50px"
+                    />
                   ) : (
                     <p className="pImg">
                       Arrastra y suelta una imagen aquí o haz clic para
@@ -184,7 +222,18 @@ export const CrearEvento = () => {
                   value={selectedAddress}
                 />
               </Form.Field>
-              <Button color="teal" fluid size="large" type="submit">
+              <Button
+                color="teal"
+                fluid
+                size="large"
+                type="submit"
+                onClick={() =>
+                  setFechaDeCreacion(
+                    (formData.fechaCreacion =
+                      moment(fechaDeCreacion).format("DD/MM/YYYY HH:mm"))
+                  )
+                }
+              >
                 Submit
               </Button>
               {message && <Message>{message}</Message>}

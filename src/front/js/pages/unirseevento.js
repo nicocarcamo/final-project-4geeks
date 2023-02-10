@@ -51,7 +51,7 @@ export function UnirseEvento() {
             <div className="event-card" key={event.id}>
               <span className="date  d-flex justify-content-end mx-4">
                 <i className="history icon"></i>
-                05/01/2023
+                {event.fechaCreacion}
               </span>
               <img src={event.image_url} />
               <div className="content m-3">
@@ -61,11 +61,12 @@ export function UnirseEvento() {
                   <h3>{event.descripcion}</h3>
                   <h3>Tipo: {event.publicooprivado}</h3>
                   <h3>N° Asistentes: {event.integrantes}</h3>
+                  <h3>Fecha: {event.fechaEvento}</h3>
                   <h3>Dirección: {event.ubicacion}</h3>
                 </div>
               </div>
               <div className="extra content">
-                <div className="ui right labeled button" tabindex="0">
+                <div className="ui right labeled button">
                   <div className="ui red icon tiny button">
                     <i className="thumbs outline up large icon"></i>
                   </div>
@@ -78,7 +79,6 @@ export function UnirseEvento() {
                 </div>
                 <div
                   className="ui left labeled right floated button"
-                  tabindex="0"
                 >
                   <Button
                     onClick={() => handleEventSelection(event)}

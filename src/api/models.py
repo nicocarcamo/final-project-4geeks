@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost/dbname'
@@ -54,12 +55,11 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre_evento = db.Column(db.String(300), unique=True, nullable=False)
     ubicacion = db.Column(db.String(120), nullable=False)
-    # date_time = db.Column(db.DateTime, nullable=False)
-    # fecha = db.Column(db.String(120), nullable=False)
-    # hora = db.Column(db.String(120), nullable=False)
-    integrantes = db.Column(db.String(120))
-    publicooprivado = db.Column(db.String(120))
-    image_url = db.Column(db.String(120))
+    integrantes = db.Column(db.String(120), nullable=False)
+    publicooprivado = db.Column(db.String(120), nullable=False)
+    fechaEvento = db.Column(db.String(256), nullable=True)
+    image_url = db.Column(db.String(120), nullable=True)
+    fechaCreacion = db.Column(db.DateTime, default=datetime.utcnow)
     creador_evento = db.Column(db.String(120), db.ForeignKey(
         "user.username"), nullable=False)
 
@@ -70,10 +70,9 @@ class Event(db.Model):
             "ubicacion": self.ubicacion,
             "integrantes": self.integrantes,
             "publicooprivado": self.publicooprivado,
-            # "fecha": self.fecha,
-            # "hora": self.hora,
-            # "date_time": self.date_time,
+            "fechaEvento": self.fechaEvento,
             "image_url": self.image_url,
+            "fechaCreacion": self.fechaCreacion,
             "creador_evento": self.creador_evento
         }
 
@@ -95,11 +94,12 @@ class CrearEvento(db.Model):
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
     descripcion = db.Column(db.String(120), nullable=False)
     integrantes = db.Column(db.String(120), nullable=False)
-    publicooprivado = db.Column(db.String(120), unique=False)
+    publicooprivado = db.Column(db.String(120), nullable=False)
     valor = db.Column(db.String(120), nullable=False)
-    # date_time = db.Column(db.DateTime, nullable=False)
-    image_url = db.Column(db.String(256))
+    fechaEvento = db.Column(db.String(256), nullable=True)
+    image_url = db.Column(db.String(256), nullable=True)
     ubicacion = db.Column(db.String(600), nullable=False)
+    fechaCreacion = db.Column(db.DateTime, default=datetime.utcnow)
 
     # el evento debe recibir latitud y longitud para marcar el mapa
     # lat = db.Column(db.Float)
@@ -108,15 +108,16 @@ class CrearEvento(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     event = db.relationship("UnirseEvento", back_populates="event")
 
-    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, valor, image_url, ubicacion, is_active):
+    def __init__(self, nombreevento, descripcion, integrantes, publicooprivado, fechaEvento, valor, image_url, fechaCreacion, ubicacion, is_active):
         self.nombreevento = nombreevento
         self.descripcion = descripcion
         self.integrantes = integrantes
         self.publicooprivado = publicooprivado
+        self.fechaEvento = fechaEvento
         self.valor = valor
-        # self.date_time = date_time
         self.image_url = image_url
         self.ubicacion = ubicacion
+        self.fechaCreacion = fechaCreacion
         self.is_active = is_active
 
     def serialize(self):
@@ -126,10 +127,11 @@ class CrearEvento(db.Model):
             "descripcion": self.descripcion,
             "integrantes": self.integrantes,
             "publicooprivado": self.publicooprivado,
+            "fechaEvento": self.fechaEvento,
             "valor": self.valor,
-            # "date_time": self.date_time,
             "image_url": self.image_url,
             "ubicacion": self.ubicacion,
+            "fechaCreacion": self.fechaCreacion,
             "is_active": self.is_active
         }
 
