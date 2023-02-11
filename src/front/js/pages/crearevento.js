@@ -118,6 +118,8 @@ export const CrearEvento = () => {
   // Agregar fecha actual ------
 
   const [fechaDeCreacion, setFechaDeCreacion] = useState(new Date());
+  const offset = 3;
+  (formData.fechaCreacion = fechaDeCreacion)
   // const options = { timeZone: 'America/Santiago' };
   // formData.fechaCreacion =  moment(fechaDeCreacion).format("DD/MM/YYYY HH:mm");
   // ---------------------------
@@ -229,8 +231,7 @@ export const CrearEvento = () => {
                 type="submit"
                 onClick={() =>
                   setFechaDeCreacion(
-                    (formData.fechaCreacion =
-                      moment(fechaDeCreacion).format("DD/MM/YYYY HH:mm"))
+                    new Date(fechaDeCreacion.setHours(fechaDeCreacion.getHours() - offset))
                   )
                 }
               >

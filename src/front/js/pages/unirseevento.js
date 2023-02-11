@@ -49,9 +49,9 @@ export function UnirseEvento() {
         <div className="events-list">
           {events.map((event) => (
             <div className="event-card" key={event.id}>
-              <span className="date  d-flex justify-content-end mx-4">
+              <span className="d-flex justify-content-end mx-4">
                 <i className="history icon"></i>
-                {event.fechaCreacion}
+                Creado el: {event.fechaCreacion}
               </span>
               <img src={event.image_url} />
               <div className="content m-3">
@@ -77,9 +77,7 @@ export function UnirseEvento() {
                     Unirse!{" "}
                   </Link>{" "}
                 </div>
-                <div
-                  className="ui left labeled right floated button"
-                >
+                <div className="ui left labeled right floated button">
                   <Button
                     onClick={() => handleEventSelection(event)}
                     color="green"
