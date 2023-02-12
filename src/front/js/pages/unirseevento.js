@@ -55,7 +55,6 @@ export function UnirseEvento() {
               </span>
               <img src={event.image_url} />
               <div className="content m-3">
-                <div className="meta"></div>
                 <div className="m-2">
                   <h2>{event.nombreevento}</h2>
                   <h3>{event.descripcion}</h3>

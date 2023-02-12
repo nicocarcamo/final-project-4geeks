@@ -67,7 +67,6 @@ export function MiEvento({ evento }) {
             <div className="extra content d-flex">
               <div
                 className="ui left labeled right floated button"
-                tabindex="0"
               >
                 <Button
                   onClick={() => handleEventSelection(event)}
