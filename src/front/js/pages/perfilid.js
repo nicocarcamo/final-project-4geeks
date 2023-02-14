@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import {Icon} from 'semantic-ui-react'
+import "../../styles/perfil.css";
 
 
 export const PerfilId = () => {
@@ -42,6 +43,7 @@ export const PerfilId = () => {
 
   return (
     <>
+          <div className="blurProfile"></div>
       <Grid
         textAlign="center"
         style={{ height: "90vh", border: "thin solid lightgray" }}

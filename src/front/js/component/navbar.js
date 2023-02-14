@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
-import logo from "../../img/logo_transparent.png";
+import logo from "../../img/logo_logo.png";
 import "../../styles/navbar.css";
 import { Dropdown, Icon } from "semantic-ui-react";
 

@@ -53,9 +53,9 @@ export const Login = () => {
   };
 
   return (
-    // <div className="content">
-    //   <div className="blur">
-    //   <div className="innerContent">
+    <div className="content">
+      <div className="blur">
+      <div className="innerContent">
         <Grid className="gridInnerContent"
           textAlign="center"
           verticalAlign="middle"
@@ -121,8 +121,8 @@ export const Login = () => {
               </Message>
           </Grid.Column>
         </Grid>
-    //   </div>
-    // </div>
-    // </div>
+       </div>
+     </div>
+     </div>
   );
 };

@@ -113,7 +113,7 @@ export const Register = () => {
               color="teal"
               textAlign="center"
             >
-              <Image src={logo} /> <span>Crea Una Nueva Cuenta</span>
+              <Image src={logo} /> <span className="align-content-center">Crea Una Nueva Cuenta</span>
             </Header>
             <Segment className="segmentRegister">
               <Form className="register" size="large" onSubmit={handleSubmit}>
