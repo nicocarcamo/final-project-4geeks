@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_transparent.png";
 import fondo from "../../img/background.jpg";
 import {Icon} from 'semantic-ui-react'
 
@@ -60,7 +60,7 @@ export const Login = () => {
           textAlign="center"
           verticalAlign="middle"
         >
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 450 }} className="mt-5">
             <Header className="headerLogin" as="h2" color="teal" textAlign="center">
               <Image src={logo} />
               {/* <span>Log-in</span> */}

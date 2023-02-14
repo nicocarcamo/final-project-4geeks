@@ -22,21 +22,22 @@ body {
     z-index: 0;
 }
 
-.column {
-    margin-top: 200px;
-}
+/* .column {
+    
+} */
 
 .gridInnerContent{
     /* top: 200px;
     left: 100px;
     position: relative; */
-    margin-top: 100px;
     width: -webkit-fill-available;
     height: -webkit-fill-available;
     background-image: url(https://cdn.shopify.com/s/files/1/0765/0807/products/mountain-wall-mural-peel-stick-152953_1800x1800.png.jpg?v=1666799212);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 200px;
+    height: 750px;
 }
 /* .innerContent {
     position: relative;

@@ -12,7 +12,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import "../../styles/register.css";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_transparent.png";
 import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import {Icon} from 'semantic-ui-react'
 
