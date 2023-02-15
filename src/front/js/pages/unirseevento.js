@@ -60,19 +60,22 @@ export function UnirseEvento() {
                     </div>
                     <img className="center" src="src/front/img/rigo-baby.jpg" />
                   </div>
-                  <span className="date  d-flex justify-content-end mx-4">
+                  {/* <span className="date  d-flex justify-content-end mx-4">
                     <i className="calendar alternate icon"></i>
                     05/01/2023
-                  </span>
+                  </span> */}
                   <div className="content m-3">
                     <div className="meta"></div>
                     <div className="m-2">
                       <h2>{event.nombreevento}</h2>
                       <div className="description">{event.descripcion}</div>
                       <div className="description">
-                        Integrantes: {event.integrantes}
+                        Fecha: {event.publicooprivado}
                       </div>
-                      <div className="description">{event.ubicacion}</div>
+                      <div className="description">
+                        Hora: {event.integrantes}
+                      </div>
+                      <div className="description">Lugar: {event.ubicacion}</div>
                     </div>
                   </div>
                   <div className="extra content">
@@ -101,8 +104,15 @@ export function UnirseEvento() {
                         <i className="external share large icon"></i>
                       </div>
                     </div>
+
                   </div>
                 </div>
+                <Button
+                        onClick={() => handleEventSelection(event)}
+                        color="red"
+                      >
+                        Eliminar Evento
+                      </Button>
               </div>
             </div>
           ))}

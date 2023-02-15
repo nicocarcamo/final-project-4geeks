@@ -31,18 +31,18 @@ export function OrganizacionEvento() {
             </div>
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
-          <span class="date  d-flex justify-content-end mx-4">
+          {/* <span class="date  d-flex justify-content-end mx-4">
             <i class="calendar alternate icon"></i>
             05/01/2023
-          </span>
+          </span> */}
           <div class="content m-3">
             <div class="meta"></div>
             <div class="m-2">
               <h2>Nombre Evento</h2>
               <div class="description">Descripción:</div>
               <div class="description">Integrantes:</div>
-              <div class="description">Ubicación:</div>
-              <div class="description">Pubico</div>
+              <div class="description">Hora:</div>
+              <div class="description">Fecha:</div>
               <div class="description">Valor</div>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
               <i class="backward icon teal"> </i>

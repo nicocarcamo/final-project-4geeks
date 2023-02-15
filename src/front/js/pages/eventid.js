@@ -71,10 +71,10 @@ export function EventoDetalle() {
             </div>
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
-          <span class="date  d-flex justify-content-end mx-4">
+          {/* <span class="date  d-flex justify-content-end mx-4">
                 <i class="calendar alternate icon"></i>
                 05/01/2023
-              </span>
+              </span> */}
           <div class="content m-3">
             <div class="meta">
 
@@ -82,9 +82,10 @@ export function EventoDetalle() {
             <div class="m-2">
               <h2>{event.nombreevento}</h2>
               <div class="description">{event.descripcion}</div>
-              <div class="description">Integrantes: {event.integrantes}</div>
-              <div class="description">{event.ubicacion}</div>
-              <div class="description">{event.publicooprivado}</div>
+              <div class="description">Fecha: {event.publicooprivado}</div>
+              <div class="description">Hora: {event.integrantes}</div>
+              <div class="description">Lugar: {event.ubicacion}</div>
+
               <div class="description">{event.valor}</div>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
               <i class="backward icon teal"> </i>

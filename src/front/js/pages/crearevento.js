@@ -141,16 +141,18 @@ export const CrearEvento = () => {
                 <Form.Input
                   name="integrantes"
                   placeholder="Cantidad de Integrantes"
-                  label="Cantidad de Integrantes"
+                  label="Fecha"
                   onChange={handleChange}
+                  type="date"
                 />
               </Form.Field>
               <Form.Field>
                 <Form.Input
                   name="publicooprivado"
                   placeholder="Público o Privado"
-                  label="Público o Privado"
+                  label="Hora"
                   onChange={handleChange}
+                  type="time"
                 />
               </Form.Field>
               <Form.Field>
