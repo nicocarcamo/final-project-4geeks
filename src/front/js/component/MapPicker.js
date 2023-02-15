@@ -48,6 +48,7 @@ const MapPicker = ({ onAddressChange }) => {
   }
 
   return (
+
     <div className="divMap">
       <div
         id="map"

@@ -11,7 +11,7 @@ import {
 } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import "../../styles/login.css";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_transparent.png";
 import fondo from "../../img/background.jpg";
 import {Icon} from 'semantic-ui-react'
 
@@ -54,13 +54,13 @@ export const Login = () => {
 
   return (
     <div className="content">
-      <div className="blur"></div>
+      <div className="blur">
       <div className="innerContent">
         <Grid className="gridInnerContent"
           textAlign="center"
           verticalAlign="middle"
         >
-          <Grid.Column style={{ maxWidth: 450 }}>
+          <Grid.Column style={{ maxWidth: 450 }} className="mt-5">
             <Header className="headerLogin" as="h2" color="teal" textAlign="center">
               <Image src={logo} />
               {/* <span>Log-in</span> */}
@@ -73,7 +73,7 @@ export const Login = () => {
                   type="text"
                   icon="user"
                   iconPosition="left"
-                  placeholder="E-mail address"
+                  placeholder="Dirección de email"
                   name="email"
                   onChange={handleChange}
                 />
@@ -82,7 +82,7 @@ export const Login = () => {
                   className="input"
                   icon="lock"
                   iconPosition="left"
-                  placeholder="Password"
+                  placeholder="Contraseña"
                   name="password"
                   type="password"
                   onChange={handleChange}
@@ -95,25 +95,34 @@ export const Login = () => {
                   size="large"
                   type="submit"
                 >
-                  Login
+                  Ingresa
                 </Button>
               </Segment>
             </Form>
             {message && <Message className="messageError">{message}</Message>}
-            {!isLoggedIn && (
+            {!isLoggedIn}
               <Message className="msg">
-                <span> New to us?</span>
+             Eres nuevo?
+                <br></br>
                 <a href="/register">
-                <br/>
-                  <span>
-                    <i className="fa-solid fa-angle-right"></i>Sign Up
-                  </span>
+            
+                  <i class="user plus icon"></i>
+ Regístrate
+                </a>
+                <br></br>
+                <br></br>
+
+                Olvidaste la contraseña?                <br></br>
+                <a href="/recupera">
+            
+                  <i class="user plus icon"></i>
+ Recupérala
                 </a>
               </Message>
-            )}
           </Grid.Column>
         </Grid>
-      </div>
-    </div>
+       </div>
+     </div>
+     </div>
   );
 };

@@ -217,9 +217,9 @@ export const CrearEvento = () => {
               </Form.Field> */}
               <Form.Field>
                 <Form.Input
-                  name="ubicacion"
-                  placeholder="Ubicacion"
-                  label="Ubicacion"
+                  name="ubicación"
+                  placeholder="Ubicación"
+                  label="Ubicación"
                   onChange={handleChange}
                   value={selectedAddress}
                 />

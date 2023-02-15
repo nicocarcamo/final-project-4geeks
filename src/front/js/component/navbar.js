@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_logo.png";
 import "../../styles/navbar.css";
 import { Dropdown, Icon } from "semantic-ui-react";
 
@@ -72,7 +72,7 @@ export const Navbar = () => {
 
           <div className="mx-5">
             <Dropdown
-              text="Account"
+              text="Mi Cuenta"
               className="text-light"
               pointing="top right"
               open={open}
@@ -82,7 +82,7 @@ export const Navbar = () => {
                 <Dropdown.Item
                   as={Link}
                   to="/perfil"
-                  text="Perfil"
+                  text="Mi Perfil"
                   description={<Icon name="user" />}
                 />
                 <Dropdown.Item
@@ -93,7 +93,7 @@ export const Navbar = () => {
                 />
                 <Dropdown.Divider />
                 <Dropdown.Item
-                  text="Logout"
+                  text="Salir"
                   onClick={handleSubmit}
                   description={<Icon name="sign out" />}
                 />

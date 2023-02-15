@@ -50,9 +50,9 @@ export function BuscarUsuarios() {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Username</Table.HeaderCell>
-              <Table.HeaderCell>First Name</Table.HeaderCell>
-              <Table.HeaderCell>Last Name</Table.HeaderCell>
+              <Table.HeaderCell>Nombre de Usuario</Table.HeaderCell>
+              <Table.HeaderCell>Nombre</Table.HeaderCell>
+              <Table.HeaderCell>Apellido</Table.HeaderCell>
               <Table.HeaderCell>Email</Table.HeaderCell>
               <Table.HeaderCell>Perfil</Table.HeaderCell>
               {/* <Table.HeaderCell>Ubicacion</Table.HeaderCell>

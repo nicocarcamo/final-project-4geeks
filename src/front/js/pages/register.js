@@ -12,7 +12,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import "../../styles/register.css";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_transparent.png";
 import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import {Icon} from 'semantic-ui-react'
 
@@ -70,7 +70,7 @@ export const Register = () => {
 
     if (!formValid) {
       setErrors(errors);
-      setAllFieldsRequiredMessage("All fields are required");
+      setAllFieldsRequiredMessage("Todos los campos son requeridos.");
       return;
     }
     actions.register(formData, navigate, setMessage);
@@ -81,7 +81,7 @@ export const Register = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
       if (!validatePassword(e.target.value)) {
         setPasswordError(
-          "Password must be at least 8 characters long, and must include uppercase and lowercase letters."
+          "La contraseña debe tener al menos 8 caracteres, letras mayúsculas, letras minúsculas y números."
         );
         setIsPasswordValid(false);
       } else {
@@ -92,6 +92,8 @@ export const Register = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
+
+  
 
   return (
     <div className="contentRegister">
@@ -111,7 +113,7 @@ export const Register = () => {
               color="teal"
               textAlign="center"
             >
-              <Image src={logo} /> <span>Create New Account</span>
+              <Image src={logo} /> <span className="align-content-center">Crea Una Nueva Cuenta</span>
             </Header>
             <Segment className="segmentRegister">
               <Form className="register" size="large" onSubmit={handleSubmit}>
@@ -120,8 +122,8 @@ export const Register = () => {
                     className="input"
                     type="text"
                     name="username"
-                    placeholder="Username"
-                    label="Username"
+                    placeholder="Nombre de Usuario"
+                    label="Nombre de Usuario"
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -130,8 +132,8 @@ export const Register = () => {
                     className="input"
                     type="text"
                     name="firstname"
-                    placeholder="First Name"
-                    label="First Name"
+                    placeholder="Primer Nombre"
+                    label="Primer Nombre"
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -140,8 +142,8 @@ export const Register = () => {
                     className="input"
                     type="text"
                     name="lastname"
-                    placeholder="Last Name"
-                    label="Last Name"
+                    placeholder="Apellido"
+                    label="Apellido"
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -161,14 +163,24 @@ export const Register = () => {
                     className="input"
                     type="password"
                     name="password"
-                    placeholder="Password"
-                    label="Password"
+                    placeholder="Contraseña"
+                    label="Constraseña"
                     onChange={handleChange}
                   />
                 </Form.Field>
                 {passwordError && (
                   <p style={{ color: "red" }}>{passwordError}</p>
                 )}
+                                <Form.Field>
+                  <Form.Input
+                    className="input"
+                    type="password"
+                    name="password"
+                    placeholder="Confirmar contraseña"
+                    label="Confirmar constraseña"
+                    // onChange={handleChange2}
+                  />
+                </Form.Field>
                 <Button
                   className="button"
                   color="teal"
@@ -177,7 +189,7 @@ export const Register = () => {
                   type="submit"
                   disabled={!isPasswordValid}
                 >
-                  Submit
+                  Crear Cuenta
                 </Button>
                 {/* {errors.username && <p style={{ color: "red" }}>{errors.username}</p>} */}
                 {allFieldsRequiredMessage && (
@@ -189,9 +201,11 @@ export const Register = () => {
               {message && <Message>{message}</Message>}
             </Segment>
             <Message className="msgRegister">
-              Already have a user?{" "}
+              Ya tienes una cuenta?{" "}
+              <br></br>
               <a href="/login">
-                <i className="fa-solid fa-angle-right"></i>Login
+              <i class="user icon"></i>
+Ingresa
               </a>
             </Message>
           </Grid.Column>

@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Card, Header, Button, Grid, Image } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
 import {Icon} from 'semantic-ui-react'
+import "../../styles/perfil.css";
 
 
 export const PerfilId = () => {
@@ -31,17 +32,18 @@ export const PerfilId = () => {
   }, []);
 
   if (error) return <div>Error: {error.message}</div>;
-  if (!user) return <div>Loading...</div>;
+  if (!user) return <div>Cargando...</div>;
 
   const extra = (
     <a>
       <i className="fa-solid fa-location-dot me-1"></i>
-      16 Events near you!
+      16 Eventos cerca tuyo!
     </a>
   );
 
   return (
     <>
+          <div className="blurProfile"></div>
       <Grid
         textAlign="center"
         style={{ height: "90vh", border: "thin solid lightgray" }}
@@ -78,12 +80,12 @@ export const PerfilId = () => {
               </div>
               <div>
                 {" "}
-                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email} ${store.users?.is_active}`}</p>
+                <p className="container d-flex justify-content-center mb-3">{`${store.users?.email}`}</p>
               </div>
           </Card>
 
           <Button color="teal" size="medium" type="submit" className="mt-2">
-Follow          </Button>
+Seguir          </Button>
         </Grid.Column>
       </Grid>
     </>
