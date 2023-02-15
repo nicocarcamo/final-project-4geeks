@@ -61,7 +61,7 @@ export function EventoDetalle() {
       <div class="ui piled compact segment p-4">
         <div class="floating ui red label">9</div>
         <div class="ui card">
-          <div class="blurring dimmable image">
+          {/* <div class="blurring dimmable image">
             <div class="ui inverted dimmer">
               <div class="content">
                 <div class="center">
@@ -70,7 +70,7 @@ export function EventoDetalle() {
               </div>
             </div>
             <img class="center" src="src/front/img/rigo-baby.jpg" />
-          </div>
+          </div> */}
           {/* <span class="date  d-flex justify-content-end mx-4">
                 <i class="calendar alternate icon"></i>
                 05/01/2023

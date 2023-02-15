@@ -21,7 +21,7 @@ export function OrganizacionEvento() {
       <div class="ui piled compact segment">
         <div class="floating ui red label">9</div>
         <div class="ui card">
-          <div class="blurring dimmable image">
+          {/* <div class="blurring dimmable image">
             <div class="ui inverted dimmer">
               <div class="content">
                 <div class="center">
@@ -30,7 +30,7 @@ export function OrganizacionEvento() {
               </div>
             </div>
             <img class="center" src="src/front/img/rigo-baby.jpg" />
-          </div>
+          </div> */}
           {/* <span class="date  d-flex justify-content-end mx-4">
             <i class="calendar alternate icon"></i>
             05/01/2023
@@ -38,12 +38,12 @@ export function OrganizacionEvento() {
           <div class="content m-3">
             <div class="meta"></div>
             <div class="m-2">
-              <h2>Nombre Evento</h2>
-              <div class="description">Descripción:</div>
-              <div class="description">Integrantes:</div>
-              <div class="description">Hora:</div>
-              <div class="description">Fecha:</div>
-              <div class="description">Valor</div>
+              <h2>Salida a la piscina</h2>
+              <div class="description">Descripción: Ida grupal a la piscina del Cerro San Cristóbal</div>
+              {/* <div class="description">Integrantes:</div> */}
+              <div class="description">Hora: 11:00hrs</div>
+              <div class="description">Fecha: 15/2/23</div>
+              {/* <div class="description">Valor</div> */}
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
               <i class="backward icon teal"> </i>
                 Volver a eventos
