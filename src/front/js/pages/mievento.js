@@ -49,9 +49,9 @@ export function MiEvento({ evento }) {
       <div className="events-list">
         {events.map((event) => (
           <div className="event-card" key={event.id}>
-            <span className="date  d-flex justify-content-end mx-4">
+            <span className="d-flex justify-content-end mx-4">
               <i className="history icon"></i>
-              05/01/2023
+              Creado el: {event.fechaCreacion}
             </span>
             <img src={event.image_url} />
             <div className="content m-3">
@@ -61,13 +61,12 @@ export function MiEvento({ evento }) {
                 <h3>{event.descripcion}</h3>
                 <h3>Tipo: {event.publicooprivado}</h3>
                 <h3>N° Asistentes: {event.integrantes}</h3>
+                <h3>Fecha: {event.fechaEvento}</h3>
                 <h3>Dirección: {event.ubicacion}</h3>
               </div>
             </div>
             <div className="extra content d-flex">
-              <div
-                className="ui left labeled right floated button"
-              >
+              <div className="ui left labeled right floated button">
                 <Button
                   onClick={() => handleEventSelection(event)}
                   color="green"

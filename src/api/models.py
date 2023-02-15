@@ -18,7 +18,10 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean, default=True)
+    # events_attending = db.relationship('Event', secondary='event_attendees', back_populates='attendees')
     user = db.relationship("UnirseEvento", back_populates="user")
+
+    
 
     def __init__(self, username, firstname, lastname, email, password, is_active):
         self.username = username
@@ -49,6 +52,10 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+# event_attendees = db.Table('event_attendees',
+#     db.Column('event_id', db.Integer, db.ForeignKey('event.id'), primary_key=True),
+#     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True)
+# )
 
 class Event(db.Model):
     __tablename__ = "events"
@@ -60,6 +67,7 @@ class Event(db.Model):
     fechaEvento = db.Column(db.String(256), nullable=True)
     image_url = db.Column(db.String(120), nullable=True)
     fechaCreacion = db.Column(db.DateTime, default=datetime.utcnow)
+    # attendees = db.relationship('User', secondary='event_attendees', back_populates='events_attending')
     creador_evento = db.Column(db.String(120), db.ForeignKey(
         "user.username"), nullable=False)
 
@@ -92,7 +100,7 @@ class CrearEvento(db.Model):
     __tablename__ = 'crearevento'
     id = db.Column(db.Integer, primary_key=True)
     nombreevento = db.Column(db.String(120), unique=True, nullable=False)
-    descripcion = db.Column(db.String(120), nullable=False)
+    descripcion = db.Column(db.String(600), nullable=False)
     integrantes = db.Column(db.String(120), nullable=False)
     publicooprivado = db.Column(db.String(120), nullable=False)
     valor = db.Column(db.String(120), nullable=False)

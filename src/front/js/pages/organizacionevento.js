@@ -3,21 +3,45 @@ import { useNavigate } from "react-router-dom";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
-import {Icon} from 'semantic-ui-react'
+import { Icon } from "semantic-ui-react";
 
 export function OrganizacionEvento() {
-   //icon importation
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   const { store, actions } = useContext(Context);
-   const styleLink = document.createElement("link");
-   styleLink.rel = "stylesheet";
-   styleLink.href = 
-   "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
-   document.head.appendChild(styleLink);
+  //icon importation
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { store, actions } = useContext(Context);
+  const [event, setEvent] = useState(null);
+  const [error, setError] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href =
+    "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
+  
+  useEffect(() => {
+    if (!store.currentUser) navigate("/login");
+  }, []);
+
+  useEffect(() => {
+    actions
+      .getEvents()
+      .then((data) => setEvents(data))
+      .catch((error) => console.error(error));
+    actions
+      .getCurrentUser()
+      .then((user) => setCurrentUser(user))
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleEventSelection = (event) => {
+    // setSelectedEvent(event);
+    navigate(`/crearevento/${event.id}`);
+  };
 
   return (
     <div id="album" class="d-flex justify-content-center">
-            <div className="backgroundCrearE"></div>
+      <div className="backgroundCrearE"></div>
       <div class="ui piled compact segment">
         <div class="floating ui red label">9</div>
         <div class="ui card">
@@ -31,28 +55,27 @@ export function OrganizacionEvento() {
             </div>
             <img class="center" src="src/front/img/rigo-baby.jpg" />
           </div>
-          <span class="date  d-flex justify-content-end mx-4">
-            <i class="calendar alternate icon"></i>
-            05/01/2023
+          <span className="d-flex justify-content-end mx-4">
+            <i className="history icon"></i>
+            Creado el: {event.fechaCreacion}
           </span>
           <div class="content m-3">
             <div class="meta"></div>
             <div class="m-2">
-              <h2>Nombre Evento</h2>
-              <div class="description">Descripción:</div>
-              <div class="description">Integrantes:</div>
-              <div class="description">Ubicación:</div>
-              <div class="description">Pubico</div>
-              <div class="description">Valor</div>
+              <h2>{event.nombreevento}</h2>
+              <h3>{event.descripcion}</h3>
+              <h3>Tipo: {event.publicooprivado}</h3>
+              <h3>N° Asistentes: {event.integrantes}</h3>
+              <h3>Fecha: {event.fechaEvento}</h3>
+              <h3>Dirección: {event.ubicacion}</h3>
               <Link to="/unirseevento" class="my-4 d-flex justify-content-end">
-              <i class="backward icon teal"> </i>
+                <i class="backward icon teal"> </i>
                 Volver a eventos
               </Link>
             </div>
           </div>
           <div class="extra content">
-            <div class="ui right labeled button" tabindex="0">
-            </div>
+            <div class="ui right labeled button" tabindex="0"></div>
             <div class="ui left labeled right floated button" tabindex="0">
               <a class="ui basic green right pointing label">Compartir!</a>
               <div class="ui red icon tiny button">
@@ -122,7 +145,9 @@ export function OrganizacionEvento() {
             <div class="metadata">
               <span class="date">5 días atrás</span>
             </div>
-            <div class="text">Acuérdense que va a hacer calor, lleven agua!</div>
+            <div class="text">
+              Acuérdense que va a hacer calor, lleven agua!
+            </div>
             <div class="actions">
               <a class="reply">Responde</a>
             </div>

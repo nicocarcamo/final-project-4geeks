@@ -172,3 +172,30 @@ if __name__ == 'api':
     db.init_app(app)
     db.create_all()
     app.register_blueprint(api)
+
+
+@app.route('/api/events/<int:event_id>/join', methods=['POST'])
+def join_event(event_id):
+    event = Event.query.get(event_id)
+    user = User.query.get(1)  
+    event.attendees.append(user)
+    db.session.commit()
+    return jsonify({'success': True})
+
+
+@app.route('/register', methods=['POST'])
+def register_for_event():
+    event_id = request.json['event_id']
+    participant_name = request.json['participant_name']
+    participant_email = request.json['participant_email']
+
+    # Verificar si el participante ya está registrado en el evento
+    if Participant.query.filter_by(email=participant_email, event_id=event_id).first():
+        return jsonify({'message': 'El participante ya está registrado en este evento.'})
+
+    # Crear un nuevo participante y guardarlo en la base de datos
+    new_participant = Participant(name=participant_name, email=participant_email, event_id=event_id)
+    db.session.add(new_participant)
+    db.session.commit()
+
+    return jsonify({'message': 'Registro exitoso.'})

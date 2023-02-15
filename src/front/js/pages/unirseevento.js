@@ -6,6 +6,9 @@ import backgroundUnirse from "../../img/mountain-wall-mural-peel-stick-152953_18
 import "../../styles/unirseEvento.css";
 import { Link } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 export function UnirseEvento() {
   const { store, actions } = useContext(Context);
@@ -42,6 +45,21 @@ export function UnirseEvento() {
     navigate(`/crearevento/${event.id}`);
   };
 
+  function registerForEvent(eventId, participantName, participantEmail) {
+    axios
+      .post("/register", {
+        event_id: eventId,
+        participant_name: participantName,
+        participant_email: participantEmail,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <>
       <div className="backgroundUnirse"></div>
@@ -69,12 +87,15 @@ export function UnirseEvento() {
                   <div className="ui red icon tiny button">
                     <i className="thumbs outline up large icon"></i>
                   </div>
-                  <Link
-                    to="/organizacionevento"
+                  <ToastContainer />
+                  <Button
+                    onClick={() => {
+                      toast.success("Te has unido al evento exitosamente!");
+                    }}
                     className="ui basic blue left pointing label"
                   >
                     Unirse!{" "}
-                  </Link>{" "}
+                  </Button>{" "}
                 </div>
                 <div className="ui left labeled right floated button">
                   <Button

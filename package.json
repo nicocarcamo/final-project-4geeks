@@ -91,6 +91,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.3.0",
 		"react-time-picker": "^5.2.0",
+		"react-toastify": "^9.1.1",
 		"semantic-ui-css": "^2.5.0",
 		"semantic-ui-react": "^2.1.4"
 	}
