@@ -179,7 +179,7 @@ export const CrearEvento = () => {
               </Form.Field> */}
               <Form.Field>
                 <Form.Input
-                  name="ubicación"
+                  name="ubicacion"
                   placeholder="Ubicación"
                   label="Ubicación"
                   onChange={handleChange}
