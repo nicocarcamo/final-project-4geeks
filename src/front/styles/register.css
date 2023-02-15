@@ -46,6 +46,10 @@ body .contentRegister {
   display: flex;
 }
 
+footer {
+  z-index: 3;
+}
+
 .headerRegister span {
   background-color: rgba(126, 149, 150, 0.495);
   top: 20px;
@@ -55,6 +59,8 @@ body .contentRegister {
   color: rgb(52, 60, 88);
   width: 300px;
   position: relative;
+  align-content: center;
+  display: grid;
 }
 .headerRegister img {
   transform: scale(5);

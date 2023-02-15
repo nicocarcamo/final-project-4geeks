@@ -68,3 +68,7 @@
   color: #54b3d6 !important;
   transition: color 0.3s, ease-in-outbox-shadow 0.3s ease-in-out !important;
 }
+
+.profileBackground {
+  min-height: 750px;
+}

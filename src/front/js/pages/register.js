@@ -12,7 +12,7 @@ import {
   Segment,
 } from "semantic-ui-react";
 import "../../styles/register.css";
-import logo from "../../img/logo2_style.png";
+import logo from "../../img/logo_transparent.png";
 import backgroundRegister from "../../img/mountain-wall-mural-peel-stick-152953_1800x1800.webp";
 import {Icon} from 'semantic-ui-react'
 
@@ -113,7 +113,7 @@ export const Register = () => {
               color="teal"
               textAlign="center"
             >
-              <Image src={logo} /> <span>Crea Una Nueva Cuenta</span>
+              <Image src={logo} /> <span className="align-content-center">Crea Una Nueva Cuenta</span>
             </Header>
             <Segment className="segmentRegister">
               <Form className="register" size="large" onSubmit={handleSubmit}>
