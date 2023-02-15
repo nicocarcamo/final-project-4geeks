@@ -121,6 +121,17 @@ def get_event_by_id(event_id):
         return jsonify({'error': 'Event not found'}), 404
 
 
+# @app.route('/api/eventos/<int:event_id>', methods=['DELETE'])
+# def delete_event(event_id):
+#     event = Event.query.get(event_id)
+#     if not event:
+#         return jsonify({'message': 'Event not found'}), 404
+
+#     db.session.delete(event)
+#     db.session.commit()
+#     return jsonify({'message': 'Event deleted'})
+
+
 @api.route('/perfil', methods=['GET'])
 @jwt_required()
 def get_profile():

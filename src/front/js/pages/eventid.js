@@ -40,11 +40,32 @@ export function EventoDetalle() {
     );
   };
 
+  // function DeleteEvent(props) {
+  //   const [eventId, setEventId] = useState(props.eventId);
+
+  //   const handleDelete = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.BACKEND_URL}/api/eventos/${eventId}`,
+  //         {
+  //           method: "DELETE",
+  //         }
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error("Error deleting event");
+  //       }
+  //       console.log("Event deleted successfully");
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  // }
+
   return (
-    <div id="album" class="d-flex justify-content-center my-5">
+    <div id="album" className="d-flex justify-content-center my-5">
       <div className="backgroundCrearE"></div>
-      <div class="ui compact segment p-4 colorFondoMiEvento">
-        <div class="ui card colorFondoMiEventoUI">
+      <div className="ui compact segment p-4 colorFondoMiEvento">
+        <div className="ui card colorFondoMiEventoUI">
           <span className="d-flex justify-content-end mx-4">
             <i className="history icon"></i>
             Creado el: {event.fechaCreacion}
@@ -61,18 +82,24 @@ export function EventoDetalle() {
             </div>
           </div>
         </div>
-        <Link to="/unirseevento" className="my-4 d-flex justify-content-end">
+        {/* <div>
+          <button onClick={handleDelete}>Delete Event</button>
+        </div> */}
+        <Link
+          to="/unirseevento"
+          className="my-4 d-flex justify-content-end text-white"
+        >
           Volver a eventos
           <i className="calendar icon red"> </i>
         </Link>
       </div>
       <div className="extra content">
-        <div className="ui left labeled right floated button">
+        {/* <div className="ui left labeled right floated button">
           <a className="ui basic green right pointing label">Compartir!</a>
           <div className="ui red icon tiny button">
             <i className="external share large icon"></i>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
